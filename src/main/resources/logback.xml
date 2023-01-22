@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<appender name="STDOUT-APPENDER"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="INFO-FILE-APPENDER"
+		class="ch.qos.logback.core.FileAppender">
+		<file>info.log</file>
+		<!-- file>${user.dir}/info.log</file> -->
+		<!-- append: false: start fresh log file at every app start -->
+		<append>false</append>
+		<!-- set immediateFlush to false for much higher logging throughput -->
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="ERROR-FILE-APPENDER"
+		class="ch.qos.logback.core.FileAppender">
+		<file>${user.dir}/error.log</file>
+		<append>true</append>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- set immediateFlush to false for much higher logging throughput -->
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.hibernate.type" level="INFO" /> <!-- "ALL" -->
+	<logger name="org.hibernate" level="INFO" /> <!-- "DEBUG" -->
+	<logger name="qble2.document.viewer" level="DEBUG" />
+	<!-- <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter"> 
+		<level value="DEBUG" /> </logger> -->
+	<logger name="qble2.document.viewer.RequestLoggingFilter">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="org.springframework.security">
+		<level value="INFO" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT-APPENDER" />
+		<appender-ref ref="INFO-FILE-APPENDER" />
+		<appender-ref ref="ERROR-FILE-APPENDER" />
+	</root>
+
+</configuration>
