@@ -44,7 +44,7 @@ public class PdfViewController implements Initializable, EventListener {
       log.info("loading pdf file:\t{}", pdfFilePath.toString());
       pdfView.load(pdfFilePath.toFile());
     } else {
-      unloadPdf();
+      pdfView.unload();
     }
 
     selectedPdfFilePathObjectProperty.set(pdfFilePath);
@@ -53,9 +53,5 @@ public class PdfViewController implements Initializable, EventListener {
   /////
   /////
   /////
-
-  private void unloadPdf() {
-    pdfView.unload();
-  }
 
 }

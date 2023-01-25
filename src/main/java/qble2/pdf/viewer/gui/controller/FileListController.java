@@ -11,6 +11,9 @@ import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -58,19 +61,17 @@ public class FileListController implements Initializable, EventListener {
   @FXML
   private ListView<Path> fileListView;
 
+  //
+  private ObservableList<Path> observableFileList;
+  private FilteredList<Path> filteredFileList;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     EventBusFx.getInstance().registerListener(this);
 
-    initAutoCompleteTextField();
     initFileListView();
+    initAutoCompleteTextField();
   }
-
-  // @PreDestroy
-  // public void onDestroy() {
-  // log.info("shutting down executor service");
-  // executor.shutdownNow();
-  // }
 
   /////
   ///// events
@@ -85,11 +86,11 @@ public class FileListController implements Initializable, EventListener {
       }
     };
     task.setOnSucceeded(e -> {
-      log.info("loading directory succeeded, found {} files", task.getValue().size());
-      fileListView.getItems().clear();
-      fileListView.getItems().addAll(task.getValue());
+      log.info("directory has been loaded, found {} files", task.getValue().size());
+      observableFileList.clear();
+      observableFileList.addAll(task.getValue());
 
-      refreshAutocompleteSuggestions(task.getValue());
+      updateAutocompleteSuggestions(task.getValue());
     });
     task.setOnFailed(e -> {
       log.info("loading directory failed.");
@@ -102,6 +103,18 @@ public class FileListController implements Initializable, EventListener {
   /////
   /////
 
+  private void initFileListView() {
+    observableFileList = FXCollections.observableArrayList();
+    filteredFileList = new FilteredList<>(observableFileList);
+    fileListView.setItems(filteredFileList);
+
+    fileListView.setCellFactory(new FilePathCellFactory());
+    fileListView.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldValue, newValue) -> {
+          EventBusFx.getInstance().notify(new FileSelectionChangedEvent(newValue));
+        });
+  }
+
   private void initAutoCompleteTextField() {
     autoCompleteTextField = new AutoCompleteTextField(ViewConstant.SEARCH_PROMPT_TEXT);
     HBox.setHgrow(autoCompleteTextField, Priority.ALWAYS);
@@ -110,7 +123,9 @@ public class FileListController implements Initializable, EventListener {
         new EventHandler<AutoCompleteTextField.AutoCompletedEvent>() {
           @Override
           public void handle(AutoCompletedEvent event) {
-            log.info("autocomplete: {}", event.getCompletion());
+            filteredFileList
+                .setPredicate(path -> path.getFileName().toString().equals(event.getCompletion()));
+            fileListView.getSelectionModel().select(0);
           }
         });
     filterBox.getChildren().add(autoCompleteTextField);
@@ -127,19 +142,12 @@ public class FileListController implements Initializable, EventListener {
         .bind(autoCompleteTextField.textProperty().isNotEmpty());
     clearAutoCompleteInputLabel.setOnMouseClicked(e -> {
       autoCompleteTextField.clear();
+      filteredFileList.setPredicate(x -> true);
     });
     filterBox.getChildren().add(clearAutoCompleteInputLabel);
   }
 
-  private void initFileListView() {
-    fileListView.setCellFactory(new FilePathCellFactory());
-    fileListView.getSelectionModel().selectedItemProperty()
-        .addListener((obs, oldValue, newValue) -> {
-          EventBusFx.getInstance().notify(new FileSelectionChangedEvent(newValue));
-        });
-  }
-
-  private void refreshAutocompleteSuggestions(List<Path> fileList) {
+  private void updateAutocompleteSuggestions(List<Path> fileList) {
     List<String> suggestions =
         fileList.stream().map(path -> path.getFileName().toString()).toList();
     autoCompleteTextField.updateSuggestions(suggestions);

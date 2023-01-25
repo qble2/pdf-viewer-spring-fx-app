@@ -11,7 +11,7 @@
       <fx:include minWidth="300.0" prefWidth="300.0" source="fileList.fxml" BorderPane.alignment="CENTER" />
    </left>
    <top>
-      <fx:include source="menuBar.fxml" BorderPane.alignment="CENTER" />
+      <fx:include source="menuBar.fxml" BorderPane.alignment="CENTER_LEFT" />
    </top>
    <bottom>
       <fx:include source="footer.fxml" BorderPane.alignment="CENTER_LEFT" />
