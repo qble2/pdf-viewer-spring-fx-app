@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui.controller;
+package qble2.pdf.viewer.gui.controller;
 
 import java.net.URL;
 import java.nio.file.Path;
@@ -9,11 +9,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.PdfViewerConfig;
-import qble2.document.viewer.gui.ViewConstant;
-import qble2.document.viewer.gui.event.EventBusFx;
-import qble2.document.viewer.gui.event.FileSelectionChangedEvent;
-import qble2.document.viewer.gui.event.LoadDirectoryEvent;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
+import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 
 @Component
 @Slf4j

@@ -1,4 +1,4 @@
-package qble2.document.viewer;
+package qble2.pdf.viewer;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContextInitializer;
@@ -10,22 +10,22 @@ import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.PdfViewerConfig;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
 
 @Slf4j
-public class DocumentViewerFxApplication extends Application {
+public class PdfViewerFxApplication extends Application {
 
   private ConfigurableApplicationContext applicationContext;
 
   @Override
   public void init() throws Exception {
     ApplicationContextInitializer<GenericApplicationContext> initializer = c -> {
-      c.registerBean(Application.class, () -> DocumentViewerFxApplication.this);
+      c.registerBean(Application.class, () -> PdfViewerFxApplication.this);
       c.registerBean(Parameters.class, this::getParameters);
       c.registerBean(HostServices.class, this::getHostServices);
     };
 
-    applicationContext = new SpringApplicationBuilder(DocumentViewerSpringApplication.class)
+    applicationContext = new SpringApplicationBuilder(PdfViewerSpringApplication.class)
         .initializers(initializer).run(getParameters().getRaw().toArray(new String[0]));
   }
 

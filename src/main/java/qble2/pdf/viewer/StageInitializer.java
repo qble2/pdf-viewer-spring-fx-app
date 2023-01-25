@@ -1,4 +1,4 @@
-package qble2.document.viewer;
+package qble2.pdf.viewer;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,8 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.ViewConstant;
-import qble2.document.viewer.gui.controller.MainController;
+import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.gui.controller.MainController;
 
 @Component
 @Slf4j

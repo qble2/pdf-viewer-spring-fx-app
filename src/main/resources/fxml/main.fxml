@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.document.viewer.gui.controller.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
    <center>
       <fx:include prefHeight="600.0" prefWidth="1024.0" source="pdfView.fxml" BorderPane.alignment="CENTER" />
    </center>

@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui;
+package qble2.pdf.viewer.gui;
 
 import java.nio.file.Path;
 import javafx.scene.control.ListCell;
@@ -23,7 +23,7 @@ public class FilePathCellFactory implements Callback<ListView<Path>, ListCell<Pa
           setText(fileName);
           setTooltip(new Tooltip(fileName));
         }
-      };
+      }
     };
   }
 

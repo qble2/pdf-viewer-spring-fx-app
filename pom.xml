@@ -9,9 +9,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>qble2</groupId>
-	<artifactId>document-viewer</artifactId>
+	<artifactId>pdf-viewer-spring-fx-app</artifactId>
 	<version>1.0</version>
-	<name>document-viewer-spring-app</name>
+	<name>pdf-viewer-spring-fx-app</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>

@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui.event;
+package qble2.pdf.viewer.gui.event;
 
 import java.util.EventListener;
 import com.google.common.eventbus.EventBus;

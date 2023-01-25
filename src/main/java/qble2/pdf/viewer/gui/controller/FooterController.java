@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui.controller;
+package qble2.pdf.viewer.gui.controller;
 
 import java.net.URL;
 import java.util.EventListener;
@@ -9,8 +9,8 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import qble2.document.viewer.gui.event.EventBusFx;
-import qble2.document.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 
 @Component
 public class FooterController implements Initializable, EventListener {

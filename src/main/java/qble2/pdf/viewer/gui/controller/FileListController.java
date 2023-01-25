@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui.controller;
+package qble2.pdf.viewer.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,14 +24,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.AutoCompleteTextField;
-import qble2.document.viewer.gui.AutoCompleteTextField.AutoCompletedEvent;
-import qble2.document.viewer.gui.DirectoryService;
-import qble2.document.viewer.gui.FilePathCellFactory;
-import qble2.document.viewer.gui.ViewConstant;
-import qble2.document.viewer.gui.event.EventBusFx;
-import qble2.document.viewer.gui.event.FileSelectionChangedEvent;
-import qble2.document.viewer.gui.event.LoadDirectoryEvent;
+import qble2.pdf.viewer.gui.AutoCompleteTextField;
+import qble2.pdf.viewer.gui.AutoCompleteTextField.AutoCompletedEvent;
+import qble2.pdf.viewer.gui.DirectoryService;
+import qble2.pdf.viewer.gui.FilePathCellFactory;
+import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 
 @Component
 @Slf4j
@@ -78,7 +78,7 @@ public class FileListController implements Initializable, EventListener {
 
   @Subscribe
   public void processLoadDirectoryEvent(LoadDirectoryEvent event) throws IOException {
-    Task<List<Path>> task = new Task<List<Path>>() {
+    Task<List<Path>> task = new Task<>() {
       @Override
       protected List<Path> call() throws Exception {
         return directoryService.loadDirectory(event.getDirectoryPath());

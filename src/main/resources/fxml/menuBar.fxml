@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.document.viewer.gui.controller.MenuBarController">
+<HBox alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
    <children>
       <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectory" text="select directory">
          <graphic>

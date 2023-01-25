@@ -1,4 +1,4 @@
-package qble2.document.viewer.model;
+package qble2.pdf.viewer.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

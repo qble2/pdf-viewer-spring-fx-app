@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui;
+package qble2.pdf.viewer.gui;
 
 public class ViewConstant {
 

@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui.controller;
+package qble2.pdf.viewer.gui.controller;
 
 import java.io.File;
 import java.net.URL;
@@ -11,9 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.DirectoryChooser;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.PdfViewerConfig;
-import qble2.document.viewer.gui.event.EventBusFx;
-import qble2.document.viewer.gui.event.LoadDirectoryEvent;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 
 @Component
 @Slf4j

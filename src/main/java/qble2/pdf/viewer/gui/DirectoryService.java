@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui;
+package qble2.pdf.viewer.gui;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.EventBusFx;
 
 @Service
 @Slf4j

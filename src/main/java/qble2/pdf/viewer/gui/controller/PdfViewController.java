@@ -1,4 +1,4 @@
-package qble2.document.viewer.gui.controller;
+package qble2.pdf.viewer.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,8 +13,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import lombok.extern.slf4j.Slf4j;
-import qble2.document.viewer.gui.event.EventBusFx;
-import qble2.document.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 
 @Component
 @Slf4j
