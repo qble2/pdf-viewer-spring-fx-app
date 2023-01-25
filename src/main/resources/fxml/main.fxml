@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.document.viewer.gui.MainController" />
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.document.viewer.gui.controller.MainController">
+   <center>
+      <fx:include prefHeight="600.0" prefWidth="1024.0" source="pdfView.fxml" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <fx:include minWidth="300.0" prefWidth="300.0" source="fileList.fxml" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <fx:include source="menuBar.fxml" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <fx:include source="footer.fxml" BorderPane.alignment="CENTER_LEFT" />
+   </bottom>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</BorderPane>

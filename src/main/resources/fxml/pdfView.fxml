@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.dlsc.pdfviewfx.PDFView?>
+<?import javafx.scene.paint.Color?>
+
+<PDFView fx:id="pdfView" searchText="" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.document.viewer.gui.controller.PdfViewController">
+   <searchResultColor>
+      <Color red="1.0" green="0.6857143044471741" />
+   </searchResultColor>
+</PDFView>
