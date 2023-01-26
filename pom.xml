@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>qble2</groupId>
 	<artifactId>pdf-viewer-spring-fx-app</artifactId>
-	<version>1.0.0</version>
+	<version>0.1.0</version>
 	<name>pdf-viewer-spring-fx-app</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
