@@ -23,6 +23,9 @@ public class MainController implements Initializable, EventListener {
   @Autowired
   private EventBusFx eventBusFx;
 
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
+
   //
   private Stage stage;
 
@@ -47,7 +50,7 @@ public class MainController implements Initializable, EventListener {
   public void setStage(Stage stage) {
     this.stage = stage;
     this.stage.setOnShown(e -> {
-      String lastDirectoryPath = PdfViewerConfig.getInstance().getLastUsedDirectory();
+      String lastDirectoryPath = pdfViewerConfig.getLastUsedDirectory();
       if (lastDirectoryPath != null) {
         log.info("found last directory used:\t{}", lastDirectoryPath);
         eventBusFx.notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));

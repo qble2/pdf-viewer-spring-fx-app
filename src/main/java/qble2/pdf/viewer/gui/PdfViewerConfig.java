@@ -9,8 +9,10 @@ import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
+@Component
 @Slf4j
 public class PdfViewerConfig extends Configurations {
 
@@ -19,9 +21,7 @@ public class PdfViewerConfig extends Configurations {
   private Configuration config;
   private FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
 
-  private static final PdfViewerConfig INSTANCE = new PdfViewerConfig();
-
-  private PdfViewerConfig() {
+  public PdfViewerConfig() {
     try {
       if (Files.notExists(CONFIG_FILE_PATH)) {
         Files.createFile(CONFIG_FILE_PATH);
@@ -36,10 +36,6 @@ public class PdfViewerConfig extends Configurations {
     } catch (IOException | ConfigurationException e) {
       log.error("an error has occured", e);
     }
-  }
-
-  public static PdfViewerConfig getInstance() {
-    return INSTANCE;
   }
 
   public void saveConfig() {

@@ -1,5 +1,6 @@
 package qble2.pdf.viewer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationEvent;
@@ -14,6 +15,9 @@ import qble2.pdf.viewer.gui.PdfViewerConfig;
 
 @Slf4j
 public class PdfViewerFxApplication extends Application {
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   private ConfigurableApplicationContext applicationContext;
 
@@ -39,7 +43,7 @@ public class PdfViewerFxApplication extends Application {
   public void stop() throws Exception {
     log.info("FX application is stopping");
 
-    PdfViewerConfig.getInstance().saveConfig();
+    pdfViewerConfig.saveConfig();
 
     applicationContext.close();
     Platform.exit();

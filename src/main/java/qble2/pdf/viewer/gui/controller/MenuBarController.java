@@ -24,6 +24,9 @@ public class MenuBarController implements Initializable, EventListener {
   @Autowired
   private EventBusFx eventBusFx;
 
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
+
   @FXML
   private Button selectDirectoryButton;
 
@@ -52,7 +55,7 @@ public class MenuBarController implements Initializable, EventListener {
       Path selectedDirectoryPath = selectedDirectory.toPath();
       log.info("selected directory:\t{}", selectedDirectoryPath.toString());
 
-      PdfViewerConfig.getInstance().saveLastUsedDirectory(selectedDirectoryPath.toString());
+      pdfViewerConfig.saveLastUsedDirectory(selectedDirectoryPath.toString());
       eventBusFx.notify(new LoadDirectoryEvent(selectedDirectoryPath));
     }
   }
