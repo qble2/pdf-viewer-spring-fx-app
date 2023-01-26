@@ -8,7 +8,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.FileListController">
    <children>
-      <HBox fx:id="filterBox">
+      <HBox fx:id="autoCompleteBox">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin></HBox>

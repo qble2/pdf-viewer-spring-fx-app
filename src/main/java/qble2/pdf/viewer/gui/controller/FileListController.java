@@ -35,6 +35,9 @@ import qble2.pdf.viewer.gui.ViewConstant;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.TaskDoneEvent;
+import qble2.pdf.viewer.gui.event.TaskRunningEvent;
 
 @Component
 @Slf4j
@@ -52,7 +55,7 @@ public class FileListController implements Initializable, EventListener {
   private DirectoryService directoryService;
 
   @FXML
-  private HBox filterBox;
+  private HBox autoCompleteBox;
 
   // not using ControlsFX
   private AutoCompleteTextField autoCompleteTextField;
@@ -62,6 +65,7 @@ public class FileListController implements Initializable, EventListener {
   private ListView<Path> fileListView;
 
   //
+  private Path lastDirectoryPath;
   private ObservableList<Path> observableFileList;
   private FilteredList<Path> filteredFileList;
 
@@ -79,24 +83,14 @@ public class FileListController implements Initializable, EventListener {
 
   @Subscribe
   public void processLoadDirectoryEvent(LoadDirectoryEvent event) throws IOException {
-    Task<List<Path>> task = new Task<>() {
-      @Override
-      protected List<Path> call() throws Exception {
-        return directoryService.loadDirectory(event.getDirectoryPath());
-      }
-    };
-    task.setOnSucceeded(e -> {
-      log.info("directory has been loaded, found {} files", task.getValue().size());
-      observableFileList.clear();
-      observableFileList.addAll(task.getValue());
+    runLoadDirectoryTask(event.getDirectoryPath());
+  }
 
-      updateAutocompleteSuggestions(task.getValue());
-    });
-    task.setOnFailed(e -> {
-      log.info("loading directory failed.");
-    });
-
-    executor.submit(task);
+  @Subscribe
+  public void processReLoadDirectoryEvent(ReLoadDirectoryEvent event) {
+    if (lastDirectoryPath != null) {
+      runLoadDirectoryTask(lastDirectoryPath);
+    }
   }
 
   /////
@@ -128,7 +122,7 @@ public class FileListController implements Initializable, EventListener {
             fileListView.getSelectionModel().select(0);
           }
         });
-    filterBox.getChildren().add(autoCompleteTextField);
+    autoCompleteBox.getChildren().add(autoCompleteTextField);
 
     Image clearAutoCompleteImage = new Image(
         getClass().getResource("/image/material/outline_close_black_24dp.png").toExternalForm());
@@ -144,13 +138,40 @@ public class FileListController implements Initializable, EventListener {
       autoCompleteTextField.clear();
       filteredFileList.setPredicate(x -> true);
     });
-    filterBox.getChildren().add(clearAutoCompleteInputLabel);
+    autoCompleteBox.getChildren().add(clearAutoCompleteInputLabel);
   }
 
   private void updateAutocompleteSuggestions(List<Path> fileList) {
     List<String> suggestions =
         fileList.stream().map(path -> path.getFileName().toString()).toList();
     autoCompleteTextField.updateSuggestions(suggestions);
+  }
+
+  private void runLoadDirectoryTask(Path directoryPath) {
+    lastDirectoryPath = directoryPath;
+
+    Task<List<Path>> task = new Task<>() {
+      @Override
+      protected List<Path> call() throws Exception {
+        EventBusFx.getInstance().notify(new TaskRunningEvent());
+        return directoryService.loadDirectory(directoryPath);
+      }
+    };
+    task.setOnSucceeded(e -> {
+      log.info("directory has been loaded, found {} files", task.getValue().size());
+      observableFileList.clear();
+      observableFileList.addAll(task.getValue());
+
+      updateAutocompleteSuggestions(task.getValue());
+
+      EventBusFx.getInstance().notify(new TaskDoneEvent());
+    });
+    task.setOnFailed(e -> {
+      log.info("loading directory failed.");
+      EventBusFx.getInstance().notify(new TaskDoneEvent());
+    });
+
+    executor.submit(task);
   }
 
 }

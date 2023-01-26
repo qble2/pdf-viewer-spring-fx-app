@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
+<HBox alignment="CENTER_LEFT" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
    <children>
       <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectory" text="select directory">
          <graphic>
@@ -15,6 +16,18 @@
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <Button fx:id="reloadDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#reloadDirectory" text="Reload">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/outline_refresh_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="reload directories" />
+         </tooltip>
       </Button>
    </children>
 </HBox>

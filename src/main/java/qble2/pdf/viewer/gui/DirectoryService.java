@@ -15,6 +15,8 @@ import qble2.pdf.viewer.gui.event.EventBusFx;
 @Slf4j
 public class DirectoryService implements EventListener {
 
+  private static final String PDF_EXTENSION = "pdf";
+
   public DirectoryService() {
     EventBusFx.getInstance().registerListener(this);
   }
@@ -33,7 +35,7 @@ public class DirectoryService implements EventListener {
 
   private boolean isPdfFile(Path path) {
     return Files.isRegularFile(path)
-        && "pdf".equals(FilenameUtils.getExtension(path.getFileName().toString()));
+        && PDF_EXTENSION.equals(FilenameUtils.getExtension(path.getFileName().toString()));
   }
 
 }

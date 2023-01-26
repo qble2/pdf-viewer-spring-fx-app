@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
 
 @Component
 @Slf4j
@@ -21,6 +22,9 @@ public class MenuBarController implements Initializable, EventListener {
 
   @FXML
   private Button selectDirectoryButton;
+
+  @FXML
+  private Button reloadDirectoryButton;
 
   //
   private DirectoryChooser directoryChooser;
@@ -42,11 +46,16 @@ public class MenuBarController implements Initializable, EventListener {
         directoryChooser.showDialog(selectDirectoryButton.getScene().getWindow());
     if (selectedDirectory != null) {
       Path selectedDirectoryPath = selectedDirectory.toPath();
-      log.info("selected directoryPath:\t{}", selectedDirectoryPath.toString());
+      log.info("selected directory:\t{}", selectedDirectoryPath.toString());
 
       PdfViewerConfig.getInstance().saveLastUsedDirectory(selectedDirectoryPath.toString());
       EventBusFx.getInstance().notify(new LoadDirectoryEvent(selectedDirectoryPath));
     }
+  }
+
+  @FXML
+  private void reloadDirectory() {
+    EventBusFx.getInstance().notify(new ReLoadDirectoryEvent());
   }
 
   /////
