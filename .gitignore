@@ -74,3 +74,8 @@ replay_pid*
 ### H2
 ###
 h2database/
+
+###
+### Project generated files
+###
+settings.properties
