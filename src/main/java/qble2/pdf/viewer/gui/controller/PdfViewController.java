@@ -5,6 +5,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.EventListener;
 import java.util.ResourceBundle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.dlsc.pdfviewfx.PDFView;
 import com.google.common.eventbus.Subscribe;
@@ -23,6 +24,9 @@ import qble2.pdf.viewer.gui.event.TaskRunningEvent;
 @Slf4j
 public class PdfViewController implements Initializable, EventListener {
 
+  @Autowired
+  private EventBusFx eventBusFx;
+
   @FXML
   private PDFView pdfView;
 
@@ -31,12 +35,12 @@ public class PdfViewController implements Initializable, EventListener {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    EventBusFx.getInstance().registerListener(this);
+    eventBusFx.registerListener(this);
 
     pdfView.visibleProperty().bind(selectedPdfFilePathObjectProperty.isNotNull());
 
     pdfView.documentProperty().addListener((obs, oldValue, newValue) -> {
-      EventBusFx.getInstance().notify(new TaskDoneEvent());
+      eventBusFx.notify(new TaskDoneEvent());
     });
   }
 
@@ -52,7 +56,7 @@ public class PdfViewController implements Initializable, EventListener {
 
     if (pdfFilePath != null) {
       log.info("loading pdf file:\t{}", pdfFilePath.toString());
-      EventBusFx.getInstance().notify(new TaskRunningEvent());
+      eventBusFx.notify(new TaskRunningEvent());
 
       // PDFView.load requires to be run on the FX Application thread
       // cannot make an async task out of it

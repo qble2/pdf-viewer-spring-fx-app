@@ -5,6 +5,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.EventListener;
 import java.util.ResourceBundle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +21,9 @@ import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
 @Slf4j
 public class MenuBarController implements Initializable, EventListener {
 
+  @Autowired
+  private EventBusFx eventBusFx;
+
   @FXML
   private Button selectDirectoryButton;
 
@@ -31,7 +35,7 @@ public class MenuBarController implements Initializable, EventListener {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    EventBusFx.getInstance().registerListener(this);
+    eventBusFx.registerListener(this);
 
     directoryChooser = new DirectoryChooser();
   }
@@ -49,13 +53,13 @@ public class MenuBarController implements Initializable, EventListener {
       log.info("selected directory:\t{}", selectedDirectoryPath.toString());
 
       PdfViewerConfig.getInstance().saveLastUsedDirectory(selectedDirectoryPath.toString());
-      EventBusFx.getInstance().notify(new LoadDirectoryEvent(selectedDirectoryPath));
+      eventBusFx.notify(new LoadDirectoryEvent(selectedDirectoryPath));
     }
   }
 
   @FXML
   private void reloadDirectory() {
-    EventBusFx.getInstance().notify(new ReLoadDirectoryEvent());
+    eventBusFx.notify(new ReLoadDirectoryEvent());
   }
 
   /////

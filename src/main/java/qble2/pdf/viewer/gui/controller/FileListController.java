@@ -52,6 +52,9 @@ public class FileListController implements Initializable, EventListener {
   });
 
   @Autowired
+  private EventBusFx eventBusFx;
+
+  @Autowired
   private DirectoryService directoryService;
 
   @FXML
@@ -71,7 +74,7 @@ public class FileListController implements Initializable, EventListener {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    EventBusFx.getInstance().registerListener(this);
+    eventBusFx.registerListener(this);
 
     initFileListView();
     initAutoCompleteTextField();
@@ -105,7 +108,7 @@ public class FileListController implements Initializable, EventListener {
     fileListView.setCellFactory(new FilePathCellFactory());
     fileListView.getSelectionModel().selectedItemProperty()
         .addListener((obs, oldValue, newValue) -> {
-          EventBusFx.getInstance().notify(new FileSelectionChangedEvent(newValue));
+          eventBusFx.notify(new FileSelectionChangedEvent(newValue));
         });
   }
 
@@ -153,7 +156,7 @@ public class FileListController implements Initializable, EventListener {
     Task<List<Path>> task = new Task<>() {
       @Override
       protected List<Path> call() throws Exception {
-        EventBusFx.getInstance().notify(new TaskRunningEvent());
+        eventBusFx.notify(new TaskRunningEvent());
         return directoryService.loadDirectory(directoryPath);
       }
     };
@@ -164,11 +167,11 @@ public class FileListController implements Initializable, EventListener {
 
       updateAutocompleteSuggestions(task.getValue());
 
-      EventBusFx.getInstance().notify(new TaskDoneEvent());
+      eventBusFx.notify(new TaskDoneEvent());
     });
     task.setOnFailed(e -> {
       log.info("loading directory failed.");
-      EventBusFx.getInstance().notify(new TaskDoneEvent());
+      eventBusFx.notify(new TaskDoneEvent());
     });
 
     executor.submit(task);

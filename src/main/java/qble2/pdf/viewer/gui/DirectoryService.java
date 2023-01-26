@@ -4,22 +4,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.EventListener;
 import java.util.List;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.event.EventBusFx;
 
 @Service
 @Slf4j
-public class DirectoryService implements EventListener {
+public class DirectoryService {
 
   private static final String PDF_EXTENSION = "pdf";
 
-  public DirectoryService() {
-    EventBusFx.getInstance().registerListener(this);
-  }
+  public DirectoryService() {}
 
   public List<Path> loadDirectory(Path directoryPath) {
     log.info("loading directory:\t{}", directoryPath.toString());

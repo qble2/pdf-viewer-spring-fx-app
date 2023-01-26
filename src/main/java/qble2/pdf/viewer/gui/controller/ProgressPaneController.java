@@ -3,6 +3,7 @@ package qble2.pdf.viewer.gui.controller;
 import java.net.URL;
 import java.util.EventListener;
 import java.util.ResourceBundle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
@@ -17,6 +18,9 @@ import qble2.pdf.viewer.gui.event.TaskRunningEvent;
 @Component
 public class ProgressPaneController implements Initializable, EventListener {
 
+  @Autowired
+  private EventBusFx eventBusFx;
+
   @FXML
   private BorderPane progressPane;
 
@@ -25,7 +29,7 @@ public class ProgressPaneController implements Initializable, EventListener {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    EventBusFx.getInstance().registerListener(this);
+    eventBusFx.registerListener(this);
 
     progressPane.setVisible(false);
     progressPane.setStyle("-fx-background-color: rgba(159, 159, 159, 0.5);");

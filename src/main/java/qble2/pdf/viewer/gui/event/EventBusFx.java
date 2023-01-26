@@ -1,20 +1,16 @@
 package qble2.pdf.viewer.gui.event;
 
 import java.util.EventListener;
+import org.springframework.stereotype.Component;
 import com.google.common.eventbus.EventBus;
 
-public class EventBusFx implements EventListener {
+@Component
+public class EventBusFx {
 
   private EventBus eventBus;
 
-  private static final EventBusFx INSTACE = new EventBusFx();
-
-  private EventBusFx() {
+  public EventBusFx() {
     this.eventBus = new EventBus();
-  }
-
-  public static EventBusFx getInstance() {
-    return INSTACE;
   }
 
   public void registerListener(EventListener listener) {

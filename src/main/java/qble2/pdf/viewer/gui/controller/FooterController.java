@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.EventListener;
 import java.util.ResourceBundle;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
@@ -15,12 +16,15 @@ import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 @Component
 public class FooterController implements Initializable, EventListener {
 
+  @Autowired
+  private EventBusFx eventBusFx;
+
   @FXML
   private Label fileNameLabel;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    EventBusFx.getInstance().registerListener(this);
+    eventBusFx.registerListener(this);
   }
 
   /////

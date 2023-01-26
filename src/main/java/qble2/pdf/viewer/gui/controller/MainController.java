@@ -4,6 +4,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.EventListener;
 import java.util.ResourceBundle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.Initializable;
@@ -19,11 +20,15 @@ import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 @Slf4j
 public class MainController implements Initializable, EventListener {
 
+  @Autowired
+  private EventBusFx eventBusFx;
+
+  //
   private Stage stage;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    EventBusFx.getInstance().registerListener(this);
+    eventBusFx.registerListener(this);
   }
 
   /////
@@ -45,7 +50,7 @@ public class MainController implements Initializable, EventListener {
       String lastDirectoryPath = PdfViewerConfig.getInstance().getLastUsedDirectory();
       if (lastDirectoryPath != null) {
         log.info("found last directory used:\t{}", lastDirectoryPath);
-        EventBusFx.getInstance().notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
+        eventBusFx.notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
       }
     });
   }
