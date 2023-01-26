@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.BorderPane;
 import qble2.pdf.viewer.gui.event.EventBusFx;
@@ -40,6 +41,7 @@ public class ProgressPaneController implements Initializable, EventListener {
   @Subscribe
   public void processTaskRunningEvent(TaskRunningEvent event) {
     progressPane.setVisible(true);
+    progressPane.getScene().setCursor(Cursor.WAIT);
     // progressIndicator.progressProperty().bind(event.getTask().progressProperty());
     // progressPane.visibleProperty().bind(event.getTask().workDoneProperty().lessThan(1d));
   }
@@ -48,6 +50,7 @@ public class ProgressPaneController implements Initializable, EventListener {
   public void processTaskDoneEvent(TaskDoneEvent event) {
     // progressIndicator.progressProperty().unbind();
     progressPane.setVisible(false);
+    progressPane.getScene().setCursor(Cursor.DEFAULT);
   }
 
   /////
