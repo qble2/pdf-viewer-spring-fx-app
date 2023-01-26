@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>qble2</groupId>
 	<artifactId>pdf-viewer-spring-fx-app</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>pdf-viewer-spring-fx-app</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,6 +24,16 @@
 		<error-prone.version>2.16</error-prone.version>
 		<org.openjfx.version>19</org.openjfx.version>
 	</properties>
+	<scm>
+		<!-- using http protocol -->
+		<!--<connection>scm:git:https://github.com/qble2/pdf-viewer-spring-fx-app.git</connection>
+		<url>https://github.com/qble2/pdf-viewer-spring-fx-app</url>
+		<developerConnection>scm:git:https://github.com/qble2/pdf-viewer-spring-fx-app.git</developerConnection>-->
+		<!-- using git protocol -->
+		<connection>scm:git:git@github.com:qble2/pdf-viewer-spring-fx-app.git</connection>
+		<url>scm:git:git@github.com:qble2/pdf-viewer-spring-fx-app.git</url>
+		<developerConnection>scm:git:git@github.com:qble2/pdf-viewer-spring-fx-app.git</developerConnection>
+	</scm>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
