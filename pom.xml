@@ -24,12 +24,6 @@
 		<error-prone.version>2.16</error-prone.version>
 		<org.openjfx.version>19</org.openjfx.version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -136,11 +130,6 @@
 			<version>31.1-jre</version>
 		</dependency>
 		<!-- Other -->
-		<!--<dependency>
-			<groupId>com.github.Dansoftowner</groupId>
-			<artifactId>PDFViewerFX</artifactId>
-			<version>0.8</version>
-		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>

@@ -24,12 +24,6 @@ public class MainController implements Initializable, EventListener {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     EventBusFx.getInstance().registerListener(this);
-
-    String lastDirectoryPath = PdfViewerConfig.getInstance().getLastUsedDirectory();
-    if (lastDirectoryPath != null) {
-      log.info("found last directory used:\t{}", lastDirectoryPath);
-      EventBusFx.getInstance().notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
-    }
   }
 
   /////
@@ -47,6 +41,13 @@ public class MainController implements Initializable, EventListener {
 
   public void setStage(Stage stage) {
     this.stage = stage;
+    this.stage.setOnShown(e -> {
+      String lastDirectoryPath = PdfViewerConfig.getInstance().getLastUsedDirectory();
+      if (lastDirectoryPath != null) {
+        log.info("found last directory used:\t{}", lastDirectoryPath);
+        EventBusFx.getInstance().notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
+      }
+    });
   }
 
   /////
