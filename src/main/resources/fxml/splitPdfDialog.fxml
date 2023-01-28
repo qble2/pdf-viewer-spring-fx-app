@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<DialogPane fx:id="dialogPane" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.SplitPdfDialogController">
+   <content>
+      <VBox spacing="10.0">
+         <children>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="File:" />
+                        <Label fx:id="pdfFileName" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="120.0" text="unknown" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="Pages:" />
+                        <Label fx:id="totalNumberOfPagesLabel" maxWidth="1.7976931348623157E308" text="unknown" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label fx:id="currentOperationLabel" maxWidth="1.7976931348623157E308" />
+                  <Label fx:id="workDonePercentageLabel" maxWidth="1.7976931348623157E308" text="0%" />
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" progress="0.0" />
+                  <Label fx:id="currentEntryLabel" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <Label text="Files created:" />
+                  <Label fx:id="totalNumberOfSplitFilesCreatedLabel" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Label fx:id="errorMessageLabel" maxWidth="1.7976931348623157E308" />
+         </children>
+      </VBox>
+   </content>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</DialogPane>

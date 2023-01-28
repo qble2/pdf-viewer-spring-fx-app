@@ -42,15 +42,7 @@
 
 	<logger name="org.hibernate.type" level="INFO" /> <!-- "ALL" -->
 	<logger name="org.hibernate" level="INFO" /> <!-- "DEBUG" -->
-	<logger name="qble2.document.viewer" level="DEBUG" />
-	<!-- <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter"> 
-		<level value="DEBUG" /> </logger> -->
-	<logger name="qble2.document.viewer.RequestLoggingFilter">
-		<level value="DEBUG" />
-	</logger>
-	<logger name="org.springframework.security">
-		<level value="INFO" />
-	</logger>
+	<logger name="qble2.pdf.viewer" level="DEBUG" />
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT-APPENDER" />

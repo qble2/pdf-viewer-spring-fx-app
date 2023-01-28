@@ -29,15 +29,17 @@ import javafx.scene.layout.Priority;
 import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.AutoCompleteTextField;
 import qble2.pdf.viewer.gui.AutoCompleteTextField.AutoCompletedEvent;
-import qble2.pdf.viewer.gui.DirectoryService;
 import qble2.pdf.viewer.gui.FilePathCellFactory;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.ViewConstant;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.StageShownEvent;
 import qble2.pdf.viewer.gui.event.TaskDoneEvent;
 import qble2.pdf.viewer.gui.event.TaskRunningEvent;
+import qble2.pdf.viewer.system.DirectoryService;
 
 @Component
 @Slf4j
@@ -53,6 +55,9 @@ public class FileListController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   @Autowired
   private DirectoryService directoryService;
@@ -83,6 +88,15 @@ public class FileListController implements Initializable, EventListener {
   /////
   ///// events
   /////
+
+  @Subscribe
+  public void processStageShownEvent(StageShownEvent event) {
+    String lastDirectoryPath = pdfViewerConfig.getLastUsedDirectory();
+    if (lastDirectoryPath != null) {
+      log.info("found last directory used:\t{}", lastDirectoryPath);
+      eventBusFx.notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
+    }
+  }
 
   @Subscribe
   public void processLoadDirectoryEvent(LoadDirectoryEvent event) throws IOException {
@@ -160,6 +174,11 @@ public class FileListController implements Initializable, EventListener {
         return directoryService.loadDirectory(directoryPath);
       }
     };
+    task.exceptionProperty().addListener((obs, oldValue, newValue) -> {
+      if (newValue != null) {
+        log.error("an error has occured", newValue);
+      }
+    });
     task.setOnSucceeded(e -> {
       log.info("directory has been loaded, found {} files", task.getValue().size());
       observableFileList.clear();
@@ -167,10 +186,12 @@ public class FileListController implements Initializable, EventListener {
 
       updateAutocompleteSuggestions(task.getValue());
 
+      pdfViewerConfig.saveLastUsedDirectory(directoryPath.toString());
+
       eventBusFx.notify(new TaskDoneEvent());
     });
     task.setOnFailed(e -> {
-      log.info("loading directory failed.");
+      log.info("loading directory failed");
       eventBusFx.notify(new TaskDoneEvent());
     });
 

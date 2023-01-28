@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <HBox alignment="CENTER_LEFT" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
    <children>
@@ -16,6 +17,9 @@
                </image>
             </ImageView>
          </graphic>
+         <tooltip>
+            <Tooltip text="select new directory" />
+         </tooltip>
       </Button>
       <Button fx:id="reloadDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#reloadDirectory" text="Reload">
          <graphic>
@@ -26,7 +30,33 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="reload directories" />
+            <Tooltip text="reload current directory" />
+         </tooltip>
+      </Button>
+      <Region prefWidth="30.0" />
+      <Button fx:id="splitSelectedPdfFileButton" mnemonicParsing="false" onAction="#splitSelectedPdfFile" text="Split selected file">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/baseline_content_cut_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="split selected file" />
+         </tooltip>
+      </Button>
+      <Region HBox.hgrow="ALWAYS" />
+      <Button fx:id="selectExternalPdfFileToSplitButton" mnemonicParsing="false" onAction="#selectExternalPdfFileToSplit" text="Split external file">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/outline_file_open_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="select an external PDF file to split" />
          </tooltip>
       </Button>
    </children>

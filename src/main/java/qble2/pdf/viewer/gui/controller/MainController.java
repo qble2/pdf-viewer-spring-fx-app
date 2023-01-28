@@ -1,7 +1,6 @@
 package qble2.pdf.viewer.gui.controller;
 
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.EventListener;
 import java.util.ResourceBundle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,24 +8,19 @@ import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.PdfViewerConfig;
+import lombok.Setter;
 import qble2.pdf.viewer.gui.ViewConstant;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
-import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 
 @Component
-@Slf4j
 public class MainController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
 
-  @Autowired
-  private PdfViewerConfig pdfViewerConfig;
-
   //
+  @Setter
   private Stage stage;
 
   @Override
@@ -45,17 +39,6 @@ public class MainController implements Initializable, EventListener {
       fileName = event.getFilePath().getFileName().toString();
     }
     this.stage.setTitle(fileName);
-  }
-
-  public void setStage(Stage stage) {
-    this.stage = stage;
-    this.stage.setOnShown(e -> {
-      String lastDirectoryPath = pdfViewerConfig.getLastUsedDirectory();
-      if (lastDirectoryPath != null) {
-        log.info("found last directory used:\t{}", lastDirectoryPath);
-        eventBusFx.notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
-      }
-    });
   }
 
   /////

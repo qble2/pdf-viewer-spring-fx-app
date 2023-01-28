@@ -1,4 +1,4 @@
-package qble2.pdf.viewer.gui;
+package qble2.pdf.viewer.system;
 
 import java.io.IOException;
 import java.nio.file.Files;
