@@ -23,6 +23,7 @@
 		<jacoco.maven.plugin.version>0.8.8</jacoco.maven.plugin.version>
 		<error-prone.version>2.16</error-prone.version>
 		<org.openjfx.version>19</org.openjfx.version>
+		<git.repo.url>git@github.com:qble2/pdf-viewer-spring-fx-app.git</git.repo.url>
 	</properties>
 	<scm>
 		<!-- using http protocol -->
@@ -30,10 +31,10 @@
 		<url>https://github.com/qble2/pdf-viewer-spring-fx-app</url>
 		<developerConnection>scm:git:https://github.com/qble2/pdf-viewer-spring-fx-app.git</developerConnection>-->
 		<!-- using git protocol -->
-		<connection>scm:git:git@github.com:qble2/pdf-viewer-spring-fx-app.git</connection>
-		<url>scm:git:git@github.com:qble2/pdf-viewer-spring-fx-app.git</url>
-		<developerConnection>scm:git:git@github.com:qble2/pdf-viewer-spring-fx-app.git</developerConnection>
-	</scm>
+		<connection>scm:git:${git.repo.url}</connection>
+		<url>scm:git:${git.repo.url}</url>
+		<developerConnection>scm:git:${git.repo.url}</developerConnection>
+  </scm>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
