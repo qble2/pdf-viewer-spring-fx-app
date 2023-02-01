@@ -1,7 +1,7 @@
 # pdf-viewer-spring-fx-app
 
 A JavaFX application that is launched and managed via Spring Boot, to utilize Spring features.  
-The graphical interface follows the Event-Driven Design, using Guava's Eventbus.  
+The graphical interface is composed of several controllers which are decoupled following the Event-Driven Design.  
 The templates are created with Scene Builder.  
 The project's build is managed by Maven.  
 Lombok is used to reduce boilerplate code.  
