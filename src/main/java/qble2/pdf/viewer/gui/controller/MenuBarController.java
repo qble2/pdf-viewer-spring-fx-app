@@ -13,15 +13,18 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import lombok.extern.slf4j.Slf4j;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.RequestFullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.SplitPdfFileEvent;
 
 @Component
@@ -30,6 +33,9 @@ public class MenuBarController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @FXML
+  private Parent root;
 
   @FXML
   private Button selectDirectoryButton;
@@ -62,6 +68,7 @@ public class MenuBarController implements Initializable, EventListener {
     fileChooser.setSelectedExtensionFilter(filter);
 
     //
+    root.managedProperty().bind(root.visibleProperty());
     splitSelectedPdfFileButton.visibleProperty()
         .bind(selectedPdfFilePathObjectProperty.isNotNull());
   }
@@ -102,6 +109,11 @@ public class MenuBarController implements Initializable, EventListener {
     }
   }
 
+  @FXML
+  private void enterFullScreenMode() {
+    eventBusFx.notify(new RequestFullScreenModeEvent());
+  }
+
   /////
   ///// events
   /////
@@ -111,6 +123,11 @@ public class MenuBarController implements Initializable, EventListener {
       throws IOException, InterruptedException {
     Path pdfFilePath = event.getFilePath();
     selectedPdfFilePathObjectProperty.set(pdfFilePath);
+  }
+
+  @Subscribe
+  public void processFullScreenModeEvent(FullScreenModeEvent event) {
+    this.root.setVisible(!event.isFullScreen());
   }
 
 }

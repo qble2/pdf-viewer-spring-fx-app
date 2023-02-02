@@ -12,6 +12,7 @@ import lombok.Setter;
 import qble2.pdf.viewer.gui.ViewConstant;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.RequestFullScreenModeEvent;
 
 @Component
 public class MainController implements Initializable, EventListener {
@@ -39,6 +40,11 @@ public class MainController implements Initializable, EventListener {
       fileName = event.getFilePath().getFileName().toString();
     }
     this.stage.setTitle(fileName);
+  }
+
+  @Subscribe
+  public void processRequestFullScreenModeEvent(RequestFullScreenModeEvent event) {
+    this.stage.setFullScreen(true);
   }
 
   /////

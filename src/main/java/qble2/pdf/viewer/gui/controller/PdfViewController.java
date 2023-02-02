@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import lombok.extern.slf4j.Slf4j;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.TaskDoneEvent;
@@ -84,6 +85,13 @@ public class PdfViewController implements Initializable, EventListener {
     } else {
       pdfView.unload();
     }
+  }
+
+  @Subscribe
+  public void processFullScreenModeEvent(FullScreenModeEvent event) {
+    // this.pdfView.setShowThumbnails(!event.isFullScreen());
+    this.pdfView.setThumbnailSize(event.isFullScreen() ? 50d : 200d);
+    // this.pdfView.setShowToolBar(!event.isFullScreen());
   }
 
   /////

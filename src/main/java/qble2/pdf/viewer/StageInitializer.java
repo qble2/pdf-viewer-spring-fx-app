@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.ViewConstant;
 import qble2.pdf.viewer.gui.controller.MainController;
 import qble2.pdf.viewer.gui.controller.SplitPdfDialogController;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
 
@@ -61,6 +62,10 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       Scene scene = new Scene(parent);
       scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
       stage.setScene(scene);
+
+      stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
+        eventBusFx.notify(new FullScreenModeEvent(newValue));
+      });
 
       stage.setOnShown(e -> {
         eventBusFx.notify(new StageShownEvent());

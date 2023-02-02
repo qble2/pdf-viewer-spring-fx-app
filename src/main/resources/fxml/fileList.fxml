@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.FileListController">
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.FileListController">
    <children>
       <HBox fx:id="autoCompleteBox">
          <VBox.margin>

@@ -18,6 +18,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -32,6 +33,7 @@ import qble2.pdf.viewer.gui.AutoCompleteTextField.AutoCompletedEvent;
 import qble2.pdf.viewer.gui.FilePathCellFactory;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
@@ -63,6 +65,9 @@ public class FileListController implements Initializable, EventListener {
   private DirectoryService directoryService;
 
   @FXML
+  private Parent root;
+
+  @FXML
   private HBox autoCompleteBox;
 
   // not using ControlsFX
@@ -80,6 +85,8 @@ public class FileListController implements Initializable, EventListener {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
+
+    root.managedProperty().bind(root.visibleProperty());
 
     initFileListView();
     initAutoCompleteTextField();
@@ -108,6 +115,11 @@ public class FileListController implements Initializable, EventListener {
     if (lastDirectoryPath != null) {
       runLoadDirectoryTask(lastDirectoryPath);
     }
+  }
+
+  @Subscribe
+  public void processFullScreenModeEvent(FullScreenModeEvent event) {
+    this.root.setVisible(!event.isFullScreen());
   }
 
   /////

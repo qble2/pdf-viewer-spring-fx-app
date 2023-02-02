@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 
@@ -20,11 +22,16 @@ public class FooterController implements Initializable, EventListener {
   private EventBusFx eventBusFx;
 
   @FXML
+  private Parent root;
+
+  @FXML
   private Label fileNameLabel;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
+
+    root.managedProperty().bind(root.visibleProperty());
   }
 
   /////
@@ -38,6 +45,11 @@ public class FooterController implements Initializable, EventListener {
       fileName = event.getFilePath().getFileName().toString();
     }
     this.fileNameLabel.setText(fileName);
+  }
+
+  @Subscribe
+  public void processFullScreenModeEvent(FullScreenModeEvent event) {
+    this.root.setVisible(!event.isFullScreen());
   }
 
   /////

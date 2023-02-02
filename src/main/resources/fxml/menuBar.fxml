@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
-<HBox alignment="CENTER_LEFT" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
+<HBox fx:id="root" alignment="CENTER_LEFT" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
    <children>
       <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectory" text="Select directory">
          <graphic>
@@ -47,6 +47,16 @@
          </tooltip>
       </Button>
       <Region HBox.hgrow="ALWAYS" />
+      <Button mnemonicParsing="false" onAction="#enterFullScreenMode" text="Full screen">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/outline_fullscreen_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Region prefWidth="30.0" />
       <Button fx:id="selectExternalPdfFileToSplitButton" mnemonicParsing="false" onAction="#selectExternalPdfFileToSplit" text="Split external file">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
