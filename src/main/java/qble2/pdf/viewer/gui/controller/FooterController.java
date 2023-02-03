@@ -11,15 +11,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 
 @Component
 public class FooterController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   @FXML
   private Parent root;
@@ -49,7 +53,9 @@ public class FooterController implements Initializable, EventListener {
 
   @Subscribe
   public void processFullScreenModeEvent(FullScreenModeEvent event) {
-    this.root.setVisible(!event.isFullScreen());
+    boolean isVisible = !event.isFullScreen()
+        || (event.isFullScreen() && pdfViewerConfig.isFooterVisibleInFullScreenModeCheckbox());
+    this.root.setVisible(isVisible);
   }
 
   /////

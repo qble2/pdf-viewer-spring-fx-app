@@ -19,10 +19,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.OpenConfigDialogEvent;
 import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
 import qble2.pdf.viewer.gui.event.RequestFullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.SplitPdfFileEvent;
@@ -112,6 +113,11 @@ public class MenuBarController implements Initializable, EventListener {
   @FXML
   private void enterFullScreenMode() {
     eventBusFx.notify(new RequestFullScreenModeEvent());
+  }
+
+  @FXML
+  private void openConfigDialog() {
+    eventBusFx.notify(new OpenConfigDialogEvent());
   }
 
   /////

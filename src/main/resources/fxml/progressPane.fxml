@@ -3,7 +3,7 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="progressPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.ProgressDialogPaneController">
+<BorderPane fx:id="progressPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.ProgressPaneController">
    <center>
       <ProgressIndicator fx:id="progressIndicator" progress="0.0" />
    </center>

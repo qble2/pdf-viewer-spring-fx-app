@@ -7,8 +7,6 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
@@ -41,9 +39,6 @@ public class SplitPdfDialogController implements Initializable, EventListener {
     thread.setDaemon(true);
     return thread;
   });
-
-  @Value("classpath:/fxml/splitPdfDialog.fxml")
-  private Resource splitPdfDialogFxmlResource;
 
   @Autowired
   private EventBusFx eventBusFx;

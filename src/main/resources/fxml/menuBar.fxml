@@ -18,7 +18,7 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="select new directory" />
+            <Tooltip text="load all PDF files from a directory" />
          </tooltip>
       </Button>
       <Button fx:id="reloadDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#reloadDirectory" text="Reload">
@@ -34,7 +34,7 @@
          </tooltip>
       </Button>
       <Region prefWidth="30.0" />
-      <Button fx:id="splitSelectedPdfFileButton" mnemonicParsing="false" onAction="#splitSelectedPdfFile" text="Split selected file">
+      <Button fx:id="splitSelectedPdfFileButton" mnemonicParsing="false" onAction="#splitSelectedPdfFile" text="Split selected PDF">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -43,11 +43,11 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="split selected file" />
+            <Tooltip text="split selected PDF file" />
          </tooltip>
       </Button>
       <Region HBox.hgrow="ALWAYS" />
-      <Button mnemonicParsing="false" onAction="#enterFullScreenMode" text="Full screen">
+      <Button mnemonicParsing="false" onAction="#enterFullScreenMode">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -55,6 +55,21 @@
                </image>
             </ImageView>
          </graphic>
+         <tooltip>
+            <Tooltip text="switch to full screen mode" />
+         </tooltip>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#openConfigDialog">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/outline_settings_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="open config" />
+         </tooltip>
       </Button>
       <Region prefWidth="30.0" />
       <Button fx:id="selectExternalPdfFileToSplitButton" mnemonicParsing="false" onAction="#selectExternalPdfFileToSplit" text="Split external file">

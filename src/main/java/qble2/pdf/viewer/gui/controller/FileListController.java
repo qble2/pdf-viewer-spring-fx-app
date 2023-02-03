@@ -33,9 +33,9 @@ import qble2.pdf.viewer.gui.AutoCompleteTextField.AutoCompletedEvent;
 import qble2.pdf.viewer.gui.FilePathCellFactory;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.ViewConstant;
-import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
@@ -119,7 +119,9 @@ public class FileListController implements Initializable, EventListener {
 
   @Subscribe
   public void processFullScreenModeEvent(FullScreenModeEvent event) {
-    this.root.setVisible(!event.isFullScreen());
+    boolean isVisible = !event.isFullScreen()
+        || (event.isFullScreen() && pdfViewerConfig.isFileListVisibleInFullScreenMode());
+    this.root.setVisible(isVisible);
   }
 
   /////

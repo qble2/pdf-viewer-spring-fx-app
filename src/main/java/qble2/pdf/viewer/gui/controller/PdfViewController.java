@@ -15,9 +15,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.TaskDoneEvent;
 import qble2.pdf.viewer.gui.event.TaskRunningEvent;
 
@@ -27,6 +28,9 @@ public class PdfViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   @FXML
   private PDFView pdfView;
@@ -89,9 +93,16 @@ public class PdfViewController implements Initializable, EventListener {
 
   @Subscribe
   public void processFullScreenModeEvent(FullScreenModeEvent event) {
-    // this.pdfView.setShowThumbnails(!event.isFullScreen());
-    this.pdfView.setThumbnailSize(event.isFullScreen() ? 50d : 200d);
-    // this.pdfView.setShowToolBar(!event.isFullScreen());
+    boolean isPdfViewThumbnailsVisible = !event.isFullScreen()
+        || (event.isFullScreen() && pdfViewerConfig.isPdfThumbnailsVisibleInFullScreenMode());
+    this.pdfView.setShowThumbnails(isPdfViewThumbnailsVisible);
+
+    boolean isPdfViewToolBarVisible = !event.isFullScreen() || (event.isFullScreen()
+        && pdfViewerConfig.isPdfViewToolBarVisibleInFullScreenModeCheckbox());
+    this.pdfView.setShowToolBar(isPdfViewToolBarVisible);
+
+    this.pdfView.setThumbnailSize(
+        event.isFullScreen() ? pdfViewerConfig.getPdfViewThumbnailsSizeInFullScreenMode() : 200d);
   }
 
   /////

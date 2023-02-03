@@ -18,6 +18,18 @@ public class PdfViewerConfig extends Configurations {
 
   private static final Path CONFIG_FILE_PATH = Paths.get("./settings.properties");
 
+  private static final String FULL_SCREEN_MODE_FILE_LIST_VISIBLE =
+      "fullScreenMode.fileList.visible";
+  private static final String FULL_SCREEN_MODE_PDF_VIEW_THUMBNAILS_VISIBLE =
+      "fullScreenMode.pdfView.thumbnails.visible";
+  private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_VISIBLE =
+      "fullScreenMode.pdfView.toolBar.visible";
+  private static final String FULL_SCREEN_MODE_FOOTER_VISIBLE = "fullScreenMode.footer.visible";
+
+  private static final String PDF_VIEW_TOOL_BAR_DEFAULT_SIZE = "pdfView.thumbnails.size";
+  private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE =
+      "fullScreenMode.pdfView.thumbnails.size";
+
   private Configuration config;
   private FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
 
@@ -53,6 +65,60 @@ public class PdfViewerConfig extends Configurations {
 
   public String getLastUsedDirectory() {
     return this.config.getString("directory");
+  }
+
+  public boolean isFileListVisibleInFullScreenMode() {
+    return this.config.getBoolean(FULL_SCREEN_MODE_FILE_LIST_VISIBLE, false);
+  }
+
+  public void setFileListVisibleInFullScreenMode(boolean isFileListVisibleInFullScreenMode) {
+    this.config.setProperty(FULL_SCREEN_MODE_FILE_LIST_VISIBLE, isFileListVisibleInFullScreenMode);
+  }
+
+  public boolean isPdfThumbnailsVisibleInFullScreenMode() {
+    return this.config.getBoolean(FULL_SCREEN_MODE_PDF_VIEW_THUMBNAILS_VISIBLE, false);
+  }
+
+  public void setPdfThumbnailsVisibleInFullScreenMode(
+      boolean isPdfViewThumbnailsVisibleInFullScreenMode) {
+    this.config.setProperty(FULL_SCREEN_MODE_PDF_VIEW_THUMBNAILS_VISIBLE,
+        isPdfViewThumbnailsVisibleInFullScreenMode);
+  }
+
+  public boolean isPdfViewToolBarVisibleInFullScreenModeCheckbox() {
+    return this.config.getBoolean(FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_VISIBLE, false);
+  }
+
+  public void setPdfViewToolBarVisibleInFullScreenMode(
+      boolean isPdfToolBarVisibleInFullScreenMode) {
+    this.config.setProperty(FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_VISIBLE,
+        isPdfToolBarVisibleInFullScreenMode);
+  }
+
+  public boolean isFooterVisibleInFullScreenModeCheckbox() {
+    return this.config.getBoolean(FULL_SCREEN_MODE_FOOTER_VISIBLE, false);
+  }
+
+  public void setFooterVisibleInFullScreenMode(boolean isFooterVisibleInFullScreenModeCheckbox) {
+    this.config.setProperty(FULL_SCREEN_MODE_FOOTER_VISIBLE,
+        isFooterVisibleInFullScreenModeCheckbox);
+  }
+
+  public int getPdfViewThumbnailsDefaultSize() {
+    return this.config.getInt(PDF_VIEW_TOOL_BAR_DEFAULT_SIZE, 200);
+  }
+
+  public void setPdfViewThumbnailsDefaultSize(int pdfViewThumbnailsDefaultSize) {
+    this.config.setProperty(PDF_VIEW_TOOL_BAR_DEFAULT_SIZE, pdfViewThumbnailsDefaultSize);
+  }
+
+  public int getPdfViewThumbnailsSizeInFullScreenMode() {
+    return this.config.getInt(FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE, 200);
+  }
+
+  public void setPdfViewThumbnailsSizeInFullScreenMode(int pdfViewThumbnailsSizeInFullScreenMode) {
+    this.config.setProperty(FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE,
+        pdfViewThumbnailsSizeInFullScreenMode);
   }
 
 }

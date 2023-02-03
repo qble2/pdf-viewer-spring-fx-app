@@ -13,10 +13,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.gui.controller.ConfigDialogController;
 import qble2.pdf.viewer.gui.controller.MainController;
 import qble2.pdf.viewer.gui.controller.SplitPdfDialogController;
-import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
 
 @Component
@@ -28,6 +29,9 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
   @Value("classpath:/fxml/main.fxml")
   private Resource mainFxmlResource;
+
+  @Value("classpath:/fxml/configDialog.fxml")
+  private Resource configDialogFxmlResource;
 
   @Value("classpath:/fxml/splitPdfDialog.fxml")
   private Resource splitPdfDialogFxmlResource;
@@ -51,12 +55,20 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       MainController mainController = fxmlLoader.<MainController>getController();
       mainController.setStage(stage);
 
-      // split PDF file dialog
-      FXMLLoader dialogFxmlLoader = new FXMLLoader(splitPdfDialogFxmlResource.getURL());
-      dialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
-      dialogFxmlLoader.load();
+      // config dialog
+      FXMLLoader configDialogFxmlLoader = new FXMLLoader(configDialogFxmlResource.getURL());
+      configDialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
+      configDialogFxmlLoader.load();
+      ConfigDialogController configDialogPaneController =
+          configDialogFxmlLoader.<ConfigDialogController>getController();
+      configDialogPaneController.setStage(stage);
+
+      // split PDF dialog
+      FXMLLoader splitPdfDialogFxmlLoader = new FXMLLoader(splitPdfDialogFxmlResource.getURL());
+      splitPdfDialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
+      splitPdfDialogFxmlLoader.load();
       SplitPdfDialogController splitPdfDialogController =
-          dialogFxmlLoader.<SplitPdfDialogController>getController();
+          splitPdfDialogFxmlLoader.<SplitPdfDialogController>getController();
       splitPdfDialogController.setStage(stage);
 
       Scene scene = new Scene(parent);
