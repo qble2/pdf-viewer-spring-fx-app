@@ -39,7 +39,7 @@ public class MenuBarController implements Initializable, EventListener {
   private Parent root;
 
   @FXML
-  private Button selectDirectoryButton;
+  private Button loadDirectoryButton;
 
   @FXML
   private Button reloadDirectoryButton;
@@ -79,9 +79,9 @@ public class MenuBarController implements Initializable, EventListener {
   /////
 
   @FXML
-  private void selectDirectory() {
+  private void loadDirectory() {
     File selectedDirectory =
-        directoryChooser.showDialog(selectDirectoryButton.getScene().getWindow());
+        directoryChooser.showDialog(loadDirectoryButton.getScene().getWindow());
     if (selectedDirectory != null) {
       Path selectedDirectoryPath = selectedDirectory.toPath();
       log.info("selected directory:\t{}", selectedDirectoryPath.toString());
@@ -102,7 +102,7 @@ public class MenuBarController implements Initializable, EventListener {
 
   @FXML
   private void selectExternalPdfFileToSplit() {
-    File selectedPdfFile = fileChooser.showOpenDialog(selectDirectoryButton.getScene().getWindow());
+    File selectedPdfFile = fileChooser.showOpenDialog(loadDirectoryButton.getScene().getWindow());
     if (selectedPdfFile != null) {
       Path selectedPdfFilePath = selectedPdfFile.toPath();
       log.info("selected PDF file to split:\t{}", selectedPdfFilePath.toString());

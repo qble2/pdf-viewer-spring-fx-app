@@ -9,7 +9,7 @@
 
 <HBox fx:id="root" alignment="CENTER_LEFT" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
    <children>
-      <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectory" text="Select directory">
+      <Button fx:id="loadDirectoryButton" mnemonicParsing="false" onAction="#loadDirectory" text="Load directory">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

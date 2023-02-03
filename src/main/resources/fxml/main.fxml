@@ -7,24 +7,24 @@
 <StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
    <children>
       <BorderPane>
-         <center>
-            <fx:include prefHeight="600.0" prefWidth="1024.0" source="pdfView.fxml" BorderPane.alignment="CENTER" />
-         </center>
-         <left>
-            <fx:include minWidth="300.0" prefWidth="300.0" source="fileList.fxml" BorderPane.alignment="CENTER" />
-         </left>
          <top>
             <fx:include source="menuBar.fxml" BorderPane.alignment="CENTER_LEFT" />
          </top>
-         <bottom>
-            <fx:include source="footer.fxml" BorderPane.alignment="CENTER_LEFT" />
-         </bottom>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <bottom>
+            <fx:include source="footer.fxml" BorderPane.alignment="CENTER_LEFT" />
+         </bottom>
+         <left>
+            <fx:include source="fileList.fxml" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <fx:include minHeight="600.0" minWidth="1024.0" source="pdfView.fxml" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
       <fx:include source="progressPane.fxml" />
    </children>

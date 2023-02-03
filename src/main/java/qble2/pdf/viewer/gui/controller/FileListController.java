@@ -19,12 +19,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import lombok.extern.slf4j.Slf4j;
@@ -70,12 +68,23 @@ public class FileListController implements Initializable, EventListener {
   @FXML
   private HBox autoCompleteBox;
 
+  @FXML
+  private Button clearAutoCompleteInputButton;
+
   // not using ControlsFX
   private AutoCompleteTextField autoCompleteTextField;
-  private Label clearAutoCompleteInputLabel;
+
+  @FXML
+  private ScrollPane fileListViewScrollPane;
 
   @FXML
   private ListView<Path> fileListView;
+
+  @FXML
+  private Label expandListViewLabel;
+
+  @FXML
+  private Label collapseListViewLabel;
 
   //
   private Path lastDirectoryPath;
@@ -86,10 +95,32 @@ public class FileListController implements Initializable, EventListener {
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
 
-    root.managedProperty().bind(root.visibleProperty());
+    // custom control
+    createAutoCompleteTextField();
 
     initFileListView();
-    initAutoCompleteTextField();
+
+    root.managedProperty().bind(root.visibleProperty());
+    fileListViewScrollPane.managedProperty().bind(fileListViewScrollPane.visibleProperty());
+    autoCompleteBox.managedProperty().bind(autoCompleteBox.visibleProperty());
+    expandListViewLabel.managedProperty().bind(expandListViewLabel.visibleProperty());
+    collapseListViewLabel.managedProperty().bind(collapseListViewLabel.visibleProperty());
+
+    fileListViewScrollPane.visibleProperty().bind(fileListView.visibleProperty());
+    autoCompleteBox.visibleProperty().bind(fileListView.visibleProperty());
+    expandListViewLabel.visibleProperty().bind(fileListView.visibleProperty().not());
+    collapseListViewLabel.visibleProperty().bind(fileListView.visibleProperty());
+  }
+
+  @FXML
+  private void clearAutoCompleteSelection() {
+    autoCompleteTextField.clear();
+    filteredFileList.setPredicate(x -> true);
+  }
+
+  @FXML
+  private void expandCollapseListView() {
+    fileListView.setVisible(!fileListView.isVisible());
   }
 
   /////
@@ -140,9 +171,10 @@ public class FileListController implements Initializable, EventListener {
         });
   }
 
-  private void initAutoCompleteTextField() {
+  private void createAutoCompleteTextField() {
     autoCompleteTextField = new AutoCompleteTextField(ViewConstant.SEARCH_PROMPT_TEXT);
     HBox.setHgrow(autoCompleteTextField, Priority.ALWAYS);
+    autoCompleteTextField.setPrefWidth(200d);
     autoCompleteTextField.setMaxHeight(Double.MAX_VALUE);
     autoCompleteTextField.addEventHandler(AutoCompleteTextField.AutoCompletedEvent.AUTO_COMPLETED,
         new EventHandler<AutoCompleteTextField.AutoCompletedEvent>() {
@@ -153,23 +185,7 @@ public class FileListController implements Initializable, EventListener {
             fileListView.getSelectionModel().select(0);
           }
         });
-    autoCompleteBox.getChildren().add(autoCompleteTextField);
-
-    Image clearAutoCompleteImage = new Image(
-        getClass().getResource("/image/material/outline_close_black_24dp.png").toExternalForm());
-    ImageView clearAutoCompleteImageView = new ImageView(clearAutoCompleteImage);
-    clearAutoCompleteInputLabel = new Label();
-    clearAutoCompleteInputLabel.setMaxHeight(Double.MAX_VALUE);
-    clearAutoCompleteInputLabel.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-    clearAutoCompleteInputLabel.setGraphic(clearAutoCompleteImageView);
-    clearAutoCompleteInputLabel.setTooltip(new Tooltip("clear text"));
-    clearAutoCompleteInputLabel.visibleProperty()
-        .bind(autoCompleteTextField.textProperty().isNotEmpty());
-    clearAutoCompleteInputLabel.setOnMouseClicked(e -> {
-      autoCompleteTextField.clear();
-      filteredFileList.setPredicate(x -> true);
-    });
-    autoCompleteBox.getChildren().add(clearAutoCompleteInputLabel);
+    autoCompleteBox.getChildren().add(0, autoCompleteTextField);
   }
 
   private void updateAutocompleteSuggestions(List<Path> fileList) {
