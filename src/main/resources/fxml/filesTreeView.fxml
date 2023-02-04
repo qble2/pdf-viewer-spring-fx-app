@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.FilesTreeViewController">
+   <children>
+      <ScrollPane fx:id="filesTreeViewScrollPane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+         <content>
+            <TreeView fx:id="filesTreeView" onMouseClicked="#expandCollapseTreeItemOnSingleClick" />
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

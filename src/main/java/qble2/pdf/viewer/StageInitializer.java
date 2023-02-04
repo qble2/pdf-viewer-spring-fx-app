@@ -12,8 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.ViewConstant;
-import qble2.pdf.viewer.gui.controller.ConfigDialogController;
+import qble2.pdf.viewer.gui.controller.SettingsDialogController;
 import qble2.pdf.viewer.gui.controller.MainController;
 import qble2.pdf.viewer.gui.controller.SplitPdfDialogController;
 import qble2.pdf.viewer.gui.event.EventBusFx;
@@ -23,6 +22,8 @@ import qble2.pdf.viewer.gui.event.StageShownEvent;
 @Component
 @Slf4j
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
+
+  public static final String APP_TITLE = "PDF Viewer Spring FX";
 
   @Autowired
   private EventBusFx eventBusFx;
@@ -46,7 +47,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
   public void onApplicationEvent(StageReadyEvent event) {
     try {
       Stage stage = event.getStage();
-      stage.setTitle(ViewConstant.APP_TITLE);
+      stage.setTitle(APP_TITLE);
 
       // main view
       FXMLLoader fxmlLoader = new FXMLLoader(mainFxmlResource.getURL());
@@ -59,8 +60,8 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       FXMLLoader configDialogFxmlLoader = new FXMLLoader(configDialogFxmlResource.getURL());
       configDialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
       configDialogFxmlLoader.load();
-      ConfigDialogController configDialogPaneController =
-          configDialogFxmlLoader.<ConfigDialogController>getController();
+      SettingsDialogController configDialogPaneController =
+          configDialogFxmlLoader.<SettingsDialogController>getController();
       configDialogPaneController.setStage(stage);
 
       // split PDF dialog

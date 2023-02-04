@@ -1,5 +1,5 @@
 package qble2.pdf.viewer.gui.event;
 
-public class FilesChangedEvent {
+public class ReLoadCurrentDirectoryEvent {
 
 }

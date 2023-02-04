@@ -15,27 +15,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.AutoCompleteTextField;
-import qble2.pdf.viewer.gui.AutoCompleteTextField.AutoCompletedEvent;
-import qble2.pdf.viewer.gui.FilePathCellFactory;
+import qble2.pdf.viewer.gui.FileListViewCellFactory;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
-import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.gui.event.AutoCompleteSelectionChangedEvent;
+import qble2.pdf.viewer.gui.event.ClearFileSelectionEvent;
+import qble2.pdf.viewer.gui.event.DirectoryChangedEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
-import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
+import qble2.pdf.viewer.gui.event.FilesListChangedEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
-import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.ReLoadCurrentDirectoryEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
 import qble2.pdf.viewer.gui.event.TaskDoneEvent;
 import qble2.pdf.viewer.gui.event.TaskRunningEvent;
@@ -43,7 +38,7 @@ import qble2.pdf.viewer.system.DirectoryService;
 
 @Component
 @Slf4j
-public class FileListController implements Initializable, EventListener {
+public class FilesListViewController implements Initializable, EventListener {
 
   // The Java Virtual Machine exits when the only threads running are all daemon threads.
   // This way, there is no need to manually shutdown the executor on application exit
@@ -66,28 +61,13 @@ public class FileListController implements Initializable, EventListener {
   private Parent root;
 
   @FXML
-  private HBox autoCompleteBox;
-
-  @FXML
-  private Button clearAutoCompleteInputButton;
-
-  // not using ControlsFX
-  private AutoCompleteTextField autoCompleteTextField;
-
-  @FXML
-  private ScrollPane fileListViewScrollPane;
+  private ScrollPane filesListViewScrollPane;
 
   @FXML
   private ListView<Path> fileListView;
 
-  @FXML
-  private Label expandListViewLabel;
-
-  @FXML
-  private Label collapseListViewLabel;
-
   //
-  private Path lastDirectoryPath;
+  private Path currentDirectoryPath;
   private ObservableList<Path> observableFileList;
   private FilteredList<Path> filteredFileList;
 
@@ -95,32 +75,13 @@ public class FileListController implements Initializable, EventListener {
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
 
-    // custom control
-    createAutoCompleteTextField();
-
     initFileListView();
 
     root.managedProperty().bind(root.visibleProperty());
-    fileListViewScrollPane.managedProperty().bind(fileListViewScrollPane.visibleProperty());
-    autoCompleteBox.managedProperty().bind(autoCompleteBox.visibleProperty());
-    expandListViewLabel.managedProperty().bind(expandListViewLabel.visibleProperty());
-    collapseListViewLabel.managedProperty().bind(collapseListViewLabel.visibleProperty());
+    filesListViewScrollPane.managedProperty().bind(filesListViewScrollPane.visibleProperty());
 
-    fileListViewScrollPane.visibleProperty().bind(fileListView.visibleProperty());
-    autoCompleteBox.visibleProperty().bind(fileListView.visibleProperty());
-    expandListViewLabel.visibleProperty().bind(fileListView.visibleProperty().not());
-    collapseListViewLabel.visibleProperty().bind(fileListView.visibleProperty());
-  }
+    filesListViewScrollPane.visibleProperty().bind(fileListView.visibleProperty());
 
-  @FXML
-  private void clearAutoCompleteSelection() {
-    autoCompleteTextField.clear();
-    filteredFileList.setPredicate(x -> true);
-  }
-
-  @FXML
-  private void expandCollapseListView() {
-    fileListView.setVisible(!fileListView.isVisible());
   }
 
   /////
@@ -129,10 +90,10 @@ public class FileListController implements Initializable, EventListener {
 
   @Subscribe
   public void processStageShownEvent(StageShownEvent event) {
-    String lastDirectoryPath = pdfViewerConfig.getLastUsedDirectory();
-    if (lastDirectoryPath != null) {
-      log.info("found last directory used:\t{}", lastDirectoryPath);
-      eventBusFx.notify(new LoadDirectoryEvent(Path.of(lastDirectoryPath)));
+    String currentDirectoryPath = pdfViewerConfig.getLastUsedDirectory();
+    if (currentDirectoryPath != null) {
+      log.info("loading last used directory from config:\t{}", currentDirectoryPath);
+      runLoadDirectoryTask(Path.of(currentDirectoryPath));
     }
   }
 
@@ -142,17 +103,23 @@ public class FileListController implements Initializable, EventListener {
   }
 
   @Subscribe
-  public void processReLoadDirectoryEvent(ReLoadDirectoryEvent event) {
-    if (lastDirectoryPath != null) {
-      runLoadDirectoryTask(lastDirectoryPath);
+  public void processReLoadCurrentDirectoryEvent(ReLoadCurrentDirectoryEvent event) {
+    if (currentDirectoryPath != null) {
+      runLoadDirectoryTask(currentDirectoryPath);
     }
   }
 
   @Subscribe
-  public void processFullScreenModeEvent(FullScreenModeEvent event) {
-    boolean isVisible = !event.isFullScreen()
-        || (event.isFullScreen() && pdfViewerConfig.isFileListVisibleInFullScreenMode());
-    this.root.setVisible(isVisible);
+  public void processClearFileSelectionEvent(ClearFileSelectionEvent event) {
+    filteredFileList.setPredicate(x -> true);
+    this.fileListView.getSelectionModel().clearSelection();
+  }
+
+  @Subscribe
+  public void processAutoCompleteSelectionChangedEvent(AutoCompleteSelectionChangedEvent event) {
+    filteredFileList.setPredicate(path -> path.getFileName().toString().toLowerCase()
+        .contains(event.getSelection().toLowerCase()));
+    // fileListView.getSelectionModel().select(0);
   }
 
   /////
@@ -164,39 +131,14 @@ public class FileListController implements Initializable, EventListener {
     filteredFileList = new FilteredList<>(observableFileList);
     fileListView.setItems(filteredFileList);
 
-    fileListView.setCellFactory(new FilePathCellFactory());
+    fileListView.setCellFactory(new FileListViewCellFactory());
     fileListView.getSelectionModel().selectedItemProperty()
         .addListener((obs, oldValue, newValue) -> {
           eventBusFx.notify(new FileSelectionChangedEvent(newValue));
         });
   }
 
-  private void createAutoCompleteTextField() {
-    autoCompleteTextField = new AutoCompleteTextField(ViewConstant.SEARCH_PROMPT_TEXT);
-    HBox.setHgrow(autoCompleteTextField, Priority.ALWAYS);
-    autoCompleteTextField.setPrefWidth(200d);
-    autoCompleteTextField.setMaxHeight(Double.MAX_VALUE);
-    autoCompleteTextField.addEventHandler(AutoCompleteTextField.AutoCompletedEvent.AUTO_COMPLETED,
-        new EventHandler<AutoCompleteTextField.AutoCompletedEvent>() {
-          @Override
-          public void handle(AutoCompletedEvent event) {
-            filteredFileList
-                .setPredicate(path -> path.getFileName().toString().equals(event.getCompletion()));
-            fileListView.getSelectionModel().select(0);
-          }
-        });
-    autoCompleteBox.getChildren().add(0, autoCompleteTextField);
-  }
-
-  private void updateAutocompleteSuggestions(List<Path> fileList) {
-    List<String> suggestions =
-        fileList.stream().map(path -> path.getFileName().toString()).toList();
-    autoCompleteTextField.updateSuggestions(suggestions);
-  }
-
   private void runLoadDirectoryTask(Path directoryPath) {
-    lastDirectoryPath = directoryPath;
-
     Task<List<Path>> task = new Task<>() {
       @Override
       protected List<Path> call() throws Exception {
@@ -214,9 +156,11 @@ public class FileListController implements Initializable, EventListener {
       observableFileList.clear();
       observableFileList.addAll(task.getValue());
 
-      updateAutocompleteSuggestions(task.getValue());
+      eventBusFx.notify(new FilesListChangedEvent(task.getValue()));
 
+      currentDirectoryPath = directoryPath;
       pdfViewerConfig.saveLastUsedDirectory(directoryPath.toString());
+      eventBusFx.notify(new DirectoryChangedEvent(directoryPath));
 
       eventBusFx.notify(new TaskDoneEvent());
     });

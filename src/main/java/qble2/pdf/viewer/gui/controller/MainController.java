@@ -9,7 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import lombok.Setter;
-import qble2.pdf.viewer.gui.ViewConstant;
+import qble2.pdf.viewer.StageInitializer;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.RequestFullScreenModeEvent;
@@ -35,7 +35,7 @@ public class MainController implements Initializable, EventListener {
 
   @Subscribe
   public void processFileSelectionChangedEvent(FileSelectionChangedEvent event) {
-    String fileName = ViewConstant.APP_TITLE;
+    String fileName = StageInitializer.APP_TITLE;
     if (event.getFilePath() != null) {
       fileName = event.getFilePath().getFileName().toString();
     }

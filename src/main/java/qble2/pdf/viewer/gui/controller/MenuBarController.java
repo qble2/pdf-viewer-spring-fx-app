@@ -15,16 +15,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import lombok.extern.slf4j.Slf4j;
+import qble2.pdf.viewer.gui.event.DirectoryChangedEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
-import qble2.pdf.viewer.gui.event.OpenConfigDialogEvent;
-import qble2.pdf.viewer.gui.event.ReLoadDirectoryEvent;
+import qble2.pdf.viewer.gui.event.OpenSettingsDialogEvent;
+import qble2.pdf.viewer.gui.event.ReLoadCurrentDirectoryEvent;
 import qble2.pdf.viewer.gui.event.RequestFullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.SplitPdfFileEvent;
 
@@ -42,10 +44,16 @@ public class MenuBarController implements Initializable, EventListener {
   private Button loadDirectoryButton;
 
   @FXML
-  private Button reloadDirectoryButton;
+  private Label currentDirectoryLabel;
+
+  @FXML
+  private Button reloadCurrentDirectoryButton;
 
   @FXML
   private Button splitSelectedPdfFileButton;
+
+  @FXML
+  private Button enterFullScreenModeButton;
 
   @FXML
   private Button selectExternalPdfFileToSplitButton;
@@ -53,6 +61,7 @@ public class MenuBarController implements Initializable, EventListener {
   //
   private DirectoryChooser directoryChooser;
   private FileChooser fileChooser;
+  private ObjectProperty<Path> currentDirectoryPathObjectProperty = new SimpleObjectProperty<>();
   private ObjectProperty<Path> selectedPdfFilePathObjectProperty = new SimpleObjectProperty<>();
 
   @Override
@@ -64,14 +73,29 @@ public class MenuBarController implements Initializable, EventListener {
 
     fileChooser = new FileChooser();
     fileChooser.setTitle("Select PDF file to split");
-    final ExtensionFilter filter = new ExtensionFilter("PDF Files", "*.pdf");
+    final ExtensionFilter filter = new ExtensionFilter("PDF file", "*.pdf");
     fileChooser.getExtensionFilters().add(filter);
     fileChooser.setSelectedExtensionFilter(filter);
 
     //
     root.managedProperty().bind(root.visibleProperty());
-    splitSelectedPdfFileButton.visibleProperty()
-        .bind(selectedPdfFilePathObjectProperty.isNotNull());
+    reloadCurrentDirectoryButton.managedProperty()
+        .bind(reloadCurrentDirectoryButton.visibleProperty());
+    currentDirectoryLabel.managedProperty().bind(currentDirectoryLabel.visibleProperty());
+
+    currentDirectoryLabel.visibleProperty().bind(currentDirectoryPathObjectProperty.isNotNull());
+
+    reloadCurrentDirectoryButton.disableProperty()
+        .bind(currentDirectoryPathObjectProperty.isNull());
+    splitSelectedPdfFileButton.disableProperty().bind(selectedPdfFilePathObjectProperty.isNull());
+    enterFullScreenModeButton.disableProperty().bind(selectedPdfFilePathObjectProperty.isNull());
+
+    // Function<Path, String> converter = p -> p != null ? p.toString() : StringUtils.EMPTY;
+    // currentDirectoryLabel.textProperty()
+    // .bind(Bindings.createObjectBinding(
+    // () -> converter.apply(currentDirectoryPathObjectProperty.get()),
+    // currentDirectoryPathObjectProperty));
+    currentDirectoryLabel.textProperty().bind(currentDirectoryPathObjectProperty.asString());
   }
 
   /////
@@ -91,8 +115,8 @@ public class MenuBarController implements Initializable, EventListener {
   }
 
   @FXML
-  private void reloadDirectory() {
-    eventBusFx.notify(new ReLoadDirectoryEvent());
+  private void reloadCurrentDirectory() {
+    eventBusFx.notify(new ReLoadCurrentDirectoryEvent());
   }
 
   @FXML
@@ -116,13 +140,18 @@ public class MenuBarController implements Initializable, EventListener {
   }
 
   @FXML
-  private void openConfigDialog() {
-    eventBusFx.notify(new OpenConfigDialogEvent());
+  private void openSettingsDialog() {
+    eventBusFx.notify(new OpenSettingsDialogEvent());
   }
 
   /////
   ///// events
   /////
+
+  @Subscribe
+  public void processDirectoryChangedEvent(DirectoryChangedEvent event) {
+    currentDirectoryPathObjectProperty.set(event.getDirectoryPath());
+  }
 
   @Subscribe
   public void processFileSelectionChangedEvent(FileSelectionChangedEvent event)

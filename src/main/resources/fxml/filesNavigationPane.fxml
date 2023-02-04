@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.FilesNavigationPane">
+   <children>
+      <HBox>
+         <children>
+            <HBox fx:id="autoCompleteBox" alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <CheckBox fx:id="enableAutoCompleteSuggestionsCheckBox" mnemonicParsing="false">
+                     <tooltip>
+                        <Tooltip text="enable suggestions" />
+                     </tooltip>
+                  </CheckBox>
+                  <Region prefWidth="10.0" />
+                  <Button fx:id="clearAutoCompleteInputButton" minHeight="25.0" mnemonicParsing="false" onAction="#clearAutoCompleteSelection" text="clear" />
+                  <Region prefWidth="10.0" />
+               </children>
+            </HBox>
+            <Label fx:id="expandListViewLabel" onMouseClicked="#expandCollapseListView">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/material/outline_search_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="collapseListViewLabel" onMouseClicked="#expandCollapseListView">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/material/outline_close_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+      </HBox>
+      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" VBox.vgrow="ALWAYS">
+        <tabs>
+          <Tab fx:id="listViewTab" closable="false" text="Flat">
+          	<fx:include source="filesListView.fxml" />
+          </Tab>
+          <Tab fx:id="treeViewTab" closable="false" text="Hierarchical">
+          	<fx:include source="filesTreeView.fxml" />
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

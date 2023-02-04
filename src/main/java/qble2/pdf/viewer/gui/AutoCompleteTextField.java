@@ -6,6 +6,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -27,8 +28,13 @@ public class AutoCompleteTextField extends TextField {
   private final SortedSet<String> suggestions;
   private ContextMenu suggestionsPopup;
 
-  public AutoCompleteTextField(String searchPromptText) {
+  private BooleanProperty isSuggestionsActiveBooleanProperty;
+
+  public AutoCompleteTextField(String searchPromptText,
+      BooleanProperty isSuggestionsActiveBooleanPropertyArg) {
     super();
+
+    this.isSuggestionsActiveBooleanProperty = isSuggestionsActiveBooleanPropertyArg;
 
     setPromptText(searchPromptText);
     setFocusTraversable(false);
@@ -38,23 +44,25 @@ public class AutoCompleteTextField extends TextField {
     textProperty().addListener(new ChangeListener<String>() {
       @Override
       public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
-        if (getText().length() == 0) {
-          suggestionsPopup.hide();
-        } else {
-          LinkedList<String> searchResult = new LinkedList<>();
-
-          List<String> filteredEntries =
-              suggestions.stream().filter(e -> e.toLowerCase().contains(getText().toLowerCase()))
-                  .collect(Collectors.toList());
-          searchResult.addAll(filteredEntries);
-
-          if (suggestions.size() > 0) {
-            populatePopup(searchResult);
-            if (!suggestionsPopup.isShowing()) {
-              suggestionsPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
-            }
-          } else {
+        if (isSuggestionsActiveBooleanProperty.get()) {
+          if (getText().length() == 0) {
             suggestionsPopup.hide();
+          } else {
+            LinkedList<String> searchResult = new LinkedList<>();
+
+            List<String> filteredEntries =
+                suggestions.stream().filter(e -> e.toLowerCase().contains(getText().toLowerCase()))
+                    .collect(Collectors.toList());
+            searchResult.addAll(filteredEntries);
+
+            if (suggestions.size() > 0) {
+              populatePopup(searchResult);
+              if (!suggestionsPopup.isShowing()) {
+                suggestionsPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
+              }
+            } else {
+              suggestionsPopup.hide();
+            }
           }
         }
       }

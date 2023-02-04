@@ -20,7 +20,7 @@
             <fx:include source="footer.fxml" BorderPane.alignment="CENTER_LEFT" />
          </bottom>
          <left>
-            <fx:include source="fileList.fxml" BorderPane.alignment="CENTER" />
+            <fx:include source="filesNavigationPane.fxml" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <fx:include minHeight="600.0" minWidth="1024.0" source="pdfView.fxml" BorderPane.alignment="CENTER" />

@@ -23,11 +23,11 @@ import javafx.stage.Stage;
 import lombok.Setter;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.EventBusFx;
-import qble2.pdf.viewer.gui.event.OpenConfigDialogEvent;
+import qble2.pdf.viewer.gui.event.OpenSettingsDialogEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
 
 @Component
-public class ConfigDialogController implements Initializable, EventListener {
+public class SettingsDialogController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
@@ -67,7 +67,7 @@ public class ConfigDialogController implements Initializable, EventListener {
 
     dialog = new Dialog<>();
     dialog.setDialogPane(dialogPane);
-    dialog.setTitle("Edit config");
+    dialog.setTitle("Edit settings");
 
     addIntegerTextFormatter(pdfViewThumbnailsSizeInFullScreenModeTextField);
 
@@ -86,7 +86,7 @@ public class ConfigDialogController implements Initializable, EventListener {
   }
 
   @Subscribe
-  public void processOpenConfigDialogEvent(OpenConfigDialogEvent event) {
+  public void processOpenSettingsDialogEvent(OpenSettingsDialogEvent event) {
     // dialog controls preserve their edited values on cancel action
     // values have to be reset from config
     loadConfig();

@@ -87,7 +87,9 @@ public class PdfViewController implements Initializable, EventListener {
         });
       }).start();
     } else {
-      pdfView.unload();
+      if (pdfView.getDocument() != null) {
+        pdfView.unload();
+      }
     }
   }
 

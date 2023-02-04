@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,7 +22,7 @@
             <Tooltip text="load all PDF files from a directory" />
          </tooltip>
       </Button>
-      <Button fx:id="reloadDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#reloadDirectory" text="Reload">
+      <Button fx:id="reloadCurrentDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#reloadCurrentDirectory" text="Reload directory">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,12 +34,13 @@
             <Tooltip text="reload current directory" />
          </tooltip>
       </Button>
-      <Region prefWidth="30.0" />
+      <Label fx:id="currentDirectoryLabel" />
+      <Region HBox.hgrow="ALWAYS" />
       <Button fx:id="splitSelectedPdfFileButton" mnemonicParsing="false" onAction="#splitSelectedPdfFile" text="Split selected PDF">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/material/baseline_content_cut_black_24dp.png" />
+                  <Image url="@../image/material/outline_content_cut_black_24dp.png" />
                </image>
             </ImageView>
          </graphic>
@@ -46,33 +48,7 @@
             <Tooltip text="split selected PDF file" />
          </tooltip>
       </Button>
-      <Region HBox.hgrow="ALWAYS" />
-      <Button mnemonicParsing="false" onAction="#enterFullScreenMode">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_fullscreen_black_24dp.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="switch to full screen mode" />
-         </tooltip>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#openConfigDialog">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_settings_black_24dp.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="open config" />
-         </tooltip>
-      </Button>
-      <Region prefWidth="30.0" />
-      <Button fx:id="selectExternalPdfFileToSplitButton" mnemonicParsing="false" onAction="#selectExternalPdfFileToSplit" text="Split external file">
+      <Button fx:id="selectExternalPdfFileToSplitButton" mnemonicParsing="false" onAction="#selectExternalPdfFileToSplit" text="Split external PDF">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -82,6 +58,32 @@
          </graphic>
          <tooltip>
             <Tooltip text="select an external PDF file to split" />
+         </tooltip>
+      </Button>
+      <Region prefWidth="30.0" />
+      <Button mnemonicParsing="false" onAction="#openSettingsDialog">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/outline_settings_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="open settings" />
+         </tooltip>
+      </Button>
+      <Region prefWidth="30.0" />
+      <Button fx:id="enterFullScreenModeButton" mnemonicParsing="false" onAction="#enterFullScreenMode">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/material/outline_fullscreen_black_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="switch to full screen mode" />
          </tooltip>
       </Button>
    </children>
