@@ -26,11 +26,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <CheckBox fx:id="isFileListVisibleInFullScreenModeCheckBox" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" />
+                  <CheckBox fx:id="isFilesNavigationPaneVisibleInFullScreenModeCheckBox" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" />
                   <CheckBox fx:id="isPdfViewThumbnailsVisibleInFullScreenModeCheckBox" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
                   <CheckBox fx:id="isPdfViewToolBarVisibleInFullScreenModeCheckbox" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="2" />
                   <CheckBox fx:id="isFooterVisibleInFullScreenModeCheckbox" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="3" />
-                  <Label text="PDF files list view" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+                  <Label text="Files navigation pane" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
                   <Label text="PDF view thumbnails" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                   <Label text="PDF view tool bar" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
                   <Label text="Footer" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />

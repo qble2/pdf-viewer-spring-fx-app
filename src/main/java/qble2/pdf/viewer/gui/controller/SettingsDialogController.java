@@ -42,7 +42,7 @@ public class SettingsDialogController implements Initializable, EventListener {
   private CheckBox isMenuBarVisibleInFullScreenModeCheckbox;
 
   @FXML
-  private CheckBox isFileListVisibleInFullScreenModeCheckBox;
+  private CheckBox isFilesNavigationPaneVisibleInFullScreenModeCheckBox;
 
   @FXML
   private CheckBox isPdfViewThumbnailsVisibleInFullScreenModeCheckBox;
@@ -101,8 +101,8 @@ public class SettingsDialogController implements Initializable, EventListener {
   /////
 
   private void loadConfig() {
-    isFileListVisibleInFullScreenModeCheckBox
-        .setSelected(pdfViewerConfig.isFileListVisibleInFullScreenMode());
+    isFilesNavigationPaneVisibleInFullScreenModeCheckBox
+        .setSelected(pdfViewerConfig.isFilesNavigationPaneVisibleInFullScreenMode());
     isPdfViewThumbnailsVisibleInFullScreenModeCheckBox
         .setSelected(pdfViewerConfig.isPdfThumbnailsVisibleInFullScreenMode());
     isPdfViewToolBarVisibleInFullScreenModeCheckbox
@@ -115,7 +115,7 @@ public class SettingsDialogController implements Initializable, EventListener {
 
   private void updateConfig() {
     pdfViewerConfig
-        .setFileListVisibleInFullScreenMode(isFileListVisibleInFullScreenModeCheckBox.isSelected());
+        .setFilesNavigationPaneVisibleInFullScreenMode(isFilesNavigationPaneVisibleInFullScreenModeCheckBox.isSelected());
     pdfViewerConfig.setPdfThumbnailsVisibleInFullScreenMode(
         isPdfViewThumbnailsVisibleInFullScreenModeCheckBox.isSelected());
     pdfViewerConfig.setPdfViewToolBarVisibleInFullScreenMode(

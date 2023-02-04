@@ -131,7 +131,7 @@ public class FilesNavigationPane implements Initializable, EventListener {
   @Subscribe
   public void processFullScreenModeEvent(FullScreenModeEvent event) {
     boolean isVisible = !event.isFullScreen()
-        || (event.isFullScreen() && pdfViewerConfig.isFileListVisibleInFullScreenMode());
+        || (event.isFullScreen() && pdfViewerConfig.isFilesNavigationPaneVisibleInFullScreenMode());
     this.root.setVisible(isVisible);
   }
 

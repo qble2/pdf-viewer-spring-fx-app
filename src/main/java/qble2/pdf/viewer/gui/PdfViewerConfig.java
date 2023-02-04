@@ -18,8 +18,8 @@ public class PdfViewerConfig extends Configurations {
 
   private static final Path CONFIG_FILE_PATH = Paths.get("./settings.properties");
 
-  private static final String FULL_SCREEN_MODE_FILE_LIST_VISIBLE =
-      "fullScreenMode.fileList.visible";
+  private static final String FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE =
+      "fullScreenMode.filesNavigationPane.visible";
   private static final String FULL_SCREEN_MODE_PDF_VIEW_THUMBNAILS_VISIBLE =
       "fullScreenMode.pdfView.thumbnails.visible";
   private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_VISIBLE =
@@ -67,12 +67,13 @@ public class PdfViewerConfig extends Configurations {
     return this.config.getString("directory");
   }
 
-  public boolean isFileListVisibleInFullScreenMode() {
-    return this.config.getBoolean(FULL_SCREEN_MODE_FILE_LIST_VISIBLE, false);
+  public boolean isFilesNavigationPaneVisibleInFullScreenMode() {
+    return this.config.getBoolean(FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE, false);
   }
 
-  public void setFileListVisibleInFullScreenMode(boolean isFileListVisibleInFullScreenMode) {
-    this.config.setProperty(FULL_SCREEN_MODE_FILE_LIST_VISIBLE, isFileListVisibleInFullScreenMode);
+  public void setFilesNavigationPaneVisibleInFullScreenMode(boolean isFilesNavigationPaneVisibleInFullScreenMode) {
+    this.config.setProperty(FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE,
+        isFilesNavigationPaneVisibleInFullScreenMode);
   }
 
   public boolean isPdfThumbnailsVisibleInFullScreenMode() {

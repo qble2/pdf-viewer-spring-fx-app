@@ -31,7 +31,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
   @Value("classpath:/fxml/main.fxml")
   private Resource mainFxmlResource;
 
-  @Value("classpath:/fxml/configDialog.fxml")
+  @Value("classpath:/fxml/settingsDialog.fxml")
   private Resource configDialogFxmlResource;
 
   @Value("classpath:/fxml/splitPdfDialog.fxml")
