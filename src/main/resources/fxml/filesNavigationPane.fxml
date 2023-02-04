@@ -19,17 +19,17 @@
          <children>
             <HBox fx:id="autoCompleteBox" alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
-                  <CheckBox fx:id="enableAutoCompleteSuggestionsCheckBox" mnemonicParsing="false">
+                  <CheckBox fx:id="enableAutoCompleteSuggestionsCheckBox" focusTraversable="false" mnemonicParsing="false">
                      <tooltip>
                         <Tooltip text="enable suggestions" />
                      </tooltip>
                   </CheckBox>
                   <Region prefWidth="10.0" />
-                  <Button fx:id="clearAutoCompleteInputButton" minHeight="25.0" mnemonicParsing="false" onAction="#clearAutoCompleteSelection" text="clear" />
+                  <Button fx:id="clearAutoCompleteInputButton" focusTraversable="false" minHeight="25.0" mnemonicParsing="false" onAction="#clearAutoCompleteSelection" text="clear" />
                   <Region prefWidth="10.0" />
                </children>
             </HBox>
-            <Label fx:id="expandListViewLabel" onMouseClicked="#expandCollapseListView">
+            <Label fx:id="expandListViewLabel" focusTraversable="false" onMouseClicked="#expandCollapseListView">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +38,7 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label fx:id="collapseListViewLabel" onMouseClicked="#expandCollapseListView">
+            <Label fx:id="collapseListViewLabel" focusTraversable="false" onMouseClicked="#expandCollapseListView">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -55,7 +55,7 @@
             <Insets bottom="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" VBox.vgrow="ALWAYS">
+      <TabPane fx:id="tabPane" focusTraversable="false" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" VBox.vgrow="ALWAYS">
         <tabs>
           <Tab fx:id="listViewTab" closable="false" text="Flat">
           	<fx:include source="filesListView.fxml" />

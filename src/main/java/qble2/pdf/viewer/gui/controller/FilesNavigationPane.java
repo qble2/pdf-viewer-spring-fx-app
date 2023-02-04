@@ -148,13 +148,17 @@ public class FilesNavigationPane implements Initializable, EventListener {
     HBox.setHgrow(autoCompleteTextField, Priority.ALWAYS);
     autoCompleteTextField.maxWidth(Double.MAX_VALUE);
     autoCompleteTextField.textProperty().addListener((obs, oldValue, newValue) -> {
-      eventBusFx.notify(new AutoCompleteSelectionChangedEvent(newValue));
+      // if checkbox selected, let AutoCompletedEvent handle notifications
+      if (!enableAutoCompleteSuggestionsCheckBox.isSelected()) {
+        eventBusFx.notify(new AutoCompleteSelectionChangedEvent(newValue));
+      }
     });
     autoCompleteTextField.addEventHandler(AutoCompleteTextField.AutoCompletedEvent.AUTO_COMPLETED,
         new EventHandler<AutoCompleteTextField.AutoCompletedEvent>() {
           @Override
           public void handle(AutoCompletedEvent event) {
             eventBusFx.notify(new AutoCompleteSelectionChangedEvent(event.getCompletion()));
+            root.requestFocus();
           }
         });
     autoCompleteBox.getChildren().add(0, autoCompleteTextField);

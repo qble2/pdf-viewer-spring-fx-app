@@ -6,7 +6,7 @@
 
 <VBox fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.FilesListViewController">
    <children>
-      <ScrollPane fx:id="filesListViewScrollPane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+      <ScrollPane fx:id="filesListViewScrollPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" VBox.vgrow="ALWAYS">
          <content>
             <ListView fx:id="fileListView" minWidth="300.0" prefWidth="300.0" />
          </content>

@@ -80,7 +80,10 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
       stage.setScene(scene);
 
+      // load settings
       stage.setMaximized(pdfViewerConfig.isMaximizeStageAtStartup());
+      stage.getScene().getRoot()
+          .setStyle(String.format("-app-color: %s;", pdfViewerConfig.getAppColor()));
 
       stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
         eventBusFx.notify(new FullScreenModeEvent(newValue));

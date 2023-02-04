@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PdfViewerConfig extends Configurations {
 
   private static final Path CONFIG_FILE_PATH = Paths.get("./settings.properties");
+  private static final String DEFAUT_APP_COLOR = "#E1F5FE";
 
   private static final String FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE =
       "fullScreenMode.filesNavigationPane.visible";
@@ -25,15 +26,14 @@ public class PdfViewerConfig extends Configurations {
   private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_VISIBLE =
       "fullScreenMode.pdfView.toolBar.visible";
   private static final String FULL_SCREEN_MODE_FOOTER_VISIBLE = "fullScreenMode.footer.visible";
-
   private static final String PDF_VIEW_TOOL_BAR_DEFAULT_SIZE = "pdfView.thumbnails.size";
   private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE =
       "fullScreenMode.pdfView.thumbnails.size";
   private static final String STARTUP_MAXIMIZE_WINDOW = "startup.maximizeWindow";
   private static final String STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS =
       "startup.autoCompleteSuggestions.enabled";
-
   private static final String EXPAND_ALL_TREE_VIEW_ITEMS = "treeView.expandAll";
+  private static final String APP_COLOR = "app.color";
 
   private Configuration config;
   private FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
@@ -152,6 +152,14 @@ public class PdfViewerConfig extends Configurations {
 
   public void setExpandAllTreeViewItems(boolean isExpandAllTreeViewItems) {
     this.config.setProperty(EXPAND_ALL_TREE_VIEW_ITEMS, isExpandAllTreeViewItems);
+  }
+
+  public String getAppColor() {
+    return this.config.getString(APP_COLOR, DEFAUT_APP_COLOR);
+  }
+
+  public void setAppColor(String color) {
+    this.config.setProperty(APP_COLOR, color);
   }
 
 }

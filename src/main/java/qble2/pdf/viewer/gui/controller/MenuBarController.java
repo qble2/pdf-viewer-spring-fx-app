@@ -15,11 +15,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import lombok.extern.slf4j.Slf4j;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
+import qble2.pdf.viewer.gui.event.AppColorChangedEvent;
 import qble2.pdf.viewer.gui.event.DirectoryChangedEvent;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
@@ -36,6 +40,9 @@ public class MenuBarController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   @FXML
   private Parent root;
@@ -58,6 +65,9 @@ public class MenuBarController implements Initializable, EventListener {
   @FXML
   private Button selectExternalPdfFileToSplitButton;
 
+  @FXML
+  private ColorPicker colorPicker;
+
   //
   private DirectoryChooser directoryChooser;
   private FileChooser fileChooser;
@@ -67,6 +77,8 @@ public class MenuBarController implements Initializable, EventListener {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
+
+    colorPicker.setValue(Color.valueOf(pdfViewerConfig.getAppColor()));
 
     directoryChooser = new DirectoryChooser();
     directoryChooser.setTitle("Select directory to load");
@@ -96,6 +108,11 @@ public class MenuBarController implements Initializable, EventListener {
     // () -> converter.apply(currentDirectoryPathObjectProperty.get()),
     // currentDirectoryPathObjectProperty));
     currentDirectoryLabel.textProperty().bind(currentDirectoryPathObjectProperty.asString());
+
+    //
+    colorPicker.valueProperty().addListener((obs, oldValue, newValue) -> {
+      eventBusFx.notify(new AppColorChangedEvent(newValue));
+    });
   }
 
   /////
