@@ -31,6 +31,9 @@ public class SplitPdfFileService {
   private static final String SPLIT_FILE_NAME_FORMAT = "%s.%s";
 
   @Setter
+  private Consumer<String> splitFilesTargetDirectoryConsumer;
+
+  @Setter
   private Consumer<String> currentOperationConsumer;
 
   @Setter
@@ -68,9 +71,9 @@ public class SplitPdfFileService {
     try {
       totalNumberOfSplitFilesCreatedConsumer.accept(0);
 
-      targetDirectoryPath = prepareTargetDirectory(pdfFilePath);
       document = loadPdfFile(pdfFilePath);
       PDDocumentOutline bookmarks = loadBookmarks(document);
+      targetDirectoryPath = prepareTargetDirectory(pdfFilePath);
 
       currentOperationConsumer.accept("Creating split files...");
       createSplitFiles(document, bookmarks, "", targetDirectoryPath);
@@ -98,7 +101,9 @@ public class SplitPdfFileService {
     currentOperationConsumer.accept("Preparing target folder...");
 
     Path targetDirectory = Path.of(pdfFilePath.getParent().toString(), SPLIT_FILES_TARGET_FOLDER);
+    splitFilesTargetDirectoryConsumer.accept(targetDirectory.toString());
     log.info("target folder\t{}", targetDirectory.toString());
+
     if (targetDirectory.toFile().exists()) {
       try {
         FileUtils.deleteDirectory(targetDirectory.toFile());

@@ -37,6 +37,12 @@
             </VBox>
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
+                  <Label text="Target directory:" />
+                  <Label fx:id="splitFilesTargetDirectoryLabel" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
                   <Label text="Files created:" />
                   <Label fx:id="totalNumberOfSplitFilesCreatedLabel" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
                </children>

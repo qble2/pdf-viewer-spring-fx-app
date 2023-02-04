@@ -71,6 +71,9 @@ public class SplitPdfDialogController implements Initializable, EventListener {
   private Label totalNumberOfSplitFilesCreatedLabel;
 
   @FXML
+  private Label splitFilesTargetDirectoryLabel;
+
+  @FXML
   private Label errorMessageLabel;
 
   //
@@ -140,6 +143,9 @@ public class SplitPdfDialogController implements Initializable, EventListener {
     task = new Task<>() {
       @Override
       protected Path call() throws Exception {
+        splitPdfFileService.setSplitFilesTargetDirectoryConsumer(s -> {
+          Platform.runLater(() -> splitFilesTargetDirectoryLabel.setText(s));
+        });
         splitPdfFileService.setCurrentOperationConsumer(s -> {
           Platform.runLater(() -> currentOperationLabel.setText(s));
         });
