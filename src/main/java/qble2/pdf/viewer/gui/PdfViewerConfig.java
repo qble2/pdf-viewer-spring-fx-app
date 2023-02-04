@@ -29,6 +29,11 @@ public class PdfViewerConfig extends Configurations {
   private static final String PDF_VIEW_TOOL_BAR_DEFAULT_SIZE = "pdfView.thumbnails.size";
   private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE =
       "fullScreenMode.pdfView.thumbnails.size";
+  private static final String STARTUP_MAXIMIZE_WINDOW = "startup.maximizeWindow";
+  private static final String STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS =
+      "startup.autoCompleteSuggestions.enabled";
+
+  private static final String EXPAND_ALL_TREE_VIEW_ITEMS = "treeView.expandAll";
 
   private Configuration config;
   private FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
@@ -71,7 +76,8 @@ public class PdfViewerConfig extends Configurations {
     return this.config.getBoolean(FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE, false);
   }
 
-  public void setFilesNavigationPaneVisibleInFullScreenMode(boolean isFilesNavigationPaneVisibleInFullScreenMode) {
+  public void setFilesNavigationPaneVisibleInFullScreenMode(
+      boolean isFilesNavigationPaneVisibleInFullScreenMode) {
     this.config.setProperty(FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE,
         isFilesNavigationPaneVisibleInFullScreenMode);
   }
@@ -120,6 +126,32 @@ public class PdfViewerConfig extends Configurations {
   public void setPdfViewThumbnailsSizeInFullScreenMode(int pdfViewThumbnailsSizeInFullScreenMode) {
     this.config.setProperty(FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE,
         pdfViewThumbnailsSizeInFullScreenMode);
+  }
+
+  public boolean isMaximizeStageAtStartup() {
+    return this.config.getBoolean(STARTUP_MAXIMIZE_WINDOW, false);
+  }
+
+  public void setMaximizeStageAtStartup(boolean isMaximizeStageAtStartup) {
+    this.config.setProperty(STARTUP_MAXIMIZE_WINDOW, isMaximizeStageAtStartup);
+  }
+
+  public boolean isAutoCompleteSuggestionsEnabledAtStartup() {
+    return this.config.getBoolean(STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS, false);
+  }
+
+  public void setAutoCompleteSuggestionsEnabledAtStartup(
+      boolean isAutoCompleteSuggestionsEnabledAtStartup) {
+    this.config.setProperty(STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS,
+        isAutoCompleteSuggestionsEnabledAtStartup);
+  }
+
+  public boolean isExpandAllTreeViewItems() {
+    return this.config.getBoolean(EXPAND_ALL_TREE_VIEW_ITEMS, false);
+  }
+
+  public void setExpandAllTreeViewItems(boolean isExpandAllTreeViewItems) {
+    this.config.setProperty(EXPAND_ALL_TREE_VIEW_ITEMS, isExpandAllTreeViewItems);
   }
 
 }

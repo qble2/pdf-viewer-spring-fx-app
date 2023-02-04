@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.FilesTreeViewCellFactory;
 import qble2.pdf.viewer.gui.FilterableTreeItem;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.AutoCompleteSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.ClearFileSelectionEvent;
 import qble2.pdf.viewer.gui.event.DirectoryChangedEvent;
@@ -39,6 +40,9 @@ public class FilesTreeViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   @FXML
   private Parent root;
@@ -124,6 +128,8 @@ public class FilesTreeViewController implements Initializable, EventListener {
   /////
 
   private void populateTreeView(Path path, FilterableTreeItem<Path> parent) {
+    boolean isExpandAllTreeViewItems = pdfViewerConfig.isExpandAllTreeViewItems();
+
     try {
       if (Files.isDirectory(path)) {
         FilterableTreeItem<Path> treeItem;
@@ -131,6 +137,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
           treeItem = parent;
         } else {
           treeItem = new FilterableTreeItem<>(path);
+          treeItem.setExpanded(isExpandAllTreeViewItems);
           parent.getSourceChildren().add(treeItem);
         }
 

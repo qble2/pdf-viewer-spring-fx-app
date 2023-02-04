@@ -12,8 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import qble2.pdf.viewer.gui.controller.SettingsDialogController;
+import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.controller.MainController;
+import qble2.pdf.viewer.gui.controller.SettingsDialogController;
 import qble2.pdf.viewer.gui.controller.SplitPdfDialogController;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
@@ -27,6 +28,9 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
   @Autowired
   private EventBusFx eventBusFx;
+
+  @Autowired
+  private PdfViewerConfig pdfViewerConfig;
 
   @Value("classpath:/fxml/main.fxml")
   private Resource mainFxmlResource;
@@ -75,6 +79,8 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       Scene scene = new Scene(parent);
       scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
       stage.setScene(scene);
+
+      stage.setMaximized(pdfViewerConfig.isMaximizeStageAtStartup());
 
       stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
         eventBusFx.notify(new FullScreenModeEvent(newValue));

@@ -56,6 +56,15 @@ public class SettingsDialogController implements Initializable, EventListener {
   @FXML
   private TextField pdfViewThumbnailsSizeInFullScreenModeTextField;
 
+  @FXML
+  private CheckBox isMaximizeStageAtStartupCheckbox;
+
+  @FXML
+  private CheckBox isAutoCompleteSuggestionsEnabledAtStartupCheckbox;
+
+  @FXML
+  private CheckBox isExpandAllTreeViewItemsCheckbox;
+
   //
   @Setter
   private Stage stage;
@@ -111,11 +120,16 @@ public class SettingsDialogController implements Initializable, EventListener {
         .setSelected(pdfViewerConfig.isFooterVisibleInFullScreenModeCheckbox());
     pdfViewThumbnailsSizeInFullScreenModeTextField
         .setText(String.valueOf(pdfViewerConfig.getPdfViewThumbnailsSizeInFullScreenMode()));
+    isMaximizeStageAtStartupCheckbox.setSelected(pdfViewerConfig.isMaximizeStageAtStartup());
+    isAutoCompleteSuggestionsEnabledAtStartupCheckbox
+        .setSelected(pdfViewerConfig.isAutoCompleteSuggestionsEnabledAtStartup());
+    isExpandAllTreeViewItemsCheckbox
+        .setSelected(pdfViewerConfig.isExpandAllTreeViewItems());
   }
 
   private void updateConfig() {
-    pdfViewerConfig
-        .setFilesNavigationPaneVisibleInFullScreenMode(isFilesNavigationPaneVisibleInFullScreenModeCheckBox.isSelected());
+    pdfViewerConfig.setFilesNavigationPaneVisibleInFullScreenMode(
+        isFilesNavigationPaneVisibleInFullScreenModeCheckBox.isSelected());
     pdfViewerConfig.setPdfThumbnailsVisibleInFullScreenMode(
         isPdfViewThumbnailsVisibleInFullScreenModeCheckBox.isSelected());
     pdfViewerConfig.setPdfViewToolBarVisibleInFullScreenMode(
@@ -124,6 +138,11 @@ public class SettingsDialogController implements Initializable, EventListener {
         .setFooterVisibleInFullScreenMode(isFooterVisibleInFullScreenModeCheckbox.isSelected());
     pdfViewerConfig.setPdfViewThumbnailsSizeInFullScreenMode(
         NumberUtils.toInt(pdfViewThumbnailsSizeInFullScreenModeTextField.getText(), 200));
+    pdfViewerConfig.setMaximizeStageAtStartup(isMaximizeStageAtStartupCheckbox.isSelected());
+    pdfViewerConfig.setAutoCompleteSuggestionsEnabledAtStartup(
+        isAutoCompleteSuggestionsEnabledAtStartupCheckbox.isSelected());
+    pdfViewerConfig
+        .setExpandAllTreeViewItems(isExpandAllTreeViewItemsCheckbox.isSelected());
   }
 
   private void addIntegerTextFormatter(TextField textField) {

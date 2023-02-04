@@ -102,7 +102,7 @@ public class FilesNavigationPane implements Initializable, EventListener {
     collapseListViewLabel.visibleProperty().bind(tabPane.visibleProperty());
     autoCompleteBox.visibleProperty().bind(tabPane.visibleProperty());
 
-    // stage would not properly resize
+    // stage would not resize properly
     // root.visibleProperty().bind(currentDirectoryPathObjectProperty.isNotNull());
 
     root.disableProperty().bind(currentDirectoryPathObjectProperty.isNull());
@@ -140,6 +140,9 @@ public class FilesNavigationPane implements Initializable, EventListener {
   /////
 
   private void createAutoCompleteTextField() {
+    enableAutoCompleteSuggestionsCheckBox
+        .setSelected(pdfViewerConfig.isAutoCompleteSuggestionsEnabledAtStartup());
+
     autoCompleteTextField = new AutoCompleteTextField(SEARCH_PROMPT_TEXT,
         enableAutoCompleteSuggestionsCheckBox.selectedProperty());
     HBox.setHgrow(autoCompleteTextField, Priority.ALWAYS);
