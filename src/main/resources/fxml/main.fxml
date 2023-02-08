@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane minHeight="768.0" minWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
    <children>
       <BorderPane>
          <top>
-            <fx:include source="menuBar.fxml" BorderPane.alignment="CENTER_LEFT" />
+            <fx:include source="menuBar.fxml" />
          </top>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -18,13 +17,13 @@
             <Insets />
          </opaqueInsets>
          <bottom>
-            <fx:include source="footer.fxml" BorderPane.alignment="CENTER_LEFT" />
+            <fx:include source="footer.fxml" />
          </bottom>
          <left>
-            <fx:include source="filesNavigationPane.fxml" BorderPane.alignment="CENTER" />
+            <fx:include source="filesNavigationPane.fxml" />
          </left>
          <center>
-            <fx:include source="pdfViewsPane.fxml" BorderPane.alignment="CENTER_LEFT" />
+            <fx:include source="pdfViewsPane.fxml" />
          </center>
       </BorderPane>
       <fx:include source="progressPane.fxml" />

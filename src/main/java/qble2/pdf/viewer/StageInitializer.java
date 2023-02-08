@@ -76,7 +76,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
           splitPdfDialogFxmlLoader.<SplitPdfDialogController>getController();
       splitPdfDialogController.setStage(stage);
 
-      Scene scene = new Scene(parent);
+      Scene scene = new Scene(parent, 1360d, 768d);
       scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
       stage.setScene(scene);
 
