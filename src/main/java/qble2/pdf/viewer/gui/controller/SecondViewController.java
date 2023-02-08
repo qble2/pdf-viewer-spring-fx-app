@@ -14,14 +14,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import lombok.extern.slf4j.Slf4j;
+import qble2.pdf.viewer.gui.LoadPdfFileTask;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.PinPdfFileEvent;
 import qble2.pdf.viewer.gui.event.SecondViewOpenedTabsCountChangedEvent;
 
 @Component
-@Slf4j
 public class SecondViewController implements Initializable, EventListener {
 
   @Autowired
@@ -69,8 +68,7 @@ public class SecondViewController implements Initializable, EventListener {
     PDFView pdfView = new PDFView();
     pdfView.thumbnailSizeProperty().set(pdfViewerConfig.getPdfViewThumbnailsSize());
 
-    log.info("loading PDF file:\t{}", pdfFilePath.toString());
-    pdfView.load(pdfFilePath.toFile());
+    new LoadPdfFileTask(eventBusFx, pdfView, pdfFilePath).start();
 
     tab.setContent(pdfView);
     tab.setOnClosed(e -> {
