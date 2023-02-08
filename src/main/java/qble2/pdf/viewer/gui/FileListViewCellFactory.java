@@ -1,17 +1,26 @@
 package qble2.pdf.viewer.gui;
 
 import java.nio.file.Path;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.PinPdfFileEvent;
 
 public class FileListViewCellFactory implements Callback<ListView<Path>, ListCell<Path>> {
 
   private final Image fileIconImage = new Image(
       getClass().getResourceAsStream("/image/material/outline_description_black_24dp.png"));
+
+  private EventBusFx eventBusFx;
+
+  public FileListViewCellFactory(EventBusFx eventBusFx) {
+    this.eventBusFx = eventBusFx;
+  }
 
   @Override
   public ListCell<Path> call(ListView<Path> param) {
@@ -26,9 +35,17 @@ public class FileListViewCellFactory implements Callback<ListView<Path>, ListCel
         } else {
           String fileName = path.getFileName().toString();
           setText(fileName);
-          setTooltip(new Tooltip(fileName));
+          // setTooltip(new Tooltip(fileName));
 
           setGraphic(new ImageView(fileIconImage));
+
+          // context menu
+          MenuItem pinMenuItem = new MenuItem("pin to the right");
+          pinMenuItem.setOnAction(e -> {
+            eventBusFx.notify(new PinPdfFileEvent(path));
+          });
+          ContextMenu contextMenu = new ContextMenu(pinMenuItem);
+          setContextMenu(contextMenu);
         }
       }
     };

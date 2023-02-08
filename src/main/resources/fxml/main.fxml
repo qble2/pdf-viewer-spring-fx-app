@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
+<StackPane minHeight="768.0" minWidth="1360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
    <children>
       <BorderPane>
          <top>
@@ -23,7 +24,7 @@
             <fx:include source="filesNavigationPane.fxml" BorderPane.alignment="CENTER" />
          </left>
          <center>
-            <fx:include minHeight="600.0" minWidth="1024.0" source="pdfView.fxml" BorderPane.alignment="CENTER" />
+            <fx:include source="pdfViewsPane.fxml" BorderPane.alignment="CENTER_LEFT" />
          </center>
       </BorderPane>
       <fx:include source="progressPane.fxml" />

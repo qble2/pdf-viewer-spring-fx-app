@@ -2,12 +2,15 @@ package qble2.pdf.viewer.gui;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
+import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.PinPdfFileEvent;
 
 public class FilesTreeViewCellFactory implements Callback<TreeView<Path>, TreeCell<Path>> {
 
@@ -15,6 +18,12 @@ public class FilesTreeViewCellFactory implements Callback<TreeView<Path>, TreeCe
       new Image(getClass().getResourceAsStream("/image/material/outline_folder_black_24dp.png"));
   private final Image fileIconImage = new Image(
       getClass().getResourceAsStream("/image/material/outline_description_black_24dp.png"));
+
+  private EventBusFx eventBusFx;
+
+  public FilesTreeViewCellFactory(EventBusFx eventBusFx) {
+    this.eventBusFx = eventBusFx;
+  }
 
   @Override
   public TreeCell<Path> call(TreeView<Path> param) {
@@ -31,8 +40,16 @@ public class FilesTreeViewCellFactory implements Callback<TreeView<Path>, TreeCe
           setText(fileName);
 
           boolean isDirectory = Files.isDirectory(path);
-          setTooltip(new Tooltip(isDirectory ? path.toString() : fileName));
+          // setTooltip(new Tooltip(isDirectory ? path.toString() : fileName));
           setGraphic(new ImageView(isDirectory ? folderIconImage : fileIconImage));
+
+          // context menu
+          MenuItem pinMenuItem = new MenuItem("pin to the right");
+          pinMenuItem.setOnAction(e -> {
+            eventBusFx.notify(new PinPdfFileEvent(path));
+          });
+          ContextMenu contextMenu = new ContextMenu(pinMenuItem);
+          setContextMenu(contextMenu);
         }
       }
     };

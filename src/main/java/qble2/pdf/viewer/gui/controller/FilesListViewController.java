@@ -131,7 +131,7 @@ public class FilesListViewController implements Initializable, EventListener {
     filteredFileList = new FilteredList<>(observableFileList);
     fileListView.setItems(filteredFileList);
 
-    fileListView.setCellFactory(new FileListViewCellFactory());
+    fileListView.setCellFactory(new FileListViewCellFactory(eventBusFx));
     fileListView.getSelectionModel().selectedItemProperty()
         .addListener((obs, oldValue, newValue) -> {
           eventBusFx.notify(new FileSelectionChangedEvent(newValue));

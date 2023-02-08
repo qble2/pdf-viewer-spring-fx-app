@@ -63,7 +63,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
 
     root.managedProperty().bind(root.visibleProperty());
 
-    filesTreeView.setCellFactory(new FilesTreeViewCellFactory());
+    filesTreeView.setCellFactory(new FilesTreeViewCellFactory(eventBusFx));
     filesTreeView.getSelectionModel().selectedItemProperty()
         .addListener((obs, oldValue, newValue) -> {
           if (newValue != null && Files.isRegularFile(newValue.getValue())) {

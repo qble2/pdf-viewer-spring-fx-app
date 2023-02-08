@@ -93,6 +93,9 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
         eventBusFx.notify(new StageShownEvent());
       });
 
+      stage.setMinWidth(1360d);
+      stage.setMinHeight(768d);
+
       stage.show();
       stage.toFront();
 
