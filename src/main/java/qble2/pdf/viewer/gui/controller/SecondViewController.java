@@ -67,7 +67,7 @@ public class SecondViewController implements Initializable, EventListener {
     Tab tab = new Tab(tabTitle);
 
     PDFView pdfView = new PDFView();
-    pdfView.thumbnailSizeProperty().set(pdfViewerConfig.getPdfViewThumbnailsDefaultSize());
+    pdfView.thumbnailSizeProperty().set(pdfViewerConfig.getPdfViewThumbnailsSize());
 
     log.info("loading PDF file:\t{}", pdfFilePath.toString());
     pdfView.load(pdfFilePath.toFile());

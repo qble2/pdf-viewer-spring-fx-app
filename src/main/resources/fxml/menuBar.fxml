@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
 <HBox fx:id="root" alignment="CENTER_LEFT" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MenuBarController">
    <children>
       <Button fx:id="loadDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#loadDirectory" text="Load directory">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_folder_open_black_24dp.png" />
-               </image>
-            </ImageView>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="image-view-load-directory" />
          </graphic>
          <tooltip>
             <Tooltip text="load all PDF files from a directory" />
@@ -25,11 +20,7 @@
       </Button>
       <Button fx:id="reloadCurrentDirectoryButton" focusTraversable="false" mnemonicParsing="false" onAction="#reloadCurrentDirectory" text="Reload directory">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_refresh_black_24dp.png" />
-               </image>
-            </ImageView>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="image-view-load-reload-directory" />
          </graphic>
          <tooltip>
             <Tooltip text="reload current directory" />
@@ -39,37 +30,27 @@
       <Region HBox.hgrow="ALWAYS" />
       <Button fx:id="splitSelectedPdfFileButton" focusTraversable="false" mnemonicParsing="false" onAction="#splitSelectedPdfFile" text="Split selected PDF">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_content_cut_black_24dp.png" />
-               </image>
-            </ImageView>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="image-view-split-selected-pdf-file" />
          </graphic>
          <tooltip>
             <Tooltip text="split selected PDF file" />
          </tooltip>
       </Button>
+      <Region prefWidth="20.0" />
       <Button fx:id="selectExternalPdfFileToSplitButton" focusTraversable="false" mnemonicParsing="false" onAction="#selectExternalPdfFileToSplit" text="Split external PDF">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_file_open_black_24dp.png" />
-               </image>
-            </ImageView>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="image-view-split-external-pdf-file" />
          </graphic>
          <tooltip>
             <Tooltip text="select an external PDF file to split" />
          </tooltip>
       </Button>
       <Region prefWidth="30.0" />
-      <ColorPicker fx:id="colorPicker" focusTraversable="false" maxHeight="1.7976931348623157E308" />
+      <ToggleSwitch fx:id="darkModeToggleSwitch" text="Dark mode" />
+      <Region prefWidth="30.0" />
       <Button focusTraversable="false" mnemonicParsing="false" onAction="#openSettingsDialog">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_settings_black_24dp.png" />
-               </image>
-            </ImageView>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="image-view-settings" />
          </graphic>
          <tooltip>
             <Tooltip text="open settings" />
@@ -78,11 +59,7 @@
       <Region prefWidth="30.0" />
       <Button fx:id="enterFullScreenModeButton" focusTraversable="false" mnemonicParsing="false" onAction="#enterFullScreenMode">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/material/outline_fullscreen_black_24dp.png" />
-               </image>
-            </ImageView>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="image-view-full-screen-mode" />
          </graphic>
          <tooltip>
             <Tooltip text="switch to full screen mode" />

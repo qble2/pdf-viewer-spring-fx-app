@@ -18,15 +18,15 @@ public class PdfViewerConfig extends Configurations {
 
   private static final Path CONFIG_FILE_PATH = Paths.get("./settings.properties");
 
-  private static final String DEFAUT_APP_COLOR = "#E1F5FE";
-  private static final int DEFAULT_PDF_VIEW_THUMBNAIL_SIZE = 60;
+  private static final int PDF_VIEW_THUMBNAIL_SIZE = 60;
 
-  private static final String STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS =
+  private static final String STARTUP_MAXIMIZE_WINDOW = "startup.maximizeWindow";
+  private static final String STARTUP_AUTOCOMPLETE_SUGGESTIONS_ENABLED =
       "startup.autoCompleteSuggestions.enabled";
+  private static final String DARK_MODE_ENABLED = "darkMode.enabled";
   private static final String EXPAND_ALL_TREE_VIEW_ITEMS = "treeView.expandAll";
-  private static final String PDF_VIEW_THUMBNAILS_DEFAULT_SIZE = "pdfView.thumbnails.size";
+  private static final String PDF_VIEW_THUMBNAILS_SIZE = "pdfView.thumbnails.size";
 
-  private static final String APP_COLOR = "app.color";
   private static final String FULL_SCREEN_MODE_FILES_NAVIGATION_PANE_VISIBLE =
       "fullScreenMode.filesNavigationPane.visible";
   private static final String FULL_SCREEN_MODE_PDF_VIEW_THUMBNAILS_VISIBLE =
@@ -36,7 +36,6 @@ public class PdfViewerConfig extends Configurations {
   private static final String FULL_SCREEN_MODE_FOOTER_VISIBLE = "fullScreenMode.footer.visible";
   private static final String FULL_SCREEN_MODE_PDF_VIEW_TOOL_BAR_SIZE =
       "fullScreenMode.pdfView.thumbnails.size";
-  private static final String STARTUP_MAXIMIZE_WINDOW = "startup.maximizeWindow";
 
   private Configuration config;
   private FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
@@ -114,12 +113,12 @@ public class PdfViewerConfig extends Configurations {
         isFooterVisibleInFullScreenModeCheckbox);
   }
 
-  public int getPdfViewThumbnailsDefaultSize() {
-    return this.config.getInt(PDF_VIEW_THUMBNAILS_DEFAULT_SIZE, DEFAULT_PDF_VIEW_THUMBNAIL_SIZE);
+  public int getPdfViewThumbnailsSize() {
+    return this.config.getInt(PDF_VIEW_THUMBNAILS_SIZE, PDF_VIEW_THUMBNAIL_SIZE);
   }
 
-  public void setPdfViewThumbnailsDefaultSize(int pdfViewThumbnailsDefaultSize) {
-    this.config.setProperty(PDF_VIEW_THUMBNAILS_DEFAULT_SIZE, pdfViewThumbnailsDefaultSize);
+  public void setPdfViewThumbnailsSize(int pdfViewThumbnailsDefaultSize) {
+    this.config.setProperty(PDF_VIEW_THUMBNAILS_SIZE, pdfViewThumbnailsDefaultSize);
   }
 
   public int getPdfViewThumbnailsSizeInFullScreenMode() {
@@ -140,12 +139,12 @@ public class PdfViewerConfig extends Configurations {
   }
 
   public boolean isAutoCompleteSuggestionsEnabledAtStartup() {
-    return this.config.getBoolean(STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS, false);
+    return this.config.getBoolean(STARTUP_AUTOCOMPLETE_SUGGESTIONS_ENABLED, false);
   }
 
   public void setAutoCompleteSuggestionsEnabledAtStartup(
       boolean isAutoCompleteSuggestionsEnabledAtStartup) {
-    this.config.setProperty(STARTUP_ENABLE_AUTOCOMPLETE_SUGGESTIONS,
+    this.config.setProperty(STARTUP_AUTOCOMPLETE_SUGGESTIONS_ENABLED,
         isAutoCompleteSuggestionsEnabledAtStartup);
   }
 
@@ -157,12 +156,11 @@ public class PdfViewerConfig extends Configurations {
     this.config.setProperty(EXPAND_ALL_TREE_VIEW_ITEMS, isExpandAllTreeViewItems);
   }
 
-  public String getAppColor() {
-    return this.config.getString(APP_COLOR, DEFAUT_APP_COLOR);
+  public boolean isDarkModeEnabled() {
+    return this.config.getBoolean(DARK_MODE_ENABLED, true);
   }
 
-  public void setAppColor(String color) {
-    this.config.setProperty(APP_COLOR, color);
+  public void setDarkModeEnabled(boolean isDarkModeEnabled) {
+    this.config.setProperty(DARK_MODE_ENABLED, isDarkModeEnabled);
   }
-
 }

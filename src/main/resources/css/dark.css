@@ -1,0 +1,79 @@
+.root {
+	-google-darkmode-background-color: #4b4b4b;
+	-poe-ninja-background-color: #1d262f;
+	-material-design-darkmode-background-color: #121212;
+
+/*  	-fx-base: -google-darkmode-background-color; */
+/*  	-fx-base: -poe-ninja-background-color; */
+ 	-fx-base: -material-design-darkmode-background-color;
+}
+
+.scroll-bar {
+    -fx-background-color: derive(-fx-base,45%);
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-accent;
+}
+
+.tree-cell,
+.list-view .list-cell,
+.list-view .list-cell:filled:selected .label {
+	-fx-text-fill: white;
+}
+
+/* prevents list-cell and tree-cell from losing its highlighed style when losing focus */
+.tree-cell:selected,
+.list-view .list-cell:filled:selected,
+.list-view .list-cell:filled:selected .label {
+    -fx-background-color: -fx-accent;
+	-fx-text-fill: white;
+}
+
+.image-view-load-directory {
+ 	-fx-image: url('../image/material/darkmode/outline_folder_open_white_24dp.png');
+}
+
+.image-view-load-reload-directory {
+ 	-fx-image: url('../image/material/darkmode/outline_refresh_white_24dp.png');
+}
+
+.image-view-split-selected-pdf-file {
+ 	-fx-image: url('../image/material/darkmode/outline_content_cut_white_24dp.png');
+}
+
+.image-view-split-external-pdf-file {
+ 	-fx-image: url('../image/material/darkmode/outline_file_open_white_24dp.png');
+}
+
+.image-view-settings {
+ 	-fx-image: url('../image/material/darkmode/outline_settings_white_24dp.png');
+}
+
+.image-view-full-screen-mode {
+ 	-fx-image: url('../image/material/darkmode/outline_fullscreen_white_24dp.png');
+}
+
+.image-view-flat-view {
+ 	-fx-image: url('../image/material/darkmode/outline_list_white_24dp.png');
+}
+
+.image-view-hierarchical-view {
+ 	-fx-image: url('../image/material/darkmode/outline_account_tree_white_24dp.png');
+}
+
+.image-view-search {
+ 	-fx-image: url('../image/material/darkmode/outline_search_white_24dp.png');
+}
+
+.image-view-close {
+ 	-fx-image: url('../image/material/darkmode/outline_close_white_24dp.png');
+}
+
+.image-view-file-icon {
+ 	-fx-image: url('../image/material/darkmode/outline_description_white_24dp.png');
+}
+
+.image-view-directory-icon {
+ 	-fx-image: url('../image/material/darkmode/outline_folder_white_24dp.png');
+}

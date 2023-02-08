@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -76,18 +75,19 @@ public class FilesNavigationPane implements Initializable, EventListener {
 
   //
   private ObjectProperty<Path> currentDirectoryPathObjectProperty = new SimpleObjectProperty<>();
-  private final Image listIconImage =
-      new Image(getClass().getResourceAsStream("/image/material/outline_list_alt_black_24dp.png"));
-  private final Image treeIconImage = new Image(
-      getClass().getResourceAsStream("/image/material/outline_account_tree_black_24dp.png"));
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
 
     // cannot be done with Scene Builder when Tab's content comes from an included fxml file
-    listViewTab.setGraphic(new ImageView(listIconImage));
-    treeViewTab.setGraphic(new ImageView(treeIconImage));
+    ImageView listViewTabImageView = new ImageView();
+    listViewTabImageView.getStyleClass().add("image-view-flat-view");
+    listViewTab.setGraphic(listViewTabImageView);
+
+    ImageView treeViewTabImageView = new ImageView();
+    treeViewTabImageView.getStyleClass().add("image-view-hierarchical-view");
+    treeViewTab.setGraphic(treeViewTabImageView);
 
     // custom control
     createAutoCompleteTextField();

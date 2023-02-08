@@ -1,0 +1,67 @@
+.root {
+ 	-fx-base: #E1F5FE;
+}
+
+.tab-pane .tab:selected {
+	/* #1072b0 = BLUE */
+    -fx-background-color: derive(-fx-accent,80%);
+}
+
+/* prevents list-cell and tree-cell from losing its highlighed style when losing focus */
+.tree-cell:selected,
+.list-view .list-cell:filled:selected,
+.list-view .list-cell:filled:selected .label {
+/*     -fx-background-color: -fx-accent; */
+    -fx-background-color: derive(-fx-accent,80%);
+	-fx-text-fill: black;
+}
+
+.image-view-load-directory {
+ 	-fx-image: url('../image/material/lightmode/outline_folder_open_black_24dp.png');
+}
+
+.image-view-load-reload-directory {
+ 	-fx-image: url('../image/material/lightmode/outline_refresh_black_24dp.png');
+}
+
+.image-view-split-selected-pdf-file {
+ 	-fx-image: url('../image/material/lightmode/outline_content_cut_black_24dp.png');
+}
+
+.image-view-split-external-pdf-file {
+ 	-fx-image: url('../image/material/lightmode/outline_file_open_black_24dp.png');
+}
+
+.image-view-settings {
+ 	-fx-image: url('../image/material/lightmode/outline_settings_black_24dp.png');
+}
+
+.image-view-full-screen-mode {
+ 	-fx-image: url('../image/material/lightmode/outline_fullscreen_black_24dp.png');
+}
+
+.image-view-flat-view {
+ 	-fx-image: url('../image/material/lightmode/outline_list_black_24dp.png');
+}
+
+.image-view-hierarchical-view {
+ 	-fx-image: url('../image/material/lightmode/outline_account_tree_black_24dp.png');
+}
+
+.image-view-search {
+ 	-fx-image: url('../image/material/lightmode/outline_search_black_24dp.png');
+}
+
+.image-view-close {
+ 	-fx-image: url('../image/material/lightmode/outline_close_black_24dp.png');
+}
+
+.image-view-file-icon {
+ 	-fx-image: url('../image/material/lightmode/outline_description_black_24dp.png');
+}
+
+.image-view-directory-icon {
+ 	-fx-image: url('../image/material/lightmode/outline_folder_black_24dp.png');
+}
+
+

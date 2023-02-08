@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -31,20 +30,12 @@
             </HBox>
             <Label fx:id="expandListViewLabel" focusTraversable="false" onMouseClicked="#expandCollapseListView">
                <graphic>
-                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/material/outline_search_black_24dp.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-search" />
                </graphic>
             </Label>
             <Label fx:id="collapseListViewLabel" focusTraversable="false" onMouseClicked="#expandCollapseListView">
                <graphic>
-                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/material/outline_close_black_24dp.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-close" />
                </graphic>
                <padding>
                   <Insets left="5.0" right="5.0" />

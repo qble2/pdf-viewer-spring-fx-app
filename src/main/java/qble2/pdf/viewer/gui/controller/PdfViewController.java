@@ -42,7 +42,7 @@ public class PdfViewController implements Initializable, EventListener {
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
 
-    pdfView.thumbnailSizeProperty().set(pdfViewerConfig.getPdfViewThumbnailsDefaultSize());
+    pdfView.thumbnailSizeProperty().set(pdfViewerConfig.getPdfViewThumbnailsSize());
 
     pdfView.documentProperty().addListener((obs, oldValue, newValue) -> {
       eventBusFx.notify(new TaskDoneEvent());
@@ -107,11 +107,7 @@ public class PdfViewController implements Initializable, EventListener {
 
     this.pdfView.setThumbnailSize(
         event.isFullScreen() ? pdfViewerConfig.getPdfViewThumbnailsSizeInFullScreenMode()
-            : pdfViewerConfig.getPdfViewThumbnailsDefaultSize());
+            : pdfViewerConfig.getPdfViewThumbnailsSize());
   }
-
-  /////
-  /////
-  /////
 
 }

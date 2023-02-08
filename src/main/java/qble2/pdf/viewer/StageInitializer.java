@@ -77,13 +77,15 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       splitPdfDialogController.setStage(stage);
 
       Scene scene = new Scene(parent, 1360d, 768d);
-      scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
       stage.setScene(scene);
 
       // load settings
       stage.setMaximized(pdfViewerConfig.isMaximizeStageAtStartup());
-      stage.getScene().getRoot()
-          .setStyle(String.format("-app-color: %s;", pdfViewerConfig.getAppColor()));
+      if (pdfViewerConfig.isDarkModeEnabled()) {
+        scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
+      } else {
+        scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
+      }
 
       stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
         eventBusFx.notify(new FullScreenModeEvent(newValue));
