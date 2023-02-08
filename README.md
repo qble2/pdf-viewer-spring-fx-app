@@ -14,6 +14,7 @@ The application allows the user to
 - Filter PDF files based on the file name, with autocompletion.  
 - Split large PDF files, based on the document's bookmarks (outlines).  
 - Pin PDF files in a second view for later access or for comparaison purposes.  
+- Switch between light and dark mode.  
 
 
 ## Built with:
@@ -28,7 +29,15 @@ The application allows the user to
 - [Lombok](https://projectlombok.org)
 
 ## Screeshot
+- Main window (Light mode)  
 ![pdf-viewer-spring-fx-app-screenshot-1](https://user-images.githubusercontent.com/76587083/217449748-e425012a-9b22-4a6e-80b7-062907382b12.png)  
+
+- Progress dialog (Light mode)  
 ![pdf-viewer-spring-fx-app-screenshot-2](https://user-images.githubusercontent.com/76587083/216746979-ab57dfdd-fc5a-424e-851b-05a084561e05.png)  
+
+- Settings dialog (Light mode)  
 ![pdf-viewer-spring-fx-app-screenshot-3](https://user-images.githubusercontent.com/76587083/217449846-2aa77934-3901-4eeb-9543-235724311840.png)  
+
+- Main window (Dark mode)  
+![pdf-viewer-spring-fx-app-screenshot-4](https://user-images.githubusercontent.com/76587083/217500048-c8dfc1f1-8dfe-4c47-b229-1cd7ee493740.png)  
 
