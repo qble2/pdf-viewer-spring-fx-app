@@ -29,6 +29,7 @@ public class SplitPdfFileService {
 
   private static final String SPLIT_FILES_TARGET_FOLDER = "_SPLITS";
   private static final String SPLIT_FILE_NAME_FORMAT = "%s.%s";
+  private static final String WINDOWS_FILE_NAME_FORBIDDEN_CHARACTERS_REGEX = "[\\/:*?\"<>|]";
 
   @Setter
   private Consumer<String> splitFilesTargetDirectoryConsumer;
@@ -183,8 +184,9 @@ public class SplitPdfFileService {
     currentEntryConsumer.accept(title);
     progressUpdateConsumer.accept(toPage, numberOfPages);
 
-    String pdfSplitFilename = String.format(SPLIT_FILE_NAME_FORMAT, title, "pdf");
-    Path splitPdfFilePath = Paths.get(targetDirectoryPath.toString(), pdfSplitFilename);
+    String validFileName = title.replaceAll(WINDOWS_FILE_NAME_FORBIDDEN_CHARACTERS_REGEX, "_");
+    String pdfSplitFileName = String.format(SPLIT_FILE_NAME_FORMAT, validFileName, "pdf");
+    Path splitPdfFilePath = Paths.get(targetDirectoryPath.toString(), pdfSplitFileName);
     if (toPage < fromPage) {
       log.warn("skipped item ({}): malformed page range [{}-{}]", title, fromPage, toPage);
       return;
