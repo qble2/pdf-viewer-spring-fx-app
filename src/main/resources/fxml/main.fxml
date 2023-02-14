@@ -10,9 +10,6 @@
          <top>
             <fx:include source="menuBar.fxml" />
          </top>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -29,4 +26,7 @@
       <fx:include source="progressPane.fxml" />
       <fx:include source=" screenCapturePane.fxml" />
    </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </StackPane>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -32,6 +33,9 @@
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-search" />
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label fx:id="collapseListViewLabel" focusTraversable="false" onMouseClicked="#expandCollapseListView">
                <graphic>
@@ -40,13 +44,16 @@
                <padding>
                   <Insets left="5.0" right="5.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
          </children>
          <VBox.margin>
             <Insets bottom="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <TabPane fx:id="tabPane" focusTraversable="false" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" VBox.vgrow="ALWAYS">
+      <TabPane fx:id="tabPane" focusTraversable="false" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0" tabMinHeight="30.0" tabMinWidth="100.0" VBox.vgrow="ALWAYS">
         <tabs>
           <Tab fx:id="listViewTab" closable="false" text="Flat">
           	<fx:include source="filesListView.fxml" />

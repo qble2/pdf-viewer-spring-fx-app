@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -53,7 +54,7 @@ public class FilesNavigationPaneViewController implements Initializable, EventLi
   private Label collapseListViewLabel;
 
   @FXML
-  private Parent tabPane;
+  private TabPane tabPane;
 
   @FXML
   private Tab listViewTab;
@@ -83,10 +84,14 @@ public class FilesNavigationPaneViewController implements Initializable, EventLi
     // cannot be done with Scene Builder when Tab's content comes from an included fxml file
     ImageView listViewTabImageView = new ImageView();
     listViewTabImageView.getStyleClass().add("image-view-flat-view");
+    listViewTabImageView.setFitWidth(24d);
+    listViewTabImageView.setFitHeight(24d);
     listViewTab.setGraphic(listViewTabImageView);
 
     ImageView treeViewTabImageView = new ImageView();
     treeViewTabImageView.getStyleClass().add("image-view-hierarchical-view");
+    treeViewTabImageView.setFitWidth(24d);
+    treeViewTabImageView.setFitHeight(24d);
     treeViewTab.setGraphic(treeViewTabImageView);
 
     // custom control
