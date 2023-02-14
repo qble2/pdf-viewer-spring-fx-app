@@ -32,7 +32,7 @@ public class ProgressPaneViewController implements Initializable, EventListener 
     eventBusFx.registerListener(this);
 
     progressPane.setVisible(false);
-    progressPane.setStyle("-fx-background-color: rgba(159, 159, 159, 0.5);");
+    progressPane.setStyle("-fx-background-color: rgba(159, 159, 159, 0);");
 
     // indeterminate, since tasks will not provide incremental updates
     progressIndicator.setProgress(-1d);
