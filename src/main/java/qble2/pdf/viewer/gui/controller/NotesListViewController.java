@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import com.google.common.eventbus.Subscribe;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -22,12 +21,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.business.FileNote;
 import qble2.pdf.viewer.business.FileNoteService;
@@ -56,10 +53,7 @@ public class NotesListViewController implements Initializable, EventListener {
   private ScreenCapturePaneViewController screenCapturePaneController;
 
   @FXML
-  private VBox fileNotesView;
-
-  @FXML
-  private ScrollPane fileNotesAccordionScrollPane;
+  private TitledPane fileNotesViewTitledPane;
 
   @FXML
   private Accordion fileNotesAccordion;
@@ -75,21 +69,17 @@ public class NotesListViewController implements Initializable, EventListener {
   public void initialize(URL location, ResourceBundle resources) {
     eventBusFx.registerListener(this);
 
+    fileNotesViewTitledPane.setMaxWidth(Region.USE_PREF_SIZE);
+    fileNotesViewTitledPane.setMaxHeight(Region.USE_PREF_SIZE);
+
+    fileNotesViewTitledPane.managedProperty().bind(fileNotesViewTitledPane.visibleProperty());
+    fileNotesViewTitledPane.visibleProperty().bind(
+        selectedPdfFilePathObjectProperty.isNotNull().and(isScreenCaptureInProgressBooleanProperty
+            .not().and(isFullScreenModeBooleanProperty.not())));
+
     // auto-resize when children resize (ImageView)
-    fileNotesView.setMaxWidth(Region.USE_PREF_SIZE);
-    fileNotesView.setMaxHeight(Region.USE_PREF_SIZE);
-
-    fileNotesView.managedProperty().bind(fileNotesView.visibleProperty());
-    fileNotesView.visibleProperty().bind(selectedPdfFilePathObjectProperty.isNotNull().and(
-        isScreenCaptureInProgressBooleanProperty.not().and(isFullScreenModeBooleanProperty.not())));
-
-    fileNotesAccordion.managedProperty().bind(fileNotesAccordion.visibleProperty());
-
-    // prevents showing empty space when accordion is empty
-    fileNotesAccordionScrollPane.managedProperty()
-        .bind(fileNotesAccordionScrollPane.visibleProperty());
-    fileNotesAccordionScrollPane.visibleProperty()
-        .bind(Bindings.isNotEmpty(fileNotesAccordion.getPanes()));
+    fileNotesViewTitledPane.setMaxWidth(Region.USE_PREF_SIZE);
+    fileNotesViewTitledPane.setMaxHeight(Region.USE_PREF_SIZE);
   }
 
   @FXML

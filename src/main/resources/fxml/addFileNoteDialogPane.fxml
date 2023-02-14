@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <DialogPane fx:id="dialogPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <VBox>
+      <VBox spacing="5.0">
          <children>
             <ImageView fx:id="fileNoteImageView" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -20,7 +21,10 @@
                </cursor></ImageView>
             <HBox spacing="5.0">
                <children>
-                  <Label prefWidth="100.0" text="Title" />
+                  <Label prefWidth="100.0" text="Title *">
+                     <tooltip>
+                        <Tooltip text="required" />
+                     </tooltip></Label>
                   <TextField fx:id="noteTitleTextField" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
