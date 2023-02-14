@@ -27,6 +27,11 @@ import qble2.pdf.viewer.gui.exception.PdfFileNotProvidedException;
 @Slf4j
 public class SplitPdfFileService {
 
+  /**
+   * 0-based
+   */
+  private static int SPLIT_OUTLINE_DEPTH_LIMIT_INCLUSIVE = 1;
+
   private static final String SPLIT_FILES_TARGET_FOLDER = "_SPLITS";
   private static final String SPLIT_FILE_NAME_FORMAT = "%s.%s";
   private static final String WINDOWS_FILE_NAME_FORBIDDEN_CHARACTERS_REGEX = "[\\/:*?\"<>|]";
@@ -77,7 +82,7 @@ public class SplitPdfFileService {
       targetDirectoryPath = prepareTargetDirectory(pdfFilePath);
 
       currentOperationConsumer.accept("Creating split files...");
-      createSplitFiles(document, bookmarks, "", targetDirectoryPath);
+      createSplitFiles(document, bookmarks, 0, "", targetDirectoryPath);
       // last outline
       createSplitFile(document, previousItemTitle, previousOutlineStartingPageNumber,
           document.getNumberOfPages(), targetDirectoryPath);
@@ -150,10 +155,10 @@ public class SplitPdfFileService {
     return documentOutline;
   }
 
-  private void createSplitFiles(PDDocument document, PDOutlineNode outline, String indentation,
-      Path targetDirectoryPath) {
+  private void createSplitFiles(PDDocument document, PDOutlineNode outline, int depth,
+      String indentation, Path targetDirectoryPath) {
     PDOutlineItem currentOutlineItem = outline.getFirstChild();
-    while (currentOutlineItem != null) {
+    while (currentOutlineItem != null && depth <= SPLIT_OUTLINE_DEPTH_LIMIT_INCLUSIVE) {
       String currentOutlineTitle = currentOutlineItem.getTitle();
 
       PDPage currentOutlinePage = null;
@@ -166,6 +171,10 @@ public class SplitPdfFileService {
 
       currentOutlineStartingPageNumber =
           document.getDocumentCatalog().getPages().indexOf(currentOutlinePage) + 1;
+
+      System.out.println(indentation + currentOutlineItem.getTitle() + " [depth: " + depth
+          + "] [page: " + currentOutlineStartingPageNumber + "]");
+
       if (previousItemTitle != null && currentOutlineStartingPageNumber >= 2) {
         createSplitFile(document, previousItemTitle, previousOutlineStartingPageNumber,
             currentOutlineStartingPageNumber - 1, targetDirectoryPath);
@@ -174,7 +183,8 @@ public class SplitPdfFileService {
       //
       previousOutlineStartingPageNumber = currentOutlineStartingPageNumber;
       previousItemTitle = currentOutlineTitle;
-      createSplitFiles(document, currentOutlineItem, indentation + " ", targetDirectoryPath);
+      createSplitFiles(document, currentOutlineItem, depth + 1, indentation + "\t",
+          targetDirectoryPath);
       currentOutlineItem = currentOutlineItem.getNextSibling();
     }
   }
@@ -205,11 +215,11 @@ public class SplitPdfFileService {
           log.warn("\t >>> skipped: split file already exists for item ({})", title);
         } else {
           doc.save(splitPdfFilePath.toString());
-          doc.close();
           log.info("\t >>> created");
           totalSplitFilesCreated += 1;
           totalNumberOfSplitFilesCreatedConsumer.accept(totalSplitFilesCreated);
         }
+        doc.close();
       }
     } catch (IOException e) {
       log.error("\t >>> creation failed", e);
