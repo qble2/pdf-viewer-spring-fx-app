@@ -13,9 +13,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.PdfViewerConfig;
-import qble2.pdf.viewer.gui.controller.MainController;
-import qble2.pdf.viewer.gui.controller.SettingsDialogController;
-import qble2.pdf.viewer.gui.controller.SplitPdfDialogController;
+import qble2.pdf.viewer.gui.controller.MainViewController;
+import qble2.pdf.viewer.gui.controller.SettingsDialogViewController;
+import qble2.pdf.viewer.gui.controller.SplitPdfDialogViewController;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
@@ -35,11 +35,11 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
   @Value("classpath:/fxml/main.fxml")
   private Resource mainFxmlResource;
 
-  @Value("classpath:/fxml/settingsDialog.fxml")
-  private Resource configDialogFxmlResource;
+  @Value("classpath:/fxml/settingsDialogPane.fxml")
+  private Resource settingsDialogPaneFxmlResource;
 
-  @Value("classpath:/fxml/splitPdfDialog.fxml")
-  private Resource splitPdfDialogFxmlResource;
+  @Value("classpath:/fxml/splitPdfDialogPane.fxml")
+  private Resource splitPdfDialogPaneFxmlResource;
 
   private ApplicationContext applicationContext;
 
@@ -57,23 +57,23 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
       FXMLLoader fxmlLoader = new FXMLLoader(mainFxmlResource.getURL());
       fxmlLoader.setControllerFactory(applicationContext::getBean); // !
       Parent parent = fxmlLoader.load();
-      MainController mainController = fxmlLoader.<MainController>getController();
+      MainViewController mainController = fxmlLoader.<MainViewController>getController();
       mainController.setStage(stage);
 
       // config dialog
-      FXMLLoader configDialogFxmlLoader = new FXMLLoader(configDialogFxmlResource.getURL());
-      configDialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
-      configDialogFxmlLoader.load();
-      SettingsDialogController configDialogPaneController =
-          configDialogFxmlLoader.<SettingsDialogController>getController();
-      configDialogPaneController.setStage(stage);
+      FXMLLoader settingsDialogFxmlLoader = new FXMLLoader(settingsDialogPaneFxmlResource.getURL());
+      settingsDialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
+      settingsDialogFxmlLoader.load();
+      SettingsDialogViewController settingsDialogPaneController =
+          settingsDialogFxmlLoader.<SettingsDialogViewController>getController();
+      settingsDialogPaneController.setStage(stage);
 
       // split PDF dialog
-      FXMLLoader splitPdfDialogFxmlLoader = new FXMLLoader(splitPdfDialogFxmlResource.getURL());
+      FXMLLoader splitPdfDialogFxmlLoader = new FXMLLoader(splitPdfDialogPaneFxmlResource.getURL());
       splitPdfDialogFxmlLoader.setControllerFactory(applicationContext::getBean); // !
       splitPdfDialogFxmlLoader.load();
-      SplitPdfDialogController splitPdfDialogController =
-          splitPdfDialogFxmlLoader.<SplitPdfDialogController>getController();
+      SplitPdfDialogViewController splitPdfDialogController =
+          splitPdfDialogFxmlLoader.<SplitPdfDialogViewController>getController();
       splitPdfDialogController.setStage(stage);
 
       Scene scene = new Scene(parent, 1360d, 768d);
@@ -81,11 +81,10 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
       // load settings
       stage.setMaximized(pdfViewerConfig.isMaximizeStageAtStartup());
-      if (pdfViewerConfig.isDarkModeEnabled()) {
-        scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
-      } else {
-        scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
-      }
+      scene.getStylesheets()
+          .add(getClass()
+              .getResource(pdfViewerConfig.isDarkModeEnabled() ? "/css/dark.css" : "/css/light.css")
+              .toExternalForm());
 
       stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
         eventBusFx.notify(new FullScreenModeEvent(newValue));

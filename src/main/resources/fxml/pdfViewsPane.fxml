@@ -5,6 +5,6 @@
 <SplitPane fx:id="splitPane" dividerPositions="1.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.PdfViewsPaneController">
    <items>
       <fx:include fx:id="pdfView" source="pdfView.fxml" />
-      <fx:include fx:id="secondViewTabPane" source="secondView.fxml" />
+      <fx:include fx:id="secondViewTabPane" source="secondPdfView.fxml" />
    </items>
 </SplitPane>

@@ -29,13 +29,13 @@ import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
 import qble2.pdf.viewer.gui.event.OpenSettingsDialogEvent;
-import qble2.pdf.viewer.gui.event.ReLoadCurrentDirectoryEvent;
+import qble2.pdf.viewer.gui.event.ReloadCurrentDirectoryEvent;
 import qble2.pdf.viewer.gui.event.RequestFullScreenModeEvent;
 import qble2.pdf.viewer.gui.event.SplitPdfFileEvent;
 
 @Component
 @Slf4j
-public class MenuBarController implements Initializable, EventListener {
+public class MenuBarViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
@@ -105,11 +105,6 @@ public class MenuBarController implements Initializable, EventListener {
     splitSelectedPdfFileButton.disableProperty().bind(selectedPdfFilePathObjectProperty.isNull());
     enterFullScreenModeButton.disableProperty().bind(selectedPdfFilePathObjectProperty.isNull());
 
-    // Function<Path, String> converter = p -> p != null ? p.toString() : StringUtils.EMPTY;
-    // currentDirectoryLabel.textProperty()
-    // .bind(Bindings.createObjectBinding(
-    // () -> converter.apply(currentDirectoryPathObjectProperty.get()),
-    // currentDirectoryPathObjectProperty));
     currentDirectoryLabel.textProperty().bind(currentDirectoryPathObjectProperty.asString());
   }
 
@@ -131,7 +126,7 @@ public class MenuBarController implements Initializable, EventListener {
 
   @FXML
   private void reloadCurrentDirectory() {
-    eventBusFx.notify(new ReLoadCurrentDirectoryEvent());
+    eventBusFx.notify(new ReloadCurrentDirectoryEvent());
   }
 
   @FXML
@@ -171,8 +166,7 @@ public class MenuBarController implements Initializable, EventListener {
   @Subscribe
   public void processFileSelectionChangedEvent(FileSelectionChangedEvent event)
       throws IOException, InterruptedException {
-    Path pdfFilePath = event.getFilePath();
-    selectedPdfFilePathObjectProperty.set(pdfFilePath);
+    selectedPdfFilePathObjectProperty.set(event.getFilePath());
   }
 
   @Subscribe

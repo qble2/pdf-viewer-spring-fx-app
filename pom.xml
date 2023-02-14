@@ -42,11 +42,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-		<!-- Lombok -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- only needed for h2-console -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- Database . H2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<!-- JavaFX -->
 		<dependency>
@@ -86,6 +95,12 @@
 			<artifactId>materialfx</artifactId>
 			<version>11.14.0-EA3</version>
 		</dependency>-->
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!-- Apache -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -114,7 +129,13 @@
 			<artifactId>guava</artifactId>
 			<version>31.1-jre</version>
 		</dependency>
-		<!-- Other -->
+		<!-- OCR -->
+		<!--		<dependency>-->
+		<!--			<groupId>net.sourceforge.tess4j</groupId>-->
+		<!--			<artifactId>tess4j</artifactId>-->
+		<!--			<version>5.6.0</version>-->
+		<!--		</dependency>-->
+		<!-- Others -->
 	</dependencies>
 	<build>
 		<plugins>

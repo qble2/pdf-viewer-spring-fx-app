@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainController">
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.MainViewController">
    <children>
       <BorderPane>
          <top>
@@ -27,5 +27,6 @@
          </center>
       </BorderPane>
       <fx:include source="progressPane.fxml" />
+      <fx:include source=" screenCapturePane.fxml" />
    </children>
 </StackPane>

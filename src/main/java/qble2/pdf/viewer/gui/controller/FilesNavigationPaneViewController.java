@@ -32,7 +32,7 @@ import qble2.pdf.viewer.gui.event.FilesListChangedEvent;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 
 @Component
-public class FilesNavigationPane implements Initializable, EventListener {
+public class FilesNavigationPaneViewController implements Initializable, EventListener {
 
   // matching PDFView
   private static final String SEARCH_PROMPT_TEXT = "Search ...";

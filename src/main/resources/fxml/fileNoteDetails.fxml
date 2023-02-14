@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane fx:id="fileNoteDetailsTitledPane" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qble2.pdf.viewer.gui.controller.NoteDetailsViewController">
+   <content>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="250.0" spacing="10.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="taken from page ">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="pageLabel">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="fileNoteImageView" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <TextArea fx:id="commentTextArea" focusTraversable="false" minHeight="60.0" prefHeight="60.0" wrapText="true" />
+                  <Label fx:id="lastUpdatedAtLabel">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox>
+               <children>
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#scrollToPage" text="scroll to">
+                     <tooltip>
+                        <Tooltip text="scroll to the page the capture was taken from" />
+                     </tooltip></Button>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="updateFileNoteButton" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#updateFileNote" text="update" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#deleteFileNote" text="delete">
+                     <tooltip>
+                        <Tooltip text="delete note (cannot be recovered)" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</TitledPane>

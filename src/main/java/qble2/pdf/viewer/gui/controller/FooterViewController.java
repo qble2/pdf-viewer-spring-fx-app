@@ -17,7 +17,7 @@ import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
 
 @Component
-public class FooterController implements Initializable, EventListener {
+public class FooterViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;

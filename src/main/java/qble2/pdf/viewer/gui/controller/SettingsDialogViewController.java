@@ -27,7 +27,7 @@ import qble2.pdf.viewer.gui.event.OpenSettingsDialogEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
 
 @Component
-public class SettingsDialogController implements Initializable, EventListener {
+public class SettingsDialogViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
@@ -80,9 +80,8 @@ public class SettingsDialogController implements Initializable, EventListener {
 
     addIntegerTextFormatter(pdfViewThumbnailsSizeInFullScreenModeTextField);
 
-    ButtonType applyButton = new ButtonType("Apply", ButtonData.OK_DONE);
-    ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-    dialog.getDialogPane().getButtonTypes().addAll(applyButton, cancelButton);
+    dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+    dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
   }
 
   /////
@@ -123,8 +122,7 @@ public class SettingsDialogController implements Initializable, EventListener {
     isMaximizeStageAtStartupCheckbox.setSelected(pdfViewerConfig.isMaximizeStageAtStartup());
     isAutoCompleteSuggestionsEnabledAtStartupCheckbox
         .setSelected(pdfViewerConfig.isAutoCompleteSuggestionsEnabledAtStartup());
-    isExpandAllTreeViewItemsCheckbox
-        .setSelected(pdfViewerConfig.isExpandAllTreeViewItems());
+    isExpandAllTreeViewItemsCheckbox.setSelected(pdfViewerConfig.isExpandAllTreeViewItems());
   }
 
   private void updateConfig() {
@@ -141,8 +139,7 @@ public class SettingsDialogController implements Initializable, EventListener {
     pdfViewerConfig.setMaximizeStageAtStartup(isMaximizeStageAtStartupCheckbox.isSelected());
     pdfViewerConfig.setAutoCompleteSuggestionsEnabledAtStartup(
         isAutoCompleteSuggestionsEnabledAtStartupCheckbox.isSelected());
-    pdfViewerConfig
-        .setExpandAllTreeViewItems(isExpandAllTreeViewItemsCheckbox.isSelected());
+    pdfViewerConfig.setExpandAllTreeViewItems(isExpandAllTreeViewItemsCheckbox.isSelected());
   }
 
   private void addIntegerTextFormatter(TextField textField) {

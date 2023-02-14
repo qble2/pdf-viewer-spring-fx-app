@@ -16,7 +16,7 @@ import qble2.pdf.viewer.gui.event.TaskDoneEvent;
 import qble2.pdf.viewer.gui.event.TaskRunningEvent;
 
 @Component
-public class ProgressPaneController implements Initializable, EventListener {
+public class ProgressPaneViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;

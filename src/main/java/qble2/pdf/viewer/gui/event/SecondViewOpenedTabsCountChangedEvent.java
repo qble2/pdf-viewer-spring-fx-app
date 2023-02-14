@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class SecondViewOpenedTabsCountChangedEvent {
 
-  private int opendedTabsCount;
+  private int openedTabsCount;
 
-  public SecondViewOpenedTabsCountChangedEvent(int opendedTabsCount) {
-    this.opendedTabsCount = opendedTabsCount;
+  public SecondViewOpenedTabsCountChangedEvent(int openedTabsCount) {
+    this.openedTabsCount = openedTabsCount;
   }
 
 }

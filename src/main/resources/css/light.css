@@ -64,4 +64,11 @@
  	-fx-image: url('../image/material/lightmode/outline_folder_black_24dp.png');
 }
 
+.image-view-add-note {
+ 	-fx-image: url('../image/material/lightmode/outline_note_add_black_24dp.png');
+}
+
+.image-view-edit-note {
+ 	-fx-image: url('../image/material/lightmode/outline_edit_note_black_24dp.png');
+}
 

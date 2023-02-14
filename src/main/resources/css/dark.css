@@ -77,3 +77,12 @@
 .image-view-directory-icon {
  	-fx-image: url('../image/material/darkmode/outline_folder_white_24dp.png');
 }
+
+.image-view-add-note {
+ 	-fx-image: url('../image/material/darkmode/outline_note_add_white_24dp.png');
+}
+
+.image-view-edit-note {
+ 	-fx-image: url('../image/material/darkmode/outline_edit_note_white_24dp.png');
+}
+

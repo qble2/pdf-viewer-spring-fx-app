@@ -13,7 +13,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -30,7 +29,7 @@ import qble2.pdf.viewer.system.SplitPdfFileService;
 
 @Component
 @Slf4j
-public class SplitPdfDialogController implements Initializable, EventListener {
+public class SplitPdfDialogViewController implements Initializable, EventListener {
 
   // The Java Virtual Machine exits when the only threads running are all daemon threads.
   // This way, there is no need to manually shutdown the executor on application exit
@@ -89,8 +88,7 @@ public class SplitPdfDialogController implements Initializable, EventListener {
     dialog = new Dialog<>();
     dialog.setDialogPane(dialogPane);
 
-    ButtonType okDoneButton = new ButtonType("Close", ButtonData.OK_DONE);
-    dialog.getDialogPane().getButtonTypes().add(okDoneButton);
+    dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
     errorMessageLabel.setStyle("-fx-text-fill: red;");
     errorMessageLabel.managedProperty().bind(errorMessageLabel.visibleProperty());

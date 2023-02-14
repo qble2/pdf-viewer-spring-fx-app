@@ -1,5 +1,6 @@
 package qble2.pdf.viewer;
 
+import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContextInitializer;
@@ -15,6 +16,8 @@ import qble2.pdf.viewer.gui.PdfViewerConfig;
 
 @Slf4j
 public class PdfViewerFxApplication extends Application {
+
+  private static final Locale DEFAULT_LOCALE = Locale.US;
 
   @Autowired
   private PdfViewerConfig pdfViewerConfig;
@@ -36,6 +39,10 @@ public class PdfViewerFxApplication extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     log.info("FX application is starting...");
+
+    log.info("Changing default locale to: {}", DEFAULT_LOCALE);
+    Locale.setDefault(DEFAULT_LOCALE);
+
     applicationContext.publishEvent(new StageReadyEvent(primaryStage));
   }
 

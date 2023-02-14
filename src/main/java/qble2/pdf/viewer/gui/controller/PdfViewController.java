@@ -18,6 +18,7 @@ import qble2.pdf.viewer.gui.PdfViewerConfig;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.FullScreenModeEvent;
+import qble2.pdf.viewer.gui.event.ScrollToPdfFilePageEvent;
 
 @Component
 public class PdfViewController implements Initializable, EventListener {
@@ -76,5 +77,14 @@ public class PdfViewController implements Initializable, EventListener {
         event.isFullScreen() ? pdfViewerConfig.getPdfViewThumbnailsSizeInFullScreenMode()
             : pdfViewerConfig.getPdfViewThumbnailsSize());
   }
+
+  @Subscribe
+  public void processScrollToPdfFilePageEvent(ScrollToPdfFilePageEvent event) {
+    this.pdfView.pageProperty().set(event.getPage());
+  }
+
+  /////
+  /////
+  /////
 
 }

@@ -5,14 +5,13 @@ import java.util.EventListener;
 import java.util.ResourceBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.dlsc.pdfviewfx.PDFView;
 import com.google.common.eventbus.Subscribe;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TabPane;
 import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.SecondViewOpenedTabsCountChangedEvent;
 
@@ -26,10 +25,10 @@ public class PdfViewsPaneController implements Initializable, EventListener {
   private SplitPane splitPane;
 
   @FXML
-  private PDFView pdfView;
+  private Parent pdfView;
 
   @FXML
-  private TabPane secondViewTabPane;
+  private Parent secondViewTabPane;
 
   //
   private IntegerProperty secondViewOpenedTabsCountIntegerProperty = new SimpleIntegerProperty(0);
@@ -52,14 +51,14 @@ public class PdfViewsPaneController implements Initializable, EventListener {
   @Subscribe
   public void processSecondViewOpenedTabsCountChangedEvent(
       SecondViewOpenedTabsCountChangedEvent event) {
-    if (event.getOpendedTabsCount() == 0) {
+    if (event.getOpenedTabsCount() == 0) {
       showDivider(false);
     } else if (secondViewOpenedTabsCountIntegerProperty.get() == 0) {
       // first tab opened
       showDivider(true);
     }
 
-    secondViewOpenedTabsCountIntegerProperty.set(event.getOpendedTabsCount());
+    secondViewOpenedTabsCountIntegerProperty.set(event.getOpenedTabsCount());
   }
 
   /////

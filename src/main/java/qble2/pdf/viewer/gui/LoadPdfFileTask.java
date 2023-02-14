@@ -5,6 +5,7 @@ import com.dlsc.pdfviewfx.PDFView;
 import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import qble2.pdf.viewer.gui.event.EventBusFx;
+import qble2.pdf.viewer.gui.event.PageSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.TaskDoneEvent;
 import qble2.pdf.viewer.gui.event.TaskRunningEvent;
 
@@ -22,6 +23,10 @@ public class LoadPdfFileTask {
 
     this.pdfView.documentProperty().addListener((obs, oldValue, newValue) -> {
       this.eventBusFx.notify(new TaskDoneEvent());
+    });
+
+    this.pdfView.pageProperty().addListener((obs, oldValue, newValue) -> {
+      this.eventBusFx.notify(new PageSelectionChangedEvent(newValue.intValue()));
     });
   }
 

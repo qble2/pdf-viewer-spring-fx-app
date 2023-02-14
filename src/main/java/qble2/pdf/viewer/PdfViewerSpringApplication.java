@@ -9,4 +9,5 @@ public class PdfViewerSpringApplication {
   public static void main(String[] args) {
     Application.launch(PdfViewerFxApplication.class, args);
   }
+
 }

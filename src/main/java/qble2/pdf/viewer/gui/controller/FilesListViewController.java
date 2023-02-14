@@ -30,7 +30,7 @@ import qble2.pdf.viewer.gui.event.EventBusFx;
 import qble2.pdf.viewer.gui.event.FileSelectionChangedEvent;
 import qble2.pdf.viewer.gui.event.FilesListChangedEvent;
 import qble2.pdf.viewer.gui.event.LoadDirectoryEvent;
-import qble2.pdf.viewer.gui.event.ReLoadCurrentDirectoryEvent;
+import qble2.pdf.viewer.gui.event.ReloadCurrentDirectoryEvent;
 import qble2.pdf.viewer.gui.event.StageShownEvent;
 import qble2.pdf.viewer.gui.event.TaskDoneEvent;
 import qble2.pdf.viewer.gui.event.TaskRunningEvent;
@@ -81,7 +81,6 @@ public class FilesListViewController implements Initializable, EventListener {
     filesListViewScrollPane.managedProperty().bind(filesListViewScrollPane.visibleProperty());
 
     filesListViewScrollPane.visibleProperty().bind(fileListView.visibleProperty());
-
   }
 
   /////
@@ -103,7 +102,7 @@ public class FilesListViewController implements Initializable, EventListener {
   }
 
   @Subscribe
-  public void processReLoadCurrentDirectoryEvent(ReLoadCurrentDirectoryEvent event) {
+  public void processReloadCurrentDirectoryEvent(ReloadCurrentDirectoryEvent event) {
     if (currentDirectoryPath != null) {
       runLoadDirectoryTask(currentDirectoryPath);
     }
@@ -119,7 +118,6 @@ public class FilesListViewController implements Initializable, EventListener {
   public void processAutoCompleteSelectionChangedEvent(AutoCompleteSelectionChangedEvent event) {
     filteredFileList.setPredicate(path -> path.getFileName().toString().toLowerCase()
         .contains(event.getSelection().toLowerCase()));
-    // fileListView.getSelectionModel().select(0);
   }
 
   /////

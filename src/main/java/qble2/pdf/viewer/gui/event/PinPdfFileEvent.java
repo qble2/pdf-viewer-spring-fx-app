@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 public class PinPdfFileEvent {
 
-  private Path pdfFilePath;
+  private Path filePath;
 
-  public PinPdfFileEvent(Path pdfFilePath) {
-    this.pdfFilePath = pdfFilePath;
+  public PinPdfFileEvent(Path filePath) {
+    this.filePath = filePath;
   }
 
 }

@@ -21,7 +21,7 @@ import qble2.pdf.viewer.gui.event.PinPdfFileEvent;
 import qble2.pdf.viewer.gui.event.SecondViewOpenedTabsCountChangedEvent;
 
 @Component
-public class SecondViewController implements Initializable, EventListener {
+public class SecondPdfViewController implements Initializable, EventListener {
 
   @Autowired
   private EventBusFx eventBusFx;
@@ -48,10 +48,10 @@ public class SecondViewController implements Initializable, EventListener {
 
   @Subscribe
   public void processPinPdfFileEvent(PinPdfFileEvent event) {
-    String tabTitle = FilenameUtils.getBaseName(event.getPdfFilePath().getFileName().toString());
+    String tabTitle = FilenameUtils.getBaseName(event.getFilePath().getFileName().toString());
     boolean exists = tabPane.getTabs().stream().anyMatch(tab -> tab.getText().equals(tabTitle));
     if (!exists) {
-      tabPane.getTabs().add(createNewTab(event.getPdfFilePath(), tabTitle));
+      tabPane.getTabs().add(createNewTab(event.getFilePath(), tabTitle));
       tabPane.getSelectionModel().selectLast();
 
       notifyOpenedTabsCountChanged();
