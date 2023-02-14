@@ -54,6 +54,9 @@ public class SettingsDialogViewController implements Initializable, EventListene
   private CheckBox isFooterVisibleInFullScreenModeCheckbox;
 
   @FXML
+  private TextField pdfViewThumbnailsSizeTextField;
+
+  @FXML
   private TextField pdfViewThumbnailsSizeInFullScreenModeTextField;
 
   @FXML
@@ -78,6 +81,7 @@ public class SettingsDialogViewController implements Initializable, EventListene
     dialog.setDialogPane(dialogPane);
     dialog.setTitle("Edit settings");
 
+    addIntegerTextFormatter(pdfViewThumbnailsSizeTextField);
     addIntegerTextFormatter(pdfViewThumbnailsSizeInFullScreenModeTextField);
 
     dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
@@ -117,6 +121,8 @@ public class SettingsDialogViewController implements Initializable, EventListene
         .setSelected(pdfViewerConfig.isPdfViewToolBarVisibleInFullScreenModeCheckbox());
     isFooterVisibleInFullScreenModeCheckbox
         .setSelected(pdfViewerConfig.isFooterVisibleInFullScreenModeCheckbox());
+    pdfViewThumbnailsSizeTextField
+        .setText(String.valueOf(pdfViewerConfig.getPdfViewThumbnailsSize()));
     pdfViewThumbnailsSizeInFullScreenModeTextField
         .setText(String.valueOf(pdfViewerConfig.getPdfViewThumbnailsSizeInFullScreenMode()));
     isMaximizeStageAtStartupCheckbox.setSelected(pdfViewerConfig.isMaximizeStageAtStartup());
@@ -134,6 +140,8 @@ public class SettingsDialogViewController implements Initializable, EventListene
         isPdfViewToolBarVisibleInFullScreenModeCheckbox.isSelected());
     pdfViewerConfig
         .setFooterVisibleInFullScreenMode(isFooterVisibleInFullScreenModeCheckbox.isSelected());
+    pdfViewerConfig
+        .setPdfViewThumbnailsSize(NumberUtils.toInt(pdfViewThumbnailsSizeTextField.getText()));
     pdfViewerConfig.setPdfViewThumbnailsSizeInFullScreenMode(
         NumberUtils.toInt(pdfViewThumbnailsSizeInFullScreenModeTextField.getText(), 200));
     pdfViewerConfig.setMaximizeStageAtStartup(isMaximizeStageAtStartupCheckbox.isSelected());

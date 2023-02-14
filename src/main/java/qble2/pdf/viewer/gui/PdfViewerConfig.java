@@ -18,7 +18,7 @@ public class PdfViewerConfig extends Configurations {
 
   private static final Path CONFIG_FILE_PATH = Paths.get("./settings.properties");
 
-  private static final int PDF_VIEW_THUMBNAIL_SIZE = 60;
+  private static final int PDF_VIEW_THUMBNAIL_SIZE = 200;
 
   private static final String STARTUP_MAXIMIZE_WINDOW = "startup.maximizeWindow";
   private static final String STARTUP_AUTOCOMPLETE_SUGGESTIONS_ENABLED =
