@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,13 @@ public class DirectoryService {
 
   public List<Path> loadDirectory(Path directoryPath) {
     log.info("loading directory:\t{}", directoryPath.toString());
-
     try {
-      return Files.walk(directoryPath).filter(this::isPdfFile).toList();
+      return Files.walk(directoryPath).filter(this::isPdfFile).sorted(new Comparator<Path>() {
+        @Override
+        public int compare(Path path1, Path path2) {
+          return Long.compare(path1.toFile().lastModified(), path2.toFile().lastModified());
+        }
+      }).toList();
     } catch (IOException e) {
       log.error("an error has occured", e);
     }
