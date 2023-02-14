@@ -47,7 +47,7 @@
                   <Label fx:id="totalNumberOfSplitFilesCreatedLabel" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Label fx:id="errorMessageLabel" maxWidth="1.7976931348623157E308" />
+            <Label fx:id="errorMessageLabel" maxWidth="1.7976931348623157E308" styleClass="error-label" />
          </children>
       </VBox>
    </content>

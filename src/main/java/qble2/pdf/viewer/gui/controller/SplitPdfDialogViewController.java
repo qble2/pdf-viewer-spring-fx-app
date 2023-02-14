@@ -90,7 +90,6 @@ public class SplitPdfDialogViewController implements Initializable, EventListene
 
     dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
-    errorMessageLabel.setStyle("-fx-text-fill: red;");
     errorMessageLabel.managedProperty().bind(errorMessageLabel.visibleProperty());
   }
 

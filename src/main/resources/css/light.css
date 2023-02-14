@@ -2,6 +2,10 @@
  	-fx-base: #E1F5FE;
 }
 
+.error-label {
+	-fx-text-fill: red;
+}
+
 .tab-pane .tab:selected {
 	/* #1072b0 = BLUE */
     -fx-background-color: derive(-fx-accent,80%);
