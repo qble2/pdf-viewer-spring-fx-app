@@ -2,9 +2,8 @@
 	-google-darkmode-background-color: #4b4b4b;
 	-poe-ninja-background-color: #1d262f;
 	-material-design-darkmode-background-color: #121212;
+	-github-darkmode-background-color: #0d1117;
 
-/*  	-fx-base: -google-darkmode-background-color; */
-/*  	-fx-base: -material-design-darkmode-background-color; */
  	-fx-base: -poe-ninja-background-color;
 }
 
