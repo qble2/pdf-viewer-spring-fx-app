@@ -10,10 +10,11 @@
 ## Features:
 The application allows the user to
 - Load PDF files from a directory.  
-- Browser loaded PDF files in a flat view or hierachical view.  
+- Browse loaded PDF files in a flat view or a hierachical view.  
 - Filter PDF files based on the file name, with autocompletion.  
 - Split large PDF files, based on the document's bookmarks (outlines).  
 - Pin PDF files in a second view for later access or for comparaison purposes.  
+- Add personal notes to PDF files.
 - Switch between light and dark mode.  
 
 
@@ -29,15 +30,15 @@ The application allows the user to
 - [Lombok](https://projectlombok.org)
 
 ## Screeshot
-- Main window (Light mode)  
-![pdf-viewer-spring-fx-app-screenshot-1](https://user-images.githubusercontent.com/76587083/217449748-e425012a-9b22-4a6e-80b7-062907382b12.png)  
 
-- Progress dialog (Light mode)  
-![pdf-viewer-spring-fx-app-screenshot-2](https://user-images.githubusercontent.com/76587083/216746979-ab57dfdd-fc5a-424e-851b-05a084561e05.png)  
+![pdf-viewer-spring-fx-app-screenshot-1](https://user-images.githubusercontent.com/76587083/220027684-b090360f-fe09-405a-be72-a0a389e27a04.png)  
 
-- Settings dialog (Light mode)  
-![pdf-viewer-spring-fx-app-screenshot-3](https://user-images.githubusercontent.com/76587083/217449846-2aa77934-3901-4eeb-9543-235724311840.png)  
+![pdf-viewer-spring-fx-app-screenshot-2](https://user-images.githubusercontent.com/76587083/220027687-84f4f3e6-6189-42ea-96cc-53d942a2e9f2.png)  
 
-- Main window (Dark mode)  
-![pdf-viewer-spring-fx-app-screenshot-4](https://user-images.githubusercontent.com/76587083/217500048-c8dfc1f1-8dfe-4c47-b229-1cd7ee493740.png)  
+![pdf-viewer-spring-fx-app-screenshot-3](https://user-images.githubusercontent.com/76587083/220027691-6343f108-9790-49a3-8d23-13abe070de1b.png)  
+
+![pdf-viewer-spring-fx-app-screenshot-4](https://user-images.githubusercontent.com/76587083/220027694-abdb7539-dc25-4dfb-aa1e-3f0d372b1f06.png)  
+
+![pdf-viewer-spring-fx-app-screenshot-5](https://user-images.githubusercontent.com/76587083/220028248-b5ffa309-293d-4bcd-9c8a-8c1e837be7bf.png)  
+
 
