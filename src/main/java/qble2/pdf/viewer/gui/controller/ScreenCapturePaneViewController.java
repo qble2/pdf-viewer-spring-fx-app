@@ -103,7 +103,7 @@ public class ScreenCapturePaneViewController implements Initializable, EventList
 
   private void openEditScreenCaptureDialog() {
     if (rectangle.getWidth() <= 0 || rectangle.getHeight() <= 0) {
-      log.warn("invalid screen region dimension (width: {} , height: {})", rectangle.getWidth(),
+      log.warn("Invalid screen region dimension (width: {} , height: {})", rectangle.getWidth(),
           rectangle.getHeight());
     } else {
       Robot robot = new Robot();

@@ -148,7 +148,7 @@ public class SplitPdfFileService {
     PDDocumentCatalog documentCatalog = document.getDocumentCatalog();
     PDDocumentOutline documentOutline = documentCatalog.getDocumentOutline();
     if (documentOutline == null) {
-      log.warn("\t >>> bookmarks not found");
+      log.warn("\t >>> Bookmarks not found");
       throw new PdfFileBookmarksNotFoundException("Bookmarks not found");
     }
 
@@ -198,7 +198,7 @@ public class SplitPdfFileService {
     String pdfSplitFileName = String.format(SPLIT_FILE_NAME_FORMAT, validFileName, "pdf");
     Path splitPdfFilePath = Paths.get(targetDirectoryPath.toString(), pdfSplitFileName);
     if (toPage < fromPage) {
-      log.warn("skipped item ({}): malformed page range [{}-{}]", title, fromPage, toPage);
+      log.warn("Skipped item ({}): malformed page range [{}-{}]", title, fromPage, toPage);
       return;
     }
 
@@ -212,7 +212,7 @@ public class SplitPdfFileService {
       for (PDDocument doc : splittedList) {
         log.info("Creating split file for item ({}) - pages [{}-{}]", title, fromPage, toPage);
         if (splitPdfFilePath.toFile().exists()) {
-          log.warn("\t >>> skipped: split file already exists for item ({})", title);
+          log.warn("\t >>> Skipped: split file already exists for item ({})", title);
         } else {
           doc.save(splitPdfFilePath.toString());
           log.info("\t >>> Created");

@@ -9,7 +9,7 @@ public class DeadEventHanlder {
 
   @Subscribe
   public void handleDeadEvent(DeadEvent deadEvent) {
-    log.warn("dead event: {}", deadEvent.getEvent());
+    log.warn("Dead event: {}", deadEvent.getEvent());
   }
 
 }
