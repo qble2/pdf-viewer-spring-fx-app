@@ -118,7 +118,7 @@ public class MenuBarViewController implements Initializable, EventListener {
         directoryChooser.showDialog(loadDirectoryButton.getScene().getWindow());
     if (selectedDirectory != null) {
       Path selectedDirectoryPath = selectedDirectory.toPath();
-      log.info("selected directory:\t{}", selectedDirectoryPath.toString());
+      log.info("Selected directory:\t{}", selectedDirectoryPath.toString());
 
       eventBusFx.notify(new LoadDirectoryEvent(selectedDirectoryPath));
     }
@@ -139,7 +139,7 @@ public class MenuBarViewController implements Initializable, EventListener {
     File selectedPdfFile = fileChooser.showOpenDialog(loadDirectoryButton.getScene().getWindow());
     if (selectedPdfFile != null) {
       Path selectedPdfFilePath = selectedPdfFile.toPath();
-      log.info("selected PDF file to split:\t{}", selectedPdfFilePath.toString());
+      log.info("Selected PDF file to split:\t{}", selectedPdfFilePath.toString());
       eventBusFx.notify(new SplitPdfFileEvent(selectedPdfFilePath));
     }
   }

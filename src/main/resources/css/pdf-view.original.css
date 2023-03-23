@@ -30,7 +30,7 @@
 .pdf-view .search-result-list-view .list-cell .image-view-wrapper {
     -fx-padding: 2px;
     -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .1), 6, 0.2, 0, 0);;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .1), 6, 0.2, 0, 0);
 }
 
 .pdf-view .search-result-list-view .list-cell .summary-label {
@@ -74,7 +74,7 @@
 .pdf-view .thumbnail-list-view .list-cell .image-view-wrapper {
     -fx-padding: 2px;
     -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .1), 6, 0.2, 0, 0);;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .1), 6, 0.2, 0, 0);
 }
 
 .pdf-view .thumbnail-list-view .list-cell:selected .image-view-wrapper {

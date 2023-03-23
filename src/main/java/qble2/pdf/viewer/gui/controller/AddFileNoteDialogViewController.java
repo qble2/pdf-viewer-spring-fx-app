@@ -56,7 +56,7 @@ public class AddFileNoteDialogViewController extends Dialog<AddFileNoteDialogRes
         return null;
       });
     } catch (IOException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
     }
   }
 

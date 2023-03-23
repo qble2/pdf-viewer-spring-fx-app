@@ -91,7 +91,7 @@ public class SplitPdfFileService {
         try {
           document.close();
         } catch (IOException e) {
-          log.error("an error has occured", e);
+          log.error("An error has occured", e);
         }
       }
     }
@@ -108,13 +108,13 @@ public class SplitPdfFileService {
 
     Path targetDirectory = Path.of(pdfFilePath.getParent().toString(), SPLIT_FILES_TARGET_FOLDER);
     splitFilesTargetDirectoryConsumer.accept(targetDirectory.toString());
-    log.info("target folder\t{}", targetDirectory.toString());
+    log.info("Target folder\t{}", targetDirectory.toString());
 
     if (targetDirectory.toFile().exists()) {
       try {
         FileUtils.deleteDirectory(targetDirectory.toFile());
       } catch (IOException e) {
-        log.error("an error has occured", e);
+        log.error("An error has occured", e);
         throw new FailedToDeleteDirectoryException(
             String.format("Failed to delete existing target directory"));
       }
@@ -127,12 +127,12 @@ public class SplitPdfFileService {
   private PDDocument loadPdfFile(Path pdfFilePath) {
     currentOperationConsumer.accept("Loading PDF file...");
 
-    log.info("loading PDF file...");
+    log.info("Loading PDF file...");
     PDDocument document;
     try {
       document = PDDocument.load(pdfFilePath.toFile());
     } catch (IOException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
       throw new FailedToLoadPdfFileException("Failed to load PDF file");
     }
     numberOfPages = document.getNumberOfPages();
@@ -144,7 +144,7 @@ public class SplitPdfFileService {
   private PDDocumentOutline loadBookmarks(PDDocument document) {
     currentOperationConsumer.accept("Loading bookmarks...");
 
-    log.info("loading bookmarks...");
+    log.info("Loading bookmarks...");
     PDDocumentCatalog documentCatalog = document.getDocumentCatalog();
     PDDocumentOutline documentOutline = documentCatalog.getDocumentOutline();
     if (documentOutline == null) {
@@ -165,7 +165,7 @@ public class SplitPdfFileService {
       try {
         currentOutlinePage = currentOutlineItem.findDestinationPage(document);
       } catch (IOException e) {
-        log.error("an error has occured", e);
+        log.error("An error has occured", e);
         throw new FailedToSplitPdfFilesException("Failed to split PDF files");
       }
 
@@ -210,19 +210,19 @@ public class SplitPdfFileService {
     try {
       List<PDDocument> splittedList = splitter.split(document);
       for (PDDocument doc : splittedList) {
-        log.info("creating split file for item ({}) - pages [{}-{}]", title, fromPage, toPage);
+        log.info("Creating split file for item ({}) - pages [{}-{}]", title, fromPage, toPage);
         if (splitPdfFilePath.toFile().exists()) {
           log.warn("\t >>> skipped: split file already exists for item ({})", title);
         } else {
           doc.save(splitPdfFilePath.toString());
-          log.info("\t >>> created");
+          log.info("\t >>> Created");
           totalSplitFilesCreated += 1;
           totalNumberOfSplitFilesCreatedConsumer.accept(totalSplitFilesCreated);
         }
         doc.close();
       }
     } catch (IOException e) {
-      log.error("\t >>> creation failed", e);
+      log.error("\t >>> Creation failed", e);
     }
   }
 

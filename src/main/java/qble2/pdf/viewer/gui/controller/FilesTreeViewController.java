@@ -90,7 +90,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
   public void processDirectoryChangedEvent(DirectoryChangedEvent event) {
     this.currentDirectoryPathObjectProperty.set(event.getDirectoryPath());
     if (currentDirectoryPathObjectProperty.get() != null) {
-      log.info("reloading tree view for directory: {}", currentDirectoryPathObjectProperty.get());
+      log.info("Reloading tree view for directory: {}", currentDirectoryPathObjectProperty.get());
 
       FilterableTreeItem<Path> rootItem =
           new FilterableTreeItem<>(currentDirectoryPathObjectProperty.get());
@@ -148,7 +148,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
         parent.getSourceChildren().add(new FilterableTreeItem<>(path));
       }
     } catch (IOException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
     }
   }
 
@@ -166,7 +166,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
   // parent.getSourceChildren().add(new TreeItem<>(path));
   // }
   // } catch (IOException e) {
-  // log.error("an error has occured", e);
+  // log.error("An error has occured", e);
   // }
   // }
 

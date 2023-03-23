@@ -19,7 +19,7 @@ public class DirectoryService {
   public DirectoryService() {}
 
   public List<Path> loadDirectory(Path directoryPath) {
-    log.info("loading directory:\t{}", directoryPath.toString());
+    log.info("Loading directory:\t{}", directoryPath.toString());
     try {
       return Files.walk(directoryPath).filter(this::isPdfFile).sorted(new Comparator<Path>() {
         @Override
@@ -28,7 +28,7 @@ public class DirectoryService {
         }
       }).toList();
     } catch (IOException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
     }
 
     return Collections.emptyList();

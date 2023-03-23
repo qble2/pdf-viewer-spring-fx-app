@@ -18,14 +18,14 @@ public class FileNoteService {
   }
 
   public FileNote createFileNote(FileNote fileNote) {
-    log.info("creating file note: {}", fileNote);
+    log.info("Creating file note: {}", fileNote);
     fileNote.setLastUpdatedAt(ZonedDateTime.now());
 
     return this.fileNoteRepository.save(fileNote);
   }
 
   public FileNote updateFileNote(FileNote fileNote) {
-    log.info("updating file note (id: {})", fileNote.getId());
+    log.info("Updating file note (id: {})", fileNote.getId());
 
     if (!this.fileNoteRepository.existsById(fileNote.getId())) {
       throw new FileNoteNotFoundException();
@@ -37,7 +37,7 @@ public class FileNoteService {
   }
 
   public void deleteFileNote(Long id) {
-    log.info("deleting file note (id: {})", id);
+    log.info("Deleting file note (id: {})", id);
     this.fileNoteRepository.deleteById(id);
   }
 

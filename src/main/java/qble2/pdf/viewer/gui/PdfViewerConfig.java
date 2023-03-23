@@ -46,23 +46,23 @@ public class PdfViewerConfig extends Configurations {
         Files.createFile(CONFIG_FILE_PATH);
       }
 
-      log.info("loading configuration file: {}", CONFIG_FILE_PATH.getFileName());
+      log.info("Loading configuration file: {}", CONFIG_FILE_PATH.getFileName());
       this.builder =
           this.fileBasedBuilder(PropertiesConfiguration.class, CONFIG_FILE_PATH.toFile());
       builder.setAutoSave(false);
 
       config = builder.getConfiguration();
     } catch (IOException | ConfigurationException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
     }
   }
 
   public void saveConfig() {
     try {
-      log.info("saving configuration file: {}", CONFIG_FILE_PATH.getFileName());
+      log.info("Saving configuration file: {}", CONFIG_FILE_PATH.getFileName());
       this.builder.save();
     } catch (ConfigurationException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
     }
   }
 

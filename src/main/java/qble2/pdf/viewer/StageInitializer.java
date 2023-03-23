@@ -102,7 +102,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
       log.info("FX application has started.");
     } catch (IOException e) {
-      log.error("an error has occured", e);
+      log.error("An error has occured", e);
       throw new RuntimeException(e);
     }
   }

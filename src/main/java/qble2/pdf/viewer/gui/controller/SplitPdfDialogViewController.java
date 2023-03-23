@@ -169,7 +169,7 @@ public class SplitPdfDialogViewController implements Initializable, EventListene
     };
     task.exceptionProperty().addListener((obs, oldValue, newValue) -> {
       if (newValue != null) {
-        log.error("an error has occured", newValue);
+        log.error("An error has occured", newValue);
         errorMessageLabel.setText(newValue.getMessage());
         errorMessageLabel.setVisible(true);
       }
@@ -180,7 +180,7 @@ public class SplitPdfDialogViewController implements Initializable, EventListene
       eventBusFx.notify(new LoadDirectoryEvent(task.getValue()));
     });
     task.setOnFailed(e -> {
-      log.info("splitting PDF file failed");
+      log.info("Failed to split PDF file");
       dialog.setTitle("Failed");
       currentOperationLabel.setText(currentOperationLabel.getText() + " (failed)");
       progressBar.progressProperty().unbind();

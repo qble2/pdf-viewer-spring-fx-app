@@ -91,7 +91,7 @@ public class FilesListViewController implements Initializable, EventListener {
   public void processStageShownEvent(StageShownEvent event) {
     String currentDirectoryPath = pdfViewerConfig.getLastUsedDirectory();
     if (currentDirectoryPath != null) {
-      log.info("loading last used directory from config:\t{}", currentDirectoryPath);
+      log.info("Loading last used directory from config:\t{}", currentDirectoryPath);
       runLoadDirectoryTask(Path.of(currentDirectoryPath));
     }
   }
@@ -146,11 +146,11 @@ public class FilesListViewController implements Initializable, EventListener {
     };
     task.exceptionProperty().addListener((obs, oldValue, newValue) -> {
       if (newValue != null) {
-        log.error("an error has occured", newValue);
+        log.error("An error has occured", newValue);
       }
     });
     task.setOnSucceeded(e -> {
-      log.info("directory has been loaded, found {} files", task.getValue().size());
+      log.info("Directory has been loaded, found {} files", task.getValue().size());
       observableFileList.clear();
       observableFileList.addAll(task.getValue());
 
@@ -163,7 +163,7 @@ public class FilesListViewController implements Initializable, EventListener {
       eventBusFx.notify(new TaskDoneEvent());
     });
     task.setOnFailed(e -> {
-      log.info("loading directory failed");
+      log.info("Failed to load directory");
       eventBusFx.notify(new TaskDoneEvent());
     });
 
