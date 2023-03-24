@@ -53,7 +53,7 @@ public class PdfViewerConfig extends Configurations {
 
       config = builder.getConfiguration();
     } catch (IOException | ConfigurationException e) {
-      log.error("An error has occured", e);
+      log.error("An error has occurred", e);
     }
   }
 
@@ -62,7 +62,7 @@ public class PdfViewerConfig extends Configurations {
       log.info("Saving configuration file: {}", CONFIG_FILE_PATH.getFileName());
       this.builder.save();
     } catch (ConfigurationException e) {
-      log.error("An error has occured", e);
+      log.error("An error has occurred", e);
     }
   }
 

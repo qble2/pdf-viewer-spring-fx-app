@@ -91,7 +91,7 @@ public class SplitPdfFileService {
         try {
           document.close();
         } catch (IOException e) {
-          log.error("An error has occured", e);
+          log.error("An error has occurred", e);
         }
       }
     }
@@ -114,7 +114,7 @@ public class SplitPdfFileService {
       try {
         FileUtils.deleteDirectory(targetDirectory.toFile());
       } catch (IOException e) {
-        log.error("An error has occured", e);
+        log.error("An error has occurred", e);
         throw new FailedToDeleteDirectoryException(
             String.format("Failed to delete existing target directory"));
       }
@@ -132,7 +132,7 @@ public class SplitPdfFileService {
     try {
       document = PDDocument.load(pdfFilePath.toFile());
     } catch (IOException e) {
-      log.error("An error has occured", e);
+      log.error("An error has occurred", e);
       throw new FailedToLoadPdfFileException("Failed to load PDF file");
     }
     numberOfPages = document.getNumberOfPages();
@@ -165,7 +165,7 @@ public class SplitPdfFileService {
       try {
         currentOutlinePage = currentOutlineItem.findDestinationPage(document);
       } catch (IOException e) {
-        log.error("An error has occured", e);
+        log.error("An error has occurred", e);
         throw new FailedToSplitPdfFilesException("Failed to split PDF files");
       }
 

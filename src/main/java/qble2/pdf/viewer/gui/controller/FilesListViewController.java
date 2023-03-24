@@ -146,7 +146,7 @@ public class FilesListViewController implements Initializable, EventListener {
     };
     task.exceptionProperty().addListener((obs, oldValue, newValue) -> {
       if (newValue != null) {
-        log.error("An error has occured", newValue);
+        log.error("An error has occurred", newValue);
       }
     });
     task.setOnSucceeded(e -> {

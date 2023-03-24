@@ -28,7 +28,7 @@ public class DirectoryService {
         }
       }).toList();
     } catch (IOException e) {
-      log.error("An error has occured", e);
+      log.error("An error has occurred", e);
     }
 
     return Collections.emptyList();

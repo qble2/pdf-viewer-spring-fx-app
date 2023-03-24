@@ -162,7 +162,7 @@ public class NotesListViewController implements Initializable, EventListener {
       noteController.init(fileNote, eventBusFx);
       return parent;
     } catch (IOException e) {
-      log.error("An error has occured", e);
+      log.error("An error has occurred", e);
     }
 
     return new TitledPane("!Failed to load file note!", null);

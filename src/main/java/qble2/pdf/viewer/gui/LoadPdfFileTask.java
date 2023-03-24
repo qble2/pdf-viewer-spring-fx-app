@@ -43,7 +43,7 @@ public class LoadPdfFileTask {
         // before it's beeing blocked by PDFView.load task
         Thread.sleep(100);
       } catch (InterruptedException e) {
-        log.error("An error has occured", e);
+        log.error("An error has occurred", e);
       }
 
       Platform.runLater(() -> {
@@ -51,7 +51,7 @@ public class LoadPdfFileTask {
           pdfView.load(pdfFilePath.toFile());
         } catch (Exception e) {
           // FileNotFoundException for example
-          log.error("An error has occured", e);
+          log.error("An error has occurred", e);
           pdfView.unload();
           eventBusFx.notify(new TaskDoneEvent());
         }

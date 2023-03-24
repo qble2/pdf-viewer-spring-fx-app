@@ -148,7 +148,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
         parent.getSourceChildren().add(new FilterableTreeItem<>(path));
       }
     } catch (IOException e) {
-      log.error("An error has occured", e);
+      log.error("An error has occurred", e);
     }
   }
 
@@ -166,7 +166,7 @@ public class FilesTreeViewController implements Initializable, EventListener {
   // parent.getSourceChildren().add(new TreeItem<>(path));
   // }
   // } catch (IOException e) {
-  // log.error("An error has occured", e);
+  // log.error("An error has occurred", e);
   // }
   // }
 
