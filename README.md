@@ -1,3 +1,7 @@
+>*Disclaimer:* 
+>- *This project main purpose was a learning experience to tackle Spring Boot integration with JavaFX.*
+>- *It may contain unpolished code that needs to be refactored and modernized.*
+
 # PDF Viewer Spring FX  
 
 - A [JavaFX](https://openjfx.io) application that is launched and managed via [Spring Boot](https://spring.io/projects/spring-boot), to utilize Spring features.  
