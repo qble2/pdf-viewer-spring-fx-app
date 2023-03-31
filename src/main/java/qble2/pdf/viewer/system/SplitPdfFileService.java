@@ -86,6 +86,7 @@ public class SplitPdfFileService {
       // last outline
       createSplitFile(document, previousItemTitle, previousOutlineStartingPageNumber,
           document.getNumberOfPages(), targetDirectoryPath);
+      currentOperationConsumer.accept("Splitting PDF file done.");
     } finally {
       if (document != null) {
         try {
@@ -108,7 +109,7 @@ public class SplitPdfFileService {
 
     Path targetDirectory = Path.of(pdfFilePath.getParent().toString(), SPLIT_FILES_TARGET_FOLDER);
     splitFilesTargetDirectoryConsumer.accept(targetDirectory.toString());
-    log.info("Target folder\t{}", targetDirectory.toString());
+    log.info("Preparing target folder\t{}", targetDirectory.toString());
 
     if (targetDirectory.toFile().exists()) {
       try {
@@ -161,23 +162,24 @@ public class SplitPdfFileService {
     while (currentOutlineItem != null && depth <= SPLIT_OUTLINE_DEPTH_LIMIT_INCLUSIVE) {
       String currentOutlineTitle = currentOutlineItem.getTitle();
 
-      PDPage currentOutlinePage = null;
       try {
-        currentOutlinePage = currentOutlineItem.findDestinationPage(document);
+        PDPage currentOutlinePage = currentOutlineItem.findDestinationPage(document);
+        if (currentOutlinePage == null) {
+          log.warn(
+              "Skipped item ({}): does not point to anything or is an action that is not a GoTo action",
+              currentOutlineItem.getTitle());
+        } else {
+          currentOutlineStartingPageNumber =
+              document.getDocumentCatalog().getPages().indexOf(currentOutlinePage) + 1;
+
+          if (previousItemTitle != null && currentOutlineStartingPageNumber >= 2) {
+            createSplitFile(document, previousItemTitle, previousOutlineStartingPageNumber,
+                currentOutlineStartingPageNumber - 1, targetDirectoryPath);
+          }
+        }
       } catch (IOException e) {
         log.error("An error has occurred", e);
         throw new FailedToSplitPdfFilesException("Failed to split PDF files");
-      }
-
-      currentOutlineStartingPageNumber =
-          document.getDocumentCatalog().getPages().indexOf(currentOutlinePage) + 1;
-
-      System.out.println(indentation + currentOutlineItem.getTitle() + " [depth: " + depth
-          + "] [page: " + currentOutlineStartingPageNumber + "]");
-
-      if (previousItemTitle != null && currentOutlineStartingPageNumber >= 2) {
-        createSplitFile(document, previousItemTitle, previousOutlineStartingPageNumber,
-            currentOutlineStartingPageNumber - 1, targetDirectoryPath);
       }
 
       //
