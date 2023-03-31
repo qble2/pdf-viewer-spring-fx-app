@@ -83,8 +83,4 @@ public class PdfViewController implements Initializable, EventListener {
     this.pdfView.pageProperty().set(event.getPage());
   }
 
-  /////
-  /////
-  /////
-
 }

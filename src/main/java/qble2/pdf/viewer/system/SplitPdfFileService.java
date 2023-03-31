@@ -86,7 +86,6 @@ public class SplitPdfFileService {
       // last outline
       createSplitFile(document, previousItemTitle, previousOutlineStartingPageNumber,
           document.getNumberOfPages(), targetDirectoryPath);
-      currentOperationConsumer.accept("Splitting PDF file done.");
     } finally {
       if (document != null) {
         try {

@@ -176,6 +176,7 @@ public class SplitPdfDialogViewController implements Initializable, EventListene
     });
     task.setOnSucceeded(e -> {
       log.info("PDF file has been successfully split");
+      currentOperationLabel.setText(currentOperationLabel.getText() + " (completed)");
       progressBar.progressProperty().unbind();
       eventBusFx.notify(new LoadDirectoryEvent(task.getValue()));
     });
