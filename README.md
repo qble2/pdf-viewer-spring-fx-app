@@ -5,7 +5,7 @@
 # PDF Viewer Spring FX  
 
 A [JavaFX](https://openjfx.io) application that is launched and managed via [Spring Boot](https://spring.io/projects/spring-boot), to utilize Spring features.  
-The application aims at easing the manipulatation of large PDF files.
+This application aims at easing the manipulatation of large PDF files.
 
 - The graphical interface is composed of several controllers decoupled following the Event-Driven Design.  
 - The templates are created with [Scene Builder](https://gluonhq.com/products/scene-builder).  
