@@ -14,7 +14,7 @@ This application aims at easing the manipulatation of large PDF files (browse, s
 - [Lombok](https://projectlombok.org) is used to reduce boilerplate code.  
 
 ## Features:
-The application allows the user to
+The application allows the user to:
 - Load PDF files from a directory.  
 - Browse loaded PDF files in a flat view or a hierachical view.  
 - Filter PDF files based on the file name, with autocompletion.  
