@@ -44,6 +44,7 @@ public class LoadPdfFileTask {
         Thread.sleep(100);
       } catch (InterruptedException e) {
         log.error("An error has occurred", e);
+        Thread.currentThread().interrupt();
       }
 
       Platform.runLater(() -> {

@@ -21,7 +21,7 @@ public class FilterableTreeItem<T> extends TreeItem<T> {
     super(value);
 
     filteredChildren.predicateProperty().bind(Bindings.createObjectBinding(() -> {
-      Predicate<TreeItem<T>> p = child -> {
+      return child -> {
         if (child instanceof FilterableTreeItem) {
           ((FilterableTreeItem<T>) child).predicateProperty().set(predicate.get());
         }
@@ -30,7 +30,6 @@ public class FilterableTreeItem<T> extends TreeItem<T> {
         }
         return predicate.get().test(child.getValue());
       };
-      return p;
     }, predicate));
 
     filteredChildren.addListener((ListChangeListener<TreeItem<T>>) c -> {
